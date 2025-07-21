@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import Navigation from "@/components/navigation";
 
 const inter = localFont({
     src: [
@@ -38,38 +39,17 @@ export default function RootLayout({
                     defaultTheme="system"
                     enableSystem
                     disableTransitionOnChange>
-                    <nav className="w-full flex flex-col sm:flex-row justify-between items-center p-5 max-w-5xl mx-auto">
-                        <Link className="text-xl font-black uppercase" href={"/"}>
-                            Fullcourt - Training
-                        </Link>
-                        <div className="flex gap-5 font-semibold">
-                            <Link className="hover:underline" href={"/drills"}>
-                                Drills
+                    <Navigation />
+                    <main className="p-4 min-h-screen">
+                        <div className="max-w-3xl mx-auto flex flex-col gap-6">{children}</div>
+                    </main>
+                    <footer className="p-4 border-t border-t-foreground/10">
+                        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                            <Link href="/" className="font-black uppercase">
+                                Fullcourt - Training
                             </Link>
-                            <Link className="hover:underline" href={"/b2b"}>
-                                B2B
-                            </Link>
-                            <Link className="hover:underline" href={"/profile"}>
-                                Profile
-                            </Link>
-                            <Link className="hover:underline" href={"/contact"}>
-                                Contact
-                            </Link>
+                            <ThemeSwitcher />
                         </div>
-                    </nav>
-                    {children}
-                    <footer className="w-full flex items-center justify-center p-5 max-w-5xl mx-auto">
-                        <p>
-                            Powered by{" "}
-                            <a
-                                href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-                                target="_blank"
-                                className="font-bold hover:underline"
-                                rel="noreferrer">
-                                Supabase
-                            </a>
-                        </p>
-                        <ThemeSwitcher />
                     </footer>
                 </ThemeProvider>
             </body>
