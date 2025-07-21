@@ -1,19 +1,10 @@
-import Image from "next/image";
-
-export function Hero() {
+export function Hero({ title }: { title: string }) {
     return (
-        <div className="flex flex-col items-center py-20 gap-10 bg-[url(/images/floor.jpg)] bg-cover bg-fixed">
-            <Image
-                src={"/images/logo-svg.svg"}
-                width={161}
-                height={150}
-                alt="Fullcourt - Training logo"
-            />
-            <h1 className="text-2xl lg:text-3xl mx-auto max-w-xl text-center font-semibold">
-                Animated basketball drills
-                <br />
-                for the entire court
+        <div className="flex flex-col items-center gap-4">
+            <h1 className="text-xl lg:text-3xl mx-auto max-w-sm text-center font-semibold">
+                {title}
             </h1>
+            <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
         </div>
     );
 }
