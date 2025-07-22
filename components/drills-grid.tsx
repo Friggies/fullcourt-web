@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/client";
 import { drill } from "@/lib/types";
 import { PostgrestError } from "@supabase/supabase-js";
 import { CircleXIcon, LoaderIcon, SearchIcon, TagIcon } from "lucide-react";
+import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
 
 export default function DrillsGrid() {
@@ -12,10 +13,8 @@ export default function DrillsGrid() {
     const [drills, setDrills] = useState<drill[]>([]);
     const [error, setError] = useState<PostgrestError | null>(null);
 
-    const supabase = createClient();
-
     useEffect(() => {
-        setLoading(true);
+        const supabase = createClient();
         const fetchDrills = async () => {
             const { data, error } = await supabase.from("drills").select("*");
             if (error) {
@@ -26,7 +25,7 @@ export default function DrillsGrid() {
             setLoading(false);
         };
         fetchDrills();
-    }, [supabase]);
+    }, []);
 
     const filteredDrills = useMemo(() => {
         return drills.filter((drill) => {
@@ -38,6 +37,15 @@ export default function DrillsGrid() {
         });
     }, [drills, filterSearch, filterCategory]);
 
+    if (loading) {
+        return (
+            <div className="flex flex-col justify- items-center mt-10 gap-2">
+                <LoaderIcon className="animate-spin" />
+                Loading
+            </div>
+        );
+    }
+
     if (error) {
         return (
             <div className="flex flex-col justify- items-center mt-10 gap-2">
@@ -45,15 +53,6 @@ export default function DrillsGrid() {
                 Error loading drills
                 <br />
                 {error.message}
-            </div>
-        );
-    }
-
-    if (loading) {
-        return (
-            <div className="flex flex-col justify- items-center mt-10 gap-2">
-                <LoaderIcon />
-                Loading
             </div>
         );
     }
@@ -92,11 +91,13 @@ export default function DrillsGrid() {
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {filteredDrills.length > 0 ? (
                     filteredDrills.map((drill) => (
-                        <li key={drill.id} className="p-4 border rounded-md shadow-sm">
-                            <h2 className="text-lg font-semibold">{drill.name}</h2>
-                            {drill.category && (
+                        <li key={drill.id}>
+                            <Link
+                                href={`/drills/${drill.id}`}
+                                className="flex flex-col gap-2 p-4 border rounded-md shadow-sm">
+                                <h2 className="text-lg font-semibold">{drill.name}</h2>
                                 <p className="text-sm text-gray-500">{drill.category}</p>
-                            )}
+                            </Link>
                         </li>
                     ))
                 ) : (
