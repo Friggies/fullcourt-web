@@ -71,7 +71,7 @@ export default function DrillsGrid() {
                         placeholder="Type here..."
                         value={filterSearch}
                         onChange={(e) => setFilterSearch(e.target.value)}
-                        className="shadow-sm border rounded-md w-full p-2 h-[42px] hover:bg-accent duration-300 cursor-pointer placeholder:text-foreground"
+                        className="shadow-sm border rounded-md w-full p-2 h-[42px] hover:bg-accent duration-300 cursor-pointer bg-background placeholder:text-foreground"
                     />
                 </label>
                 <label className="flex flex-col gap-1">
@@ -83,7 +83,7 @@ export default function DrillsGrid() {
                         value={filterCategory}
                         onChange={(e) => setFilterCategory(e.target.value)}
                         className="shadow-sm border rounded-md w-full p-2 h-[42px] hover:bg-accent duration-300 cursor-pointer bg-background text-base text-foreground">
-                        <option value="">Select...</option>
+                        <option value="">All</option>
                         <option value="Offensive">Offensive</option>
                         <option value="Warm-up">Warm-up</option>
                     </select>
