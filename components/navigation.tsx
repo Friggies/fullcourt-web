@@ -1,6 +1,6 @@
 "use client";
 
-import { MenuIcon, Target, XIcon } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";

@@ -1,5 +1,7 @@
 "use client";
 import { createClient } from "@/lib/supabase/client";
+import { drill } from "@/lib/types";
+import { PostgrestError } from "@supabase/supabase-js";
 import { CircleXIcon, LoaderIcon, SearchIcon, TagIcon } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 
@@ -7,8 +9,8 @@ export default function DrillsGrid() {
     const [loading, setLoading] = useState<boolean>(true);
     const [filterSearch, setFilterSearch] = useState<string>("");
     const [filterCategory, setFilterCategory] = useState<string>("");
-    const [drills, setDrills] = useState<any[]>([]);
-    const [error, setError] = useState<any>(null);
+    const [drills, setDrills] = useState<drill[]>([]);
+    const [error, setError] = useState<PostgrestError | null>(null);
 
     const supabase = createClient();
 
