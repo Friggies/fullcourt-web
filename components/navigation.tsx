@@ -36,7 +36,7 @@ export default function Navigation() {
             <nav className="p-4 mx-auto border-b border-b-foreground/10 bg-background sticky top-0 z-40">
                 <div className="max-w-3xl w-full flex justify-between items-center mx-auto">
                     <Link href="/" className="font-black uppercase">
-                        Fullcourt - Training
+                        Fullcourt Training
                     </Link>
                     <div className="hidden sm:flex gap-4 font-normal">
                         {links.map((link) => (
@@ -68,7 +68,7 @@ export default function Navigation() {
                             href={"/"}
                             onClick={() => setIsOpen(false)}
                             className="text-lg font-black uppercase">
-                            Fullcourt - Training
+                            Fullcourt Training
                         </Link>
                         {links.map((link) => (
                             <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)}>

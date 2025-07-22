@@ -46,7 +46,7 @@ export default function RootLayout({
                     <footer className="p-4 border-t border-t-foreground/10">
                         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                             <Link href="/" className="font-black uppercase">
-                                Fullcourt - Training
+                                Fullcourt Training
                             </Link>
                             <ThemeSwitcher />
                         </div>
