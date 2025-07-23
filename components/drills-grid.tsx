@@ -97,7 +97,7 @@ export default function DrillsGrid() {
                                 href={`/drills/${drill.id}`}
                                 className="flex flex-col border rounded-md shadow-sm overflow-hidden">
                                 <Image
-                                    src={`/thumbnails/${drill.id}.jpg`}
+                                    src={`/thumbnails/${drill.id}.webp`}
                                     alt={`${drill.name} preview`}
                                     width={600}
                                     height={1067}
