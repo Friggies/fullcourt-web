@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/client";
 import { drill } from "@/lib/types";
 import { PostgrestError } from "@supabase/supabase-js";
 import { CircleXIcon, LoaderIcon, SearchIcon, TagIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
 
@@ -94,9 +95,17 @@ export default function DrillsGrid() {
                         <li key={drill.id}>
                             <Link
                                 href={`/drills/${drill.id}`}
-                                className="flex flex-col gap-2 p-4 border rounded-md shadow-sm">
-                                <h2 className="text-lg font-semibold">{drill.name}</h2>
-                                <p className="text-sm text-gray-500">{drill.category}</p>
+                                className="flex flex-col border rounded-md shadow-sm overflow-hidden">
+                                <Image
+                                    src={`/thumbnails/${drill.id}.jpg`}
+                                    alt={`${drill.name} preview`}
+                                    width={600}
+                                    height={1067}
+                                />
+                                <div className="p-4">
+                                    <h2 className="text-lg font-semibold">{drill.name}</h2>
+                                    <p className="text-sm text-gray-500">{drill.category}</p>
+                                </div>
                             </Link>
                         </li>
                     ))

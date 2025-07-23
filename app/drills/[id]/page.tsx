@@ -6,7 +6,9 @@ import { drill } from "@/lib/types";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { CircleXIcon, LoaderIcon } from "lucide-react";
+import { ArrowLeft, ArrowLeftIcon, CircleXIcon, LoaderIcon, SearchIcon } from "lucide-react";
+import { Hero } from "@/components/hero";
+import Link from "next/link";
 
 export default function DrillPage() {
     const [drill, setDrill] = useState<drill | null>(null);
@@ -54,9 +56,37 @@ export default function DrillPage() {
     }
 
     return (
-        <div>
-            <h1>{drill.name}</h1>
-            <p>{drill.description}</p>
-        </div>
+        <>
+            <Hero title={drill.name} />
+            <div className="flex flex-col-reverse sm:flex-row gap-6">
+                <div className="flex flex-col flex-1 gap-4">
+                    <div className="flex items-center justify-between text-sm">
+                        <Link
+                            className="flex items-center gap-1 underline text-gray-500"
+                            href={"/drills"}>
+                            <ArrowLeftIcon size={16} />
+                            Back to all drills
+                        </Link>
+                        <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                            {drill.category} Drill
+                        </span>
+                    </div>
+                    <div>{drill.description}</div>
+                </div>
+                {drill.link ? (
+                    <iframe
+                        className="aspect-[9/16] sm:flex-0 sm:h-[400px] rounded-lg"
+                        src="https://youtube.com/embed/i_xkF-DAm3U"
+                        frameBorder={0}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen></iframe>
+                ) : (
+                    <video className="w-full h-auto" controls>
+                        <source src={drill.link} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                )}
+            </div>
+        </>
     );
 }
