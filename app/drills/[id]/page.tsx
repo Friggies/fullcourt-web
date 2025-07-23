@@ -6,7 +6,7 @@ import { drill } from "@/lib/types";
 import { PostgrestError } from "@supabase/supabase-js";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowLeftIcon, CircleXIcon, LoaderIcon, SearchIcon } from "lucide-react";
+import { ArrowLeftIcon, CircleXIcon, LoaderIcon } from "lucide-react";
 import { Hero } from "@/components/hero";
 import Link from "next/link";
 

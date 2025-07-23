@@ -1,6 +1,6 @@
 import DrillsGrid from "@/components/drills-grid";
 import { Hero } from "@/components/hero";
-import { Crown, CrownIcon, LinkIcon, SearchIcon, UsersIcon } from "lucide-react";
+import { CrownIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function Drills() {
