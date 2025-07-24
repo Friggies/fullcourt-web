@@ -41,6 +41,26 @@ export default function RootLayout({
         />
         <meta name="apple-mobile-web-app-title" content="FULLCOURT" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
+
+        <meta property="og:title" content="FULLCOURT – Basketball Training" />
+        <meta property="og:description" content="Animated Basketball Drills" />
+        <meta
+          property="og:image"
+          content="https://fullcourt-training.com/images/cover.webp"
+        />
+        <meta property="og:image:type" content="image/webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://fullcourt-training.com" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="FULLCOURT – Basketball Training" />
+        <meta name="twitter:description" content="Animated Basketball Drills" />
+        <meta
+          name="twitter:image"
+          content="https://fullcourt-training.com/images/cover.webp"
+        />
       </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider
