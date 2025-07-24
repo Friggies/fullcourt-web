@@ -1,3 +1,4 @@
+import { B2BDisclaimer } from '@/components/b2b-disclaimer';
 import { Hero } from '@/components/hero';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -12,7 +13,7 @@ export default function Index() {
     <>
       <Image
         src={'/animations/passing.gif'}
-        alt="Fun Tag Animation"
+        alt="Fun Passing Animation"
         unoptimized
         priority
         width={1080}
@@ -20,6 +21,7 @@ export default function Index() {
         className="h-[150px] w-auto mx-auto mt-10 mb-5 animate-spin-slow"
       />
       <Hero title="Animated basketball drills for&nbsp;the&nbsp;entire&nbsp;court" />
+      <B2BDisclaimer />
     </>
   );
 }

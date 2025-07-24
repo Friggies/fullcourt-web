@@ -1,6 +1,7 @@
+import { B2BDisclaimer } from '@/components/b2b-disclaimer';
 import DrillsGrid from '@/components/drills-grid';
 import { Hero } from '@/components/hero';
-import { CrownIcon, UsersIcon } from 'lucide-react';
+import { CrownIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Drills() {
@@ -15,17 +16,7 @@ export default function Drills() {
           Become a premium member&nbsp;today
         </Link>
       </div>
-      <div className="border shadow-sm rounded-lg p-4 bg-accent flex flex-col items-center text-center">
-        <UsersIcon className="mb-2" />
-        <p className="text-lg font-semibold">Are you a club or organization?</p>
-        <p>
-          Check out{' '}
-          <Link className="underline" href={'/b2b'}>
-            B2B
-          </Link>{' '}
-          to learn more about custom animations
-        </p>
-      </div>
+      <B2BDisclaimer />
     </>
   );
 }
