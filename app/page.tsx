@@ -11,9 +11,10 @@ export default function Index() {
   return (
     <>
       <Image
-        src={'/animations/tag.gif'}
+        src={'/animations/passing.gif'}
         alt="Fun Tag Animation"
         unoptimized
+        priority
         width={1080}
         height={1080}
         className="h-[150px] w-auto mx-auto mt-10 mb-5 animate-spin-slow"
