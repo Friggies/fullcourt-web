@@ -44,23 +44,25 @@ export default function Index() {
       </div>
       <Hero title="Animated basketball drills for&nbsp;the&nbsp;entire&nbsp;court" />
       <div className="flex flex-col items-center gap-5">
-        <h2 className="text-xl font-semibold">Follow Us on Social Media</h2>
+        <h2 className="text-xl font-semibold">
+          Join the roster on social media
+        </h2>
         <div className="flex flex-col sm:flex-row w-full gap-4">
           <div className="flex flex-1 flex-col text-center justify-center items-center">
             <span className="text-5xl">+{totalFollowers}</span>
-            <span>Followers</span>
+            <span>Players</span>
           </div>
-          <div className="flex flex-1 flex-row items-center justify-center gap-4">
+          <div className="flex flex-1 flex-row justify-center gap-4">
             {some.map(some => (
               <Link
                 target="_blank"
                 key={some.name}
                 href={some.link}
-                className="w-12 h-12 p-2 rounded-full border-[2px] border-black flex items-center content-center"
+                className="w-15 h-15 p-5 rounded-full flex items-center border-[2px] border-black hover:scale-105 transition-transform duration-300"
                 style={{ backgroundColor: '#333399' }}
               >
                 <Image
-                  className="w-full h-auto object-cover"
+                  className="flex-1 object-cover"
                   src={`/images/${some.name}.webp`}
                   alt={`${some.name} Logo`}
                   width={some.image.width}
@@ -71,7 +73,7 @@ export default function Index() {
           </div>
           <div className="flex flex-1 flex-col text-center justify-center items-center">
             <span className="text-5xl">+{totalViews}</span>
-            <span>Views</span>
+            <span>Replays</span>
           </div>
         </div>
       </div>

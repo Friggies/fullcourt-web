@@ -13,7 +13,10 @@ export default function Navigation() {
     { href: '/drills', label: 'Drill Library' },
     { href: '/b2b', label: 'B2B' },
     { href: '/profile', label: 'My Profile' },
-    { href: 'mailto:contact@fullcourt-training.com', label: 'Contact Us' },
+    {
+      href: 'mailto:contact@fullcourt-training.com',
+      label: 'Contact Us',
+    },
   ];
 
   useEffect(() => {
