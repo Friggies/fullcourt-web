@@ -87,7 +87,9 @@ export default function DrillsGrid() {
           >
             <option value="">All</option>
             <option value="Offensive">Offensive</option>
+            <option value="Defensive">Defensive</option>
             <option value="Warm-up">Warm-up</option>
+            <option value="Rotation">Rotation</option>
           </select>
         </label>
       </div>
@@ -114,7 +116,7 @@ export default function DrillsGrid() {
           ))
         ) : (
           <li className="col-span-full text-center text-gray-500">
-            No drills found.
+            No drills found
           </li>
         )}
       </ul>
