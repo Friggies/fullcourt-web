@@ -1,5 +1,6 @@
 'use client';
 
+import some from '@/data/some';
 import { MenuIcon, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,14 +14,6 @@ export default function Navigation() {
     { href: '/b2b', label: 'B2B' },
     { href: '/profile', label: 'My Profile' },
     { href: 'mailto:contact@fullcourt-training.com', label: 'Contact Us' },
-  ];
-  const some = [
-    {
-      href: 'https://www.instagram.com/fullcourt_training/',
-      label: 'Instagram',
-    },
-    { href: 'https://www.youtube.com/@fullcourt-training', label: 'YouTube' },
-    { href: 'https://www.tiktok.com/@fullcourt_training', label: 'TikTok' },
   ];
 
   useEffect(() => {
@@ -89,14 +82,14 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
-            {some.map(link => (
+            {some.map(some => (
               <Link
-                key={link.href}
-                href={link.href}
+                key={some.name}
+                href={some.link}
                 onClick={() => setIsOpen(false)}
                 target="_blank"
               >
-                {link.label}
+                {some.name}
               </Link>
             ))}
           </nav>
