@@ -46,9 +46,9 @@ export default function Index() {
       <Hero title="Animated basketball drills for&nbsp;the&nbsp;entire&nbsp;court" />
       <div className="flex flex-col sm:flex-row-reverse gap-10 items-center">
         <div className="flex flex-col gap-4 items-center sm:items-start">
-          <h2 className="flex flex-col">
+          <h2 className="flex flex-col text-center sm:text-left">
             <span className="text-xs text-gray-500 uppercase">About us</span>
-            <span className="font-semibold text-xl lg:text-2xl text-center sm:text-left">
+            <span className="font-semibold text-xl lg:text-2xl">
               A modern basketball&nbsp;playbook
             </span>
           </h2>
@@ -74,7 +74,7 @@ export default function Index() {
           alt="Tactical board of Pass & Cut drill (5 out)"
         />
       </div>
-      <div className="flex flex-col items-center gap-5 my-10">
+      <div className="flex flex-col items-center text-center gap-5 my-10">
         <h2 className="text-xl font-semibold">
           Join the roster on social&nbsp;media
         </h2>
@@ -110,11 +110,11 @@ export default function Index() {
       </div>
       <div className="flex flex-col sm:flex-row gap-10 items-center">
         <div className="flex flex-col gap-4 items-center sm:items-start">
-          <h2 className="flex flex-col">
+          <h2 className="flex flex-col text-center sm:text-left">
             <span className="text-xs text-gray-500 uppercase">
               App experience
             </span>
-            <span className="font-semibold text-xl lg:text-2xl text-center sm:text-left">
+            <span className="font-semibold text-xl lg:text-2xl">
               Basketball on your homescreen
             </span>
           </h2>
