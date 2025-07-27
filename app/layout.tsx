@@ -71,7 +71,7 @@ export default function RootLayout({
         >
           <Navigation />
           <main className="p-4 min-h-screen">
-            <div className="max-w-3xl mx-auto flex flex-col gap-6">
+            <div className="max-w-3xl mx-auto flex flex-col gap-10">
               {children}
             </div>
           </main>

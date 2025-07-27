@@ -80,7 +80,7 @@ export default function DrillPage() {
         </div>
         {drill.link ? (
           <iframe
-            className="aspect-[9/16] sm:flex-0 sm:h-[400px] rounded-lg"
+            className="aspect-[9/16] sm:flex-0 sm:h-[400px] rounded-lg shadow-sm"
             src="https://youtube.com/embed/i_xkF-DAm3U"
             frameBorder={0}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

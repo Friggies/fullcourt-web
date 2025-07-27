@@ -1,6 +1,7 @@
 import { B2BDisclaimer } from '@/components/b2b-disclaimer';
 import { Hero } from '@/components/hero';
 import some from '@/data/some';
+import { DownloadIcon, TelescopeIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -43,9 +44,39 @@ export default function Index() {
         </div>
       </div>
       <Hero title="Animated basketball drills for&nbsp;the&nbsp;entire&nbsp;court" />
-      <div className="flex flex-col items-center gap-5">
+      <div className="flex flex-col sm:flex-row-reverse gap-10 items-center">
+        <div className="flex flex-col gap-4 items-center sm:items-start">
+          <h2 className="flex flex-col">
+            <span className="text-xs text-gray-500 uppercase">About us</span>
+            <span className="font-semibold text-xl lg:text-2xl text-center sm:text-left">
+              A modern basketball&nbsp;playbook
+            </span>
+          </h2>
+          <p>
+            We help players and coaches visualize and practice various
+            basketball plays and movements. With an extensive library of drills,
+            users can easily find and follow along with animations that
+            demonstrate proper techniques and strategies.
+          </p>
+          <Link
+            href="/drills"
+            className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          >
+            Explore the drill library now
+            <TelescopeIcon size={16} strokeWidth={1.5} />
+          </Link>
+        </div>
+        <Image
+          className="aspect-[9/16] w-full sm:w-auto sm:h-[400px] border rounded-lg shadow-sm"
+          src={'/thumbnails/3.webp'}
+          width={1000}
+          height={1778}
+          alt="Tactical board of Pass & Cut drill (5 out)"
+        />
+      </div>
+      <div className="flex flex-col items-center gap-5 my-10">
         <h2 className="text-xl font-semibold">
-          Join the roster on social media
+          Join the roster on social&nbsp;media
         </h2>
         <div className="flex flex-col sm:flex-row w-full gap-4">
           <div className="flex flex-1 flex-col text-center justify-center items-center">
@@ -76,6 +107,38 @@ export default function Index() {
             <span>Replays</span>
           </div>
         </div>
+      </div>
+      <div className="flex flex-col sm:flex-row gap-10 items-center">
+        <div className="flex flex-col gap-4 items-center sm:items-start">
+          <h2 className="flex flex-col">
+            <span className="text-xs text-gray-500 uppercase">
+              App experience
+            </span>
+            <span className="font-semibold text-xl lg:text-2xl text-center sm:text-left">
+              Basketball on your homescreen
+            </span>
+          </h2>
+          <p>
+            Our app is designed to provide a seamless experience for players and
+            coaches. With a user-friendly interface, you can easily access our
+            library of drills and access a digital tactical board right on your
+            phone.
+          </p>
+          <Link
+            href="/"
+            className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+          >
+            Download the app now
+            <DownloadIcon size={16} strokeWidth={1.5} />
+          </Link>
+        </div>
+        <Image
+          className="aspect-[9/16] w-full sm:w-auto sm:h-[400px] border rounded-lg shadow-sm"
+          src={'/thumbnails/3.webp'}
+          width={1000}
+          height={1778}
+          alt="Tactical board of Pass & Cut drill (5 out)"
+        />
       </div>
       <B2BDisclaimer />
     </>
