@@ -1,5 +1,6 @@
 import { B2BDisclaimer } from '@/components/b2b-disclaimer';
 import { Hero } from '@/components/hero';
+import { Line } from '@/components/line';
 import some from '@/data/some';
 import { DownloadIcon, TelescopeIcon } from 'lucide-react';
 import { Metadata } from 'next';
@@ -74,14 +75,13 @@ export default function Index() {
           alt="Tactical board of Pass & Cut drill (5 out)"
         />
       </div>
-      <div className="flex flex-col items-center text-center gap-5 my-10">
-        <h2 className="text-xl font-semibold">
-          Join the roster on social&nbsp;media
-        </h2>
-        <div className="flex flex-col sm:flex-row w-full gap-4">
+      <Line />
+      <div className="flex flex-col items-center text-center gap-5">
+        <h2 className="text-xl font-semibold">Join us on social&nbsp;media</h2>
+        <div className="flex flex-col sm:flex-row w-full gap-5">
           <div className="flex flex-1 flex-col text-center justify-center items-center">
             <span className="text-5xl">+{totalFollowers}</span>
-            <span>Players</span>
+            <span>Followers</span>
           </div>
           <div className="flex flex-1 flex-row justify-center gap-4">
             {some.map(some => (
@@ -104,10 +104,11 @@ export default function Index() {
           </div>
           <div className="flex flex-1 flex-col text-center justify-center items-center">
             <span className="text-5xl">+{totalViews}</span>
-            <span>Replays</span>
+            <span>Views</span>
           </div>
         </div>
       </div>
+      <Line />
       <div className="flex flex-col sm:flex-row gap-10 items-center">
         <div className="flex flex-col gap-4 items-center sm:items-start">
           <h2 className="flex flex-col text-center sm:text-left">
