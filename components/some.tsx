@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export function SoMe() {
   return (
-    <div className="flex flex-row gap-3 items-center">
+    <div className="flex flex-row gap-3 items-center justify-center">
       {some.map(some => (
         <Link
           target="_blank"
