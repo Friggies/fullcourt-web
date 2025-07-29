@@ -10,12 +10,12 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const links = [
-    { href: '/drills', label: 'Drill Library' },
+    { href: '/drills', label: 'Playbook' },
     { href: '/b2b', label: 'B2B' },
     { href: '/profile', label: 'My Profile' },
     {
       href: 'mailto:contact@fullcourt-training.com',
-      label: 'Contact Us',
+      label: 'Contact',
     },
   ];
 

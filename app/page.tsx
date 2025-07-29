@@ -1,6 +1,7 @@
 import { B2BDisclaimer } from '@/components/b2b-disclaimer';
 import { Hero } from '@/components/hero';
 import { Line } from '@/components/line';
+import { SoMe } from '@/components/some';
 import some from '@/data/some';
 import { DownloadIcon, TelescopeIcon } from 'lucide-react';
 import { Metadata } from 'next';
@@ -63,7 +64,7 @@ export default function Index() {
             href="/drills"
             className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
           >
-            Explore the drill library now
+            Explore the playbook now
             <TelescopeIcon size={16} strokeWidth={1.5} />
           </Link>
         </div>
@@ -77,33 +78,17 @@ export default function Index() {
       </div>
       <Line />
       <div className="flex flex-col items-center text-center gap-5">
-        <h2 className="text-xl font-semibold">Join us on social&nbsp;media</h2>
+        <h2 className="text-xl font-semibold">
+          Team up with us on social&nbsp;media
+        </h2>
         <div className="flex flex-col sm:flex-row w-full gap-5">
           <div className="flex flex-1 flex-col text-center justify-center items-center">
-            <span className="text-5xl">+{totalFollowers}</span>
+            <span className="text-5xl flex gap-2">{totalFollowers}</span>
             <span>Followers</span>
           </div>
-          <div className="flex flex-1 flex-row justify-center gap-4">
-            {some.map(some => (
-              <Link
-                target="_blank"
-                key={some.name}
-                href={some.link}
-                className="w-15 h-15 p-5 rounded-full flex items-center border-[2px] border-black hover:scale-105 transition-transform duration-300"
-                style={{ backgroundColor: '#333399' }}
-              >
-                <Image
-                  className="flex-1 object-cover"
-                  src={`/images/${some.name}.webp`}
-                  alt={`${some.name} Logo`}
-                  width={some.image.width}
-                  height={some.image.height}
-                />
-              </Link>
-            ))}
-          </div>
+          <SoMe />
           <div className="flex flex-1 flex-col text-center justify-center items-center">
-            <span className="text-5xl">+{totalViews}</span>
+            <span className="text-5xl flex gap-2">{totalViews}</span>
             <span>Views</span>
           </div>
         </div>
@@ -113,10 +98,10 @@ export default function Index() {
         <div className="flex flex-col gap-4 items-center sm:items-start">
           <h2 className="flex flex-col text-center sm:text-left">
             <span className="text-xs text-gray-500 uppercase">
-              App experience
+              The app experience
             </span>
             <span className="font-semibold text-xl lg:text-2xl">
-              Basketball on your homescreen
+              A playbook in your pocket
             </span>
           </h2>
           <p>
