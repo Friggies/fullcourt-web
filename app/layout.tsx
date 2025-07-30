@@ -82,15 +82,17 @@ export default function RootLayout({
               <Link href="/" className="font-black uppercase">
                 Fullcourt Training
               </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="mailto:contact@fullcourt-training.com"
+                  className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+                >
+                  Contact us now
+                  <MailIcon size={16} strokeWidth={1.5} />
+                </Link>
+                <ThemeSwitcher />
+              </div>
               <SoMe />
-              <Link
-                href="mailto:contact@fullcourt-training.com"
-                className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-              >
-                Contact
-                <MailIcon size={16} strokeWidth={1.5} />
-              </Link>
-              <ThemeSwitcher />
               <p className="text-sm text-gray-500 uppercase font-black">
                 &copy; {new Date().getFullYear()} Fullcourt Training
               </p>

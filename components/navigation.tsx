@@ -5,6 +5,7 @@ import { MenuIcon, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { ThemeSwitcher } from './theme-switcher';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,7 +69,7 @@ export default function Navigation() {
           <button onClick={() => setIsOpen(false)} className="ml-auto">
             <XIcon size={30} />
           </button>
-          <nav className="flex flex-col gap-4 font-normal">
+          <nav className="flex flex-col gap-4 font-normal items-start">
             <Link
               href={'/'}
               onClick={() => setIsOpen(false)}
@@ -95,6 +96,7 @@ export default function Navigation() {
                 {some.name}
               </Link>
             ))}
+            <ThemeSwitcher />
           </nav>
         </div>
       </div>

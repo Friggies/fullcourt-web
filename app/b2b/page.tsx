@@ -17,7 +17,7 @@ export default function B2B() {
               Working with teams who want to take their game to the next level
             </span>
           </h2>
-          <p>
+          <p className="text-justify">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut eius
             iste, nulla fuga ad, voluptate atque quibusdam recusandae facilis
             error eos voluptates, rerum est ex accusamus quos sit hic! Aperiam.
@@ -41,7 +41,7 @@ export default function B2B() {
               Help your team with custom animations of your own drills and plays
             </span>
           </h2>
-          <p>
+          <p className="text-justify">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut eius
             iste, nulla fuga ad, voluptate atque quibusdam recusandae facilis
             error eos voluptates, rerum est ex accusamus quos sit hic! Aperiam.
@@ -50,7 +50,7 @@ export default function B2B() {
             href="mailto:contact@fullcourt-training.com"
             className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
           >
-            Contact
+            Contact us now
             <MailIcon size={16} strokeWidth={1.5} />
           </Link>
         </div>

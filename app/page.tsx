@@ -54,7 +54,7 @@ export default function Index() {
               A modern basketball&nbsp;playbook
             </span>
           </h2>
-          <p>
+          <p className="text-justify">
             We help players and coaches visualize and practice various
             basketball plays and movements. With an extensive library of drills,
             users can easily find and follow along with animations that
@@ -104,7 +104,7 @@ export default function Index() {
               A playbook in your pocket
             </span>
           </h2>
-          <p>
+          <p className="text-justify">
             Our app is designed to provide a seamless experience for players and
             coaches. With a user-friendly interface, you can easily access our
             library of drills and access a digital tactical board right on your
