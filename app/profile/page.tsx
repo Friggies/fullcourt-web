@@ -8,25 +8,38 @@ import { Hero } from '@/components/hero';
 export default async function Profile() {
   const supabase = await createClient();
 
-  // You can also use getUser() which will be slower.
-  const { data, error } = await supabase.auth.getClaims();
-  if (error || !data?.claims) {
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
     redirect('/auth/login');
   }
 
-  console.log(data);
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('username, premium')
+    .eq('id', user.id)
+    .single();
 
-  const { data: user } = await supabase.auth.getUser();
-  console.log(user);
+  if (profileError || !profile) {
+    console.error('Profile error:', profileError);
+    redirect('/auth/login');
+  }
 
   return (
     <>
-      <Hero title={data.claims.email} />
-      <LogoutButton />
-      <div className="bg-accent text-sm p-3 px-5 rounded-md flex gap-3 items-center">
-        <InfoIcon size="16" strokeWidth={2} />
-        This is a protected page that you can only see as an authenticated user
-      </div>
+      <>
+        <Hero title={`Welcome, ${profile.username}`} />
+        <LogoutButton />
+        <div className="bg-accent text-sm p-3 px-5 rounded-md flex gap-3 items-center mt-4">
+          <InfoIcon size={16} strokeWidth={2} />
+          {profile.premium
+            ? 'You are a Premium user'
+            : 'You are on the free plan'}
+        </div>
+      </>
     </>
   );
 }
