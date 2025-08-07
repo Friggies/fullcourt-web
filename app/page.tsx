@@ -24,29 +24,35 @@ export default function Index() {
 
   return (
     <>
-      <div>
-        <div className="relative h-[250px] w-[250px] mx-auto rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
-          <Image
-            src={'/images/floor.webp'}
-            alt="Floor Plan"
-            priority
-            width={1080}
-            height={1080}
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          />
-          <Image
-            src={'/animations/passing.gif'}
-            alt="Fun Passing Animation"
-            unoptimized
-            priority
-            width={1080}
-            height={1080}
-            className="h-[150px] w-auto  animate-spin-slow"
-          />
-        </div>
+      <div className="mb-[-1rem] relative sm:h-[250px] h-[150px] rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
+        <Image
+          src={'/images/floor.webp'}
+          alt="Floor Plan"
+          priority
+          width={1600}
+          height={1013}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+        <Image
+          src={'/images/lines.png'}
+          alt="Floor Plan"
+          priority
+          width={1600}
+          height={1013}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+        <Image
+          src={'/animations/passing.gif'}
+          alt="Fun Passing Animation"
+          unoptimized
+          priority
+          width={1080}
+          height={1080}
+          className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
+        />
       </div>
       <Hero title="Animated basketball drills for&nbsp;the&nbsp;entire&nbsp;court" />
-      <div className="flex flex-col sm:flex-row-reverse gap-10 items-center">
+      <div className="flex flex-col-reverse sm:flex-row-reverse gap-10 items-center">
         <div className="flex flex-col gap-4 items-center sm:items-start">
           <h2 className="flex flex-col text-center sm:text-left">
             <span className="text-xs text-gray-500 uppercase">About us</span>
@@ -69,8 +75,8 @@ export default function Index() {
           </Link>
         </div>
         <Image
-          className="aspect-[9/16] w-full sm:w-auto sm:h-[400px] border rounded-lg shadow-sm"
-          src={'/thumbnails/3.webp'}
+          className="aspect-[9/16] w-full sm:w-auto h-[150px] sm:h-[300px] object-contain"
+          src={'/images/logo.webp'}
           width={1000}
           height={1778}
           alt="Tactical board of Pass & Cut drill (5 out)"
