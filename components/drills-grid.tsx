@@ -99,7 +99,7 @@ export default function DrillsGrid() {
             <li key={drill.id}>
               <Link
                 href={`/drills/${drill.id}`}
-                className="flex flex-col border rounded-md shadow-sm overflow-hidden"
+                className="flex flex-col border rounded-md shadow-sm overflow-hidden bg-accent"
               >
                 <Image
                   src={`/thumbnails/${drill.id}.webp`}
