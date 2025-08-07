@@ -96,7 +96,7 @@ export default function DrillsGrid() {
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {filteredDrills.length > 0 ? (
           filteredDrills.map(drill => (
-            <li key={drill.id}>
+            <li key={drill.id} className="flex">
               <Link
                 href={`/drills/${drill.id}`}
                 className="flex flex-col border rounded-md shadow-sm overflow-hidden bg-accent"
@@ -107,7 +107,7 @@ export default function DrillsGrid() {
                   width={600}
                   height={1067}
                 />
-                <div className="p-4">
+                <div className="p-4 flex flex-col flex-1 justify-between">
                   <h2 className="text-lg font-semibold">{drill.name}</h2>
                   <p className="text-sm text-gray-500">{drill.category}</p>
                 </div>

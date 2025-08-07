@@ -4,8 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { drill } from '@/lib/types';
 import { PostgrestError } from '@supabase/supabase-js';
-import { useParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeftIcon, CircleXIcon, LoaderIcon } from 'lucide-react';
 import { Hero } from '@/components/hero';
 import Link from 'next/link';
@@ -13,6 +12,8 @@ import Link from 'next/link';
 export default function DrillPage() {
   const [drill, setDrill] = useState<drill | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [videoUri, setVideoUri] = useState<string | null>(null);
+  const [videoLoading, setVideoLoading] = useState(true);
   const [error, setError] = useState<PostgrestError | null>(null);
   const { id } = useParams();
   const router = useRouter();
@@ -36,9 +37,39 @@ export default function DrillPage() {
     fetchDrill();
   }, []);
 
+  useEffect(() => {
+    const loadVideo = async () => {
+      if (!drill) return;
+
+      setVideoLoading(true);
+      let finalSource = drill.link?.trim();
+
+      // If no public link, attempt to fetch signed URL from Supabase
+      if (!finalSource) {
+        const supabase = createClient();
+        const { data, error } = await supabase.storage
+          .from('premium-drills')
+          .createSignedUrl(`${drill.id}.mp4`, 60 * 60 * 5); // 5-hour expiry
+
+        if (error || !data?.signedUrl) {
+          console.error('Error fetching Supabase video:', error);
+          setVideoLoading(false);
+          return;
+        }
+
+        finalSource = data.signedUrl;
+      }
+
+      setVideoUri(finalSource);
+      setVideoLoading(false);
+    };
+
+    loadVideo();
+  }, [drill]);
+
   if (loading) {
     return (
-      <div className="flex flex-col justify- items-center mt-10 gap-2">
+      <div className="flex flex-col justify-center items-center mt-10 gap-2">
         <LoaderIcon className="animate-spin" />
         Loading
       </div>
@@ -52,12 +83,14 @@ export default function DrillPage() {
 
   if (error || !drill) {
     return (
-      <div className="flex flex-col justify- items-center mt-10 gap-2">
+      <div className="flex flex-col justify-center items-center mt-10 gap-2">
         <CircleXIcon />
         Error loading drill
       </div>
     );
   }
+
+  const isYouTube = videoUri && !videoUri.includes('supabase');
 
   return (
     <>
@@ -78,20 +111,27 @@ export default function DrillPage() {
           </div>
           <div>{drill.description}</div>
         </div>
-        {drill.link ? (
-          <iframe
-            className="aspect-[9/16] sm:flex-0 sm:h-[400px] rounded-lg shadow-sm"
-            src="https://youtube.com/embed/i_xkF-DAm3U"
-            frameBorder={0}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        ) : (
-          <video className="w-full h-auto" controls>
-            <source src={drill.link} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        )}
+
+        <div className="sm:w-[250px] sm:h-[444px] w-full aspect-[9/16] rounded-lg shadow overflow-hidden flex justify-center items-center bg-black">
+          {videoLoading ? (
+            <LoaderIcon className="animate-spin text-white" />
+          ) : !videoUri ? (
+            <div className="text-white">No video available</div>
+          ) : isYouTube ? (
+            <iframe
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${drill.link}?rel=0&modestbranding=1&mute=1`}
+              frameBorder={0}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : (
+            <video className="w-full h-full" controls controlsList="nodownload">
+              <source src={videoUri} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
       </div>
     </>
   );
