@@ -20,7 +20,7 @@ const inter = localFont({
   ],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -44,7 +44,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="FULLCOURT" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
 
-        <meta property="og:title" content="FULLCOURT – Basketball Training" />
+        <meta property="og:title" content="FULLCOURT - Basketball Training" />
         <meta property="og:description" content="Animated Basketball Drills" />
         <meta
           property="og:image"
@@ -57,7 +57,7 @@ export default function RootLayout({
         <meta property="og:url" content="https://fullcourt-training.com" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FULLCOURT – Basketball Training" />
+        <meta name="twitter:title" content="FULLCOURT - Basketball Training" />
         <meta name="twitter:description" content="Animated Basketball Drills" />
         <meta
           name="twitter:image"
@@ -72,11 +72,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navigation />
-          <main className="p-4 min-h-screen">
-            <div className="max-w-3xl mx-auto flex flex-col gap-10">
-              {children}
-            </div>
-          </main>
+          <main className="flex flex-col gap-10">{children}</main>
           <footer className="p-4 border-t border-t-foreground/10">
             <div className="max-w-3xl mx-auto flex flex-col gap-5 items-start">
               <Link href="/" className="font-black uppercase">

@@ -1,6 +1,6 @@
 import { B2BDisclaimer } from '@/components/b2b-disclaimer';
-import { Hero } from '@/components/hero';
 import { Line } from '@/components/line';
+import { Section } from '@/components/section';
 import { SoMe } from '@/components/some';
 import some from '@/data/some';
 import { DownloadIcon, TelescopeIcon } from 'lucide-react';
@@ -24,36 +24,54 @@ export default function Index() {
 
   return (
     <>
-      <div className="mb-[-1rem] relative sm:h-[250px] h-[150px] rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
+      <div className="relative overflow-hidden flex items-center justify-center gap-[100px]">
         <Image
           src={'/images/floor.webp'}
           alt="Floor Plan"
           priority
           width={1600}
           height={1013}
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0"
         />
-        <Image
-          src={'/images/lines.png'}
-          alt="Floor Plan"
-          priority
-          width={1600}
-          height={1013}
-          className="absolute top-0 left-0 w-full h-full object-cover"
-        />
-        <Image
-          src={'/animations/passing.gif'}
-          alt="Fun Passing Animation"
-          unoptimized
-          priority
-          width={1080}
-          height={1080}
-          className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
-        />
+
+        <div className="max-w-3xl flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-[100px] p-4 pt-8">
+          <div className="text-center z-10 relative p-4 sm:p-8 max-w-2xl bg-background flex flex-col gap-2 border rounded-lg shadow-md sm:mt-[50px] mb-[50px]">
+            <h1 className="text-2xl lg:text-3xl font-semibold">
+              Animated basketball drills
+            </h1>
+            <p className="text-balance">
+              Easily visualize, understand and practice complex basketball plays
+              with our animated drills.
+            </p>
+            <Line />
+            <div className="mt-2 flex flex-col gap-2">
+              <Link
+                href="/drills"
+                className="block text-center px-4 py-2 rounded bg-primary text-primary-foreground hover:opacity-90 transition"
+              >
+                Explore Playbook Now
+              </Link>
+              <Link
+                href="/pricing"
+                className="block text-center px-4 py-2 rounded border border-primary hover:bg-accent hover:text-accent-foreground transition"
+              >
+                Get Access to Premiumm Drills
+              </Link>
+            </div>
+          </div>
+          <Image
+            src={'/animations/passing.gif'}
+            alt="Fun Passing Animation"
+            unoptimized
+            priority
+            width={1080}
+            height={1080}
+            className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
+          />
+        </div>
       </div>
-      <Hero title="Animated basketball drills for&nbsp;the&nbsp;entire&nbsp;court" />
-      <div className="flex flex-col-reverse sm:flex-row-reverse gap-10 items-center">
-        <div className="flex flex-col gap-4 items-center sm:items-start">
+      <Section>
+        <div>
           <h2 className="flex flex-col text-center sm:text-left">
             <span className="text-xs text-gray-500 uppercase">About us</span>
             <span className="font-semibold text-xl lg:text-2xl">
@@ -80,6 +98,34 @@ export default function Index() {
           width={1000}
           height={1778}
           alt="Tactical board of Pass & Cut drill (5 out)"
+        />
+      </Section>
+      <Line />
+      <div className="mb-[-1rem] relative sm:h-[250px] h-[150px] rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
+        <Image
+          src={'/images/floor.webp'}
+          alt="Floor Plan"
+          priority
+          width={1600}
+          height={1013}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+        <Image
+          src={'/images/lines.png'}
+          alt="Floor Plan"
+          priority
+          width={1600}
+          height={1013}
+          className="absolute top-0 left-0 w-full h-full object-cover"
+        />
+        <Image
+          src={'/animations/passing.gif'}
+          alt="Fun Passing Animation"
+          unoptimized
+          priority
+          width={1080}
+          height={1080}
+          className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
         />
       </div>
       <Line />
