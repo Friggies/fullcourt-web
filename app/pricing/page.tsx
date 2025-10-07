@@ -27,7 +27,7 @@ export default function Pricing() {
       price: '15$',
       tagline: 'Everything you need to level up',
       cta: {
-        label: 'Go Premium',
+        label: 'Go Premium Now',
         href: '/auth/sign-up?plan=premium',
         variant: 'primary' as const,
       },

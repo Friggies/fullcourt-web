@@ -44,8 +44,8 @@ export default function Navigation() {
   return (
     <>
       <nav className="p-4 mx-auto border-b border-b-foreground/10 bg-background sticky top-0 z-40">
-        <div className="max-w-3xl w-full flex justify-between items-center mx-auto">
-          <Link href="/">
+        <div className="max-w-3xl w-full flex gap-4 justify-end items-center mx-auto">
+          <Link className="mr-auto" href="/">
             <Image
               src={'/images/logo.webp'}
               alt="Fullcourt Training Logo"
@@ -65,6 +65,8 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
+          </div>
+          <div className="flex gap-4 items-center">
             {user ? (
               <Link
                 href="/profile"
@@ -88,10 +90,10 @@ export default function Navigation() {
                 </Link>
               </>
             )}
+            <button onClick={() => setIsOpen(o => !o)} className="sm:hidden">
+              <MenuIcon size={30} />
+            </button>
           </div>
-          <button onClick={() => setIsOpen(o => !o)} className="sm:hidden">
-            <MenuIcon size={30} />
-          </button>
         </div>
       </nav>
       <div
@@ -126,8 +128,10 @@ export default function Navigation() {
                 {link.label}
               </Link>
             ))}
-            <SoMe />
-            <ThemeSwitcher />
+            <div className="flex gap-2 items-center">
+              <ThemeSwitcher />
+              <SoMe />
+            </div>
           </nav>
         </div>
       </div>
