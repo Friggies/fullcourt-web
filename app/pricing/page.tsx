@@ -10,7 +10,7 @@ export default function Pricing() {
       price: '0$',
       tagline: 'Get started with animated drills',
       cta: {
-        label: 'Get Started',
+        label: 'Get Started Free',
         href: '/auth/sign-up',
         variant: 'secondary' as const,
       },
