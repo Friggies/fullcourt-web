@@ -3,7 +3,7 @@ import { Line } from '@/components/line';
 import { Section } from '@/components/section';
 import { SoMe } from '@/components/some';
 import some from '@/data/some';
-import { DownloadIcon, TelescopeIcon } from 'lucide-react';
+import { DownloadIcon, StarHalf, StarIcon, TelescopeIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,15 +47,9 @@ export default function Index() {
             <div className="mt-2 flex flex-col gap-2">
               <Link
                 href="/drills"
-                className="px-4 py-2 rounded border border-2 border-brand1 bg-brand1 text-black hover:opacity-90 transition"
-              >
-                Explore Playbook Now
-              </Link>
-              <Link
-                href="/pricing"
                 className="px-4 py-2 rounded border border-2 border-brand1 hover:bg-accent hover:text-accent-foreground transition"
               >
-                Get Access to Premiumm Drills
+                Explore Playbook
               </Link>
             </div>
           </div>
@@ -70,6 +64,27 @@ export default function Index() {
           />
         </div>
       </div>
+      <Section style="bg-muted py-5 text-muted-foreground mb-10">
+        <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-1 sm:gap-5">
+          <p>
+            Trusted by{' '}
+            <span className="font-bold text-xl uppercase">hundreds</span> of
+            players and coaches worldwide.
+          </p>
+          <div className="w-full sm:w-auto flex flex-row gap-2 items-center justify-between">
+            <div className="flex justify-center gap-1 text-green-500">
+              <StarIcon fill="currentColor" />
+              <StarIcon fill="currentColor" />
+              <StarIcon fill="currentColor" />
+              <StarIcon fill="currentColor" />
+              <StarIcon fill="currentColor" />
+            </div>
+            <p>
+              <span className="font-bold text-xl">4.9</span>/5
+            </p>
+          </div>
+        </div>
+      </Section>
       <Section>
         <div>
           <h2 className="flex flex-col text-center sm:text-left">

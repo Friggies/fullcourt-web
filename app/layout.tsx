@@ -72,7 +72,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Navigation />
-          <main className="flex flex-col gap-10">{children}</main>
+          <main className="flex flex-col">{children}</main>
           <footer className="p-4 border-t border-t-foreground/10">
             <div className="max-w-3xl mx-auto flex flex-col gap-5 items-start">
               <Link href="/" className="font-black uppercase">
@@ -83,7 +83,7 @@ export default async function RootLayout({
                   href="mailto:contact@fullcourt-training.com"
                   className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
                 >
-                  Contact us now
+                  Contact us
                   <MailIcon size={16} strokeWidth={1.5} />
                 </Link>
                 <ThemeSwitcher />
