@@ -1,7 +1,10 @@
 import { B2BDisclaimer } from '@/components/b2b-disclaimer';
+import { FAQ } from '@/components/faq';
 import { Line } from '@/components/line';
+import { Newsletter } from '@/components/newsletter';
 import { Section } from '@/components/section';
 import { SoMe } from '@/components/some';
+import Testimonials from '@/components/testimonials';
 import some from '@/data/some';
 import { DownloadIcon, StarHalf, StarIcon, TelescopeIcon } from 'lucide-react';
 import { Metadata } from 'next';
@@ -35,7 +38,7 @@ export default function Index() {
         />
 
         <div className="max-w-3xl flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-[100px] p-4 pt-8">
-          <div className="text-center z-10 relative p-4 sm:p-8 max-w-2xl bg-background flex flex-col gap-2 border rounded-lg shadow-md sm:mt-[50px] mb-[50px]">
+          <div className="text-center z-10 relative p-4 sm:p-8 max-w-2xl bg-background/50 backdrop-blur-sm flex flex-col gap-2 rounded-lg shadow-md sm:mt-[50px] mb-[50px]">
             <h1 className="text-2xl lg:text-3xl font-semibold">
               Animated basketball drills
             </h1>
@@ -72,7 +75,7 @@ export default function Index() {
             players and coaches worldwide.
           </p>
           <div className="w-full sm:w-auto flex flex-row gap-2 items-center justify-between">
-            <div className="flex justify-center gap-1 text-green-500">
+            <div className="flex justify-center gap-1 text-yellow-500">
               <StarIcon fill="currentColor" />
               <StarIcon fill="currentColor" />
               <StarIcon fill="currentColor" />
@@ -114,6 +117,64 @@ export default function Index() {
           height={1778}
           alt="Tactical board of Pass & Cut drill (5 out)"
         />
+      </Section>
+      <FAQ />
+      <Newsletter />
+      <Testimonials />
+      <Section>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <li className="flex">
+            <Link
+              href={`/drills/3`}
+              className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
+            >
+              <Image
+                src={`/thumbnails/3.webp`}
+                alt={`Drill 3 preview`}
+                width={600}
+                height={1067}
+              />
+              <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
+                <h2 className="text-lg font-semibold">Drill 3</h2>
+                <p className="text-sm">Category</p>
+              </div>
+            </Link>
+          </li>
+          <li className="flex">
+            <Link
+              href={`/drills/3`}
+              className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
+            >
+              <Image
+                src={`/thumbnails/3.webp`}
+                alt={`Drill 3 preview`}
+                width={600}
+                height={1067}
+              />
+              <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
+                <h2 className="text-lg font-semibold">Drill 3</h2>
+                <p className="text-sm">Category</p>
+              </div>
+            </Link>
+          </li>
+          <li className="flex">
+            <Link
+              href={`/drills/3`}
+              className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
+            >
+              <Image
+                src={`/thumbnails/3.webp`}
+                alt={`Drill 3 preview`}
+                width={600}
+                height={1067}
+              />
+              <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
+                <h2 className="text-lg font-semibold">Drill 3</h2>
+                <p className="text-sm">Category</p>
+              </div>
+            </Link>
+          </li>
+        </ul>
       </Section>
       <Line />
       <div className="mb-[-1rem] relative sm:h-[250px] h-[150px] rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
@@ -193,6 +254,8 @@ export default function Index() {
           alt="Tactical board of Pass & Cut drill (5 out)"
         />
       </div>
+      <Section>FAQ</Section>
+      <Section>Email</Section>
       <B2BDisclaimer />
     </>
   );

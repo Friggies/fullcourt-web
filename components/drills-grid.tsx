@@ -103,7 +103,7 @@ export default function DrillsGrid() {
               <li key={drill.id} className="flex">
                 <Link
                   href={`/drills/${drill.id}`}
-                  className="flex flex-col border rounded-md shadow-sm overflow-hidden bg-accent"
+                  className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
                 >
                   <Image
                     src={`/thumbnails/${drill.id}.webp`}
@@ -111,9 +111,9 @@ export default function DrillsGrid() {
                     width={600}
                     height={1067}
                   />
-                  <div className="p-4 flex flex-col flex-1 justify-between">
+                  <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
                     <h2 className="text-lg font-semibold">{drill.name}</h2>
-                    <p className="text-sm text-gray-500">{drill.category}</p>
+                    <p className="text-sm">{drill.category}</p>
                   </div>
                 </Link>
               </li>
