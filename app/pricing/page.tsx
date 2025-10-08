@@ -52,6 +52,7 @@ export default function Pricing() {
       features: [
         { text: 'Multiple premium accounts', included: true },
         { text: 'Custom drill animations', included: true },
+        { text: 'Newsletter & SoMe exposure', included: true },
         { text: 'Premium support', included: true },
       ],
     },
