@@ -86,7 +86,7 @@ export default function Navigation() {
                   href="/auth/sign-up"
                   className="px-4 py-2 rounded bg-primary text-primary-foreground hover:opacity-90 transition"
                 >
-                  Get Started Free
+                  Get Started
                 </Link>
               </>
             )}
