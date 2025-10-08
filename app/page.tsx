@@ -6,7 +6,7 @@ import { Section } from '@/components/section';
 import { SoMe } from '@/components/some';
 import Testimonials from '@/components/testimonials';
 import some from '@/data/some';
-import { DownloadIcon, StarHalf, StarIcon, TelescopeIcon } from 'lucide-react';
+import { DownloadIcon, StarIcon, TelescopeIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';

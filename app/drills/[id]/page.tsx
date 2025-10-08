@@ -19,6 +19,8 @@ export default function DrillPage() {
   const router = useRouter();
 
   useEffect(() => {
+    if (!id) return;
+
     const supabase = createClient();
     const fetchDrill = async () => {
       const { data, error } = await supabase
@@ -35,7 +37,7 @@ export default function DrillPage() {
       setLoading(false);
     };
     fetchDrill();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const loadVideo = async () => {
