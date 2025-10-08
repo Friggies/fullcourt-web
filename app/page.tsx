@@ -47,7 +47,7 @@ export default function Index() {
             <div className="mt-2 flex flex-col gap-2">
               <Link
                 href="/drills"
-                className="block text-center px-4 py-2 rounded bg-primary text-primary-foreground hover:opacity-90 transition"
+                className="block text-center px-4 py-2 rounded border border-primary bg-primary text-primary-foreground hover:opacity-90 transition"
               >
                 Explore Playbook Now
               </Link>
