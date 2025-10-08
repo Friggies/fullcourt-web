@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --brand1: 26.07, 89.17%, 52.94%;
+    --brand2: 7.61, 56.8%, 24.51%;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;

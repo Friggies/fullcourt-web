@@ -70,7 +70,7 @@ export default function Navigation() {
             {user ? (
               <Link
                 href="/profile"
-                className="px-4 py-2 rounded border border-primary bg-primary text-primary-foreground hover:opacity-90 transition"
+                className="px-4 py-2 rounded border border-2 border-brand1 hover:bg-accent hover:text-accent-foreground transition"
               >
                 Profile
               </Link>
@@ -78,13 +78,13 @@ export default function Navigation() {
               <>
                 <Link
                   href="/auth/login"
-                  className="px-4 py-2 rounded border border-primary hover:bg-accent hover:text-accent-foreground transition"
+                  className="px-4 py-2 rounded border border-2 border-brand1 hover:bg-accent hover:text-accent-foreground transition"
                 >
                   Login
                 </Link>
                 <Link
                   href="/auth/sign-up"
-                  className="px-4 py-2 rounded border border-primary bg-primary text-primary-foreground hover:opacity-90 transition"
+                  className="px-4 py-2 rounded border border-2 border-brand1 bg-brand1 text-black hover:opacity-90 transition"
                 >
                   Get Started
                 </Link>

@@ -47,13 +47,13 @@ export default function Index() {
             <div className="mt-2 flex flex-col gap-2">
               <Link
                 href="/drills"
-                className="block text-center px-4 py-2 rounded border border-primary bg-primary text-primary-foreground hover:opacity-90 transition"
+                className="px-4 py-2 rounded border border-2 border-brand1 bg-brand1 text-black hover:opacity-90 transition"
               >
                 Explore Playbook Now
               </Link>
               <Link
                 href="/pricing"
-                className="block text-center px-4 py-2 rounded border border-primary hover:bg-accent hover:text-accent-foreground transition"
+                className="px-4 py-2 rounded border border-2 border-brand1 hover:bg-accent hover:text-accent-foreground transition"
               >
                 Get Access to Premiumm Drills
               </Link>

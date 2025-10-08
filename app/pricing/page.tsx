@@ -25,10 +25,10 @@ export default function Pricing() {
     {
       name: 'Premium',
       price: '15$',
-      tagline: 'Everything you need to level up',
+      tagline: 'For serious players & coaches',
       cta: {
         label: 'Go Premium Now',
-        href: '/auth/sign-up?plan=premium',
+        href: '/auth/sign-up',
         variant: 'primary' as const,
       },
       popular: true, // highlight this card
@@ -44,16 +44,15 @@ export default function Pricing() {
       price: 'Contact us',
       tagline: 'For clubs & organizations',
       cta: {
-        label: 'Contact sales',
+        label: 'Contact us',
         href: 'mailto:contact@fullcourt-training.com',
         variant: 'outline' as const,
       },
       popular: false,
       features: [
-        { text: 'Everything in Premium', included: true },
         { text: 'Multiple premium accounts', included: true },
         { text: 'Custom drill animations', included: true },
-        { text: 'Priority phone support', included: true },
+        { text: 'Premium support', included: true },
       ],
     },
   ];
@@ -67,17 +66,20 @@ export default function Pricing() {
         </p>
       </Section>
       <Section>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:[&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(odd)]:col-span-1
+            "
+        >
           {tiers.map(tier => (
             <div
               key={tier.name}
               className={[
-                'relative rounded-2xl border shadow-sm bg-background',
-                tier.popular ? 'ring-2 ring-primary' : 'border-foreground/10',
+                'relative rounded-md border shadow-sm bg-background',
+                tier.popular ? 'ring-2 ring-brand1' : 'border-foreground/10',
               ].join(' ')}
             >
               {tier.popular && (
-                <div className="absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow">
+                <div className="absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full bg-brand1 px-3 py-1 text-xs font-semibold text-black shadow">
                   <StarIcon size={14} />
                   Best value
                 </div>
@@ -121,7 +123,7 @@ export default function Pricing() {
                 {tier.cta.href.startsWith('mailto:') ? (
                   <Link
                     href={tier.cta.href}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg border px-4 py-2 hover:bg-accent hover:text-accent-foreground mt-auto transition"
+                    className="mt-auto inline-flex items-center justify-center gap-1 rounded border border-brand1 border-2 px-4 py-2 hover:bg-accent hover:text-accent-foreground transition"
                   >
                     {tier.cta.label}
                     <MailIcon size={16} strokeWidth={1.5} />
@@ -131,10 +133,8 @@ export default function Pricing() {
                     href={tier.cta.href}
                     className={
                       tier.cta.variant === 'primary'
-                        ? 'inline-flex items-center justify-center rounded-lg bg-primary text-primary-foreground px-4 py-2 hover:opacity-90 transition'
-                        : tier.cta.variant === 'secondary'
-                        ? 'inline-flex items-center justify-center rounded-lg border border-primary px-4 py-2 hover:bg-accent hover:text-accent-foreground transition'
-                        : 'inline-flex items-center justify-center rounded-lg border px-4 py-2 hover:bg-accent hover:text-accent-foreground transition'
+                        ? 'inline-flex items-center justify-center rounded bg-brand1 text-black px-4 py-2 hover:opacity-90 transition'
+                        : 'inline-flex items-center justify-center rounded border border-brand1 border-2 px-4 py-2 hover:bg-accent hover:text-accent-foreground transition'
                     }
                   >
                     {tier.cta.label}
