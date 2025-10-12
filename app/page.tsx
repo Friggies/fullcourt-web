@@ -254,8 +254,6 @@ export default function Index() {
           alt="Tactical board of Pass & Cut drill (5 out)"
         />
       </div>
-      <Section>FAQ</Section>
-      <Section>Email</Section>
       <B2BDisclaimer />
     </>
   );
