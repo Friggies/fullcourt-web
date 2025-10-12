@@ -1,63 +1,11 @@
 import { Hero } from '@/components/hero';
 import { Section } from '@/components/section';
+import Testimonials from '@/components/testimonials';
+import tiers from '@/data/tiers';
 import { CheckIcon, MinusIcon, MailIcon, StarIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Pricing() {
-  const tiers = [
-    {
-      name: 'Free',
-      price: '0$',
-      tagline: 'Get started with animated drills',
-      cta: {
-        label: 'Get Started',
-        href: '/auth/sign-up',
-        variant: 'secondary' as const,
-      },
-      popular: false,
-      features: [
-        { text: 'Access to free drills', included: true },
-        { text: 'Save drills to your profile', included: true },
-        { text: 'Access to premium drills', included: false },
-        { text: 'Priority email support', included: false },
-      ],
-    },
-    {
-      name: 'Premium',
-      price: '15$',
-      tagline: 'For serious players & coaches',
-      cta: {
-        label: 'Go Premium Now',
-        href: '/auth/sign-up',
-        variant: 'primary' as const,
-      },
-      popular: true, // highlight this card
-      features: [
-        { text: 'Access to free drills', included: true },
-        { text: 'Save drills to your profile', included: true },
-        { text: 'Access to premium drills', included: true },
-        { text: 'Priority email support', included: true },
-      ],
-    },
-    {
-      name: 'Business',
-      price: 'Contact us',
-      tagline: 'For clubs & organizations',
-      cta: {
-        label: 'Contact us',
-        href: 'mailto:contact@fullcourt-training.com',
-        variant: 'outline' as const,
-      },
-      popular: false,
-      features: [
-        { text: 'Multiple premium accounts', included: true },
-        { text: 'Custom drill animations', included: true },
-        { text: 'Newsletter & SoMe exposure', included: true },
-        { text: 'Premium support', included: true },
-      ],
-    },
-  ];
-
   return (
     <>
       <Hero title="Our Pricing" />
@@ -146,32 +94,7 @@ export default function Pricing() {
           ))}
         </div>
       </Section>
-      <Section>
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="rounded-xl border bg-background p-5">
-            <h4 className="font-semibold mb-2">Free tier includes saving</h4>
-            <p className="text-sm text-muted-foreground">
-              Users on Free can access the library of free drills and save them
-              to their profile to build a personal playbook.
-            </p>
-          </div>
-          <div className="rounded-xl border bg-background p-5">
-            <h4 className="font-semibold mb-2">Premium unlocks everything</h4>
-            <p className="text-sm text-muted-foreground">
-              Get full access to all drills, plays, premium animations, and new
-              releases as they drop.
-            </p>
-          </div>
-          <div className="rounded-xl border bg-background p-5">
-            <h4 className="font-semibold mb-2">Business: request animations</h4>
-            <p className="text-sm text-muted-foreground">
-              Clubs and organizations can request custom animations of their own
-              drills and plays. We’ll work with your staff to deliver exactly
-              what you need.
-            </p>
-          </div>
-        </div>
-      </Section>
+      <Testimonials />
     </>
   );
 }
