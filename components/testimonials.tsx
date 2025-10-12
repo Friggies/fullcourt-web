@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { Section } from '@/components/section';
-import { StarHalf, StarIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { StarIcon } from 'lucide-react';
 
 type Testimonial = {
   name: string;
@@ -26,7 +25,7 @@ const TESTIMONIALS: Testimonial[] = [
     role: 'Point Guard',
     quote:
       'Seeing actions play out helped me memorize sets faster. I’m reacting instead of thinking.',
-    rating: 4.5,
+    rating: 4,
     avatar: '/images/logo.webp',
   },
   {
@@ -42,7 +41,7 @@ const TESTIMONIALS: Testimonial[] = [
     role: 'Assistant Coach',
     quote:
       'Clear visuals turned our whiteboard sets into something players could actually feel.',
-    rating: 4.5,
+    rating: 5,
     avatar: '/images/logo.webp',
   },
   {
@@ -58,41 +57,34 @@ const TESTIMONIALS: Testimonial[] = [
     role: 'Assistant Coach',
     quote:
       'Clear visuals turned our whiteboard sets into something players could actually feel.',
-    rating: 4.5,
+    rating: 4,
     avatar: '/images/logo.webp',
   },
 ];
 
-function Stars({
-  value = 5,
-  className,
-}: {
-  value?: number;
-  className?: string;
-}) {
-  const full = Math.floor(value);
-  const half = value - full >= 0.5;
-  const empty = 5 - full - (half ? 1 : 0);
+function Stars({ value = 5 }: { value?: number }) {
+  const rounded = Math.min(5, Math.max(0, Math.ceil(value)));
+  const empty = 5 - rounded;
 
   return (
-    <div
-      className={cn('flex items-center', className)}
-      aria-label={`${value} out of 5 stars`}
-    >
-      {Array.from({ length: full }).map((_, i) => (
+    <div className="flex items-center" aria-label={`${rounded} out of 5 stars`}>
+      {Array.from({ length: rounded }).map((_, i) => (
         <StarIcon
           key={`f${i}`}
           className="h-4 w-4 text-yellow-500"
           fill="currentColor"
+          stroke="currentColor"
         />
       ))}
-      {half && (
-        <StarHalf className="h-4 w-4 text-yellow-500" fill="currentColor" />
-      )}
       {Array.from({ length: empty }).map((_, i) => (
-        <StarIcon key={`e${i}`} className="h-4 w-4 opacity-30" />
+        <StarIcon
+          key={`e${i}`}
+          className="h-4 w-4 text-yellow-500"
+          fill="none"
+          stroke="currentColor"
+        />
       ))}
-      <span className="sr-only">{value} out of 5</span>
+      <span className="sr-only">{rounded} out of 5</span>
     </div>
   );
 }
@@ -114,7 +106,7 @@ export default function Testimonials() {
           {TESTIMONIALS.map((t, i) => (
             <li key={i} className="flex">
               <figure className="relative flex flex-col rounded-lg border bg-background p-5 shadow-sm">
-                <Stars value={t.rating ?? 5} className="mb-2" />
+                <Stars value={t.rating ?? 5} />
                 <blockquote className="text-sm leading-relaxed mb-auto">
                   “{t.quote}”
                 </blockquote>
