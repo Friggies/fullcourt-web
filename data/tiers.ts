@@ -39,7 +39,7 @@ const tiers = [
     tagline: 'For clubs & organizations',
     cta: {
       label: 'Contact us',
-      href: 'mailto:contact@fullcourt-training.com',
+      href: 'mailto:sales@fullcourt-training.com',
       variant: 'outline' as const,
     },
     popular: false,
