@@ -45,7 +45,6 @@ export async function POST(req: Request) {
 
     if (!addRes.ok) {
       const err = await addRes.text();
-      console.log(err);
       return NextResponse.json(
         { error: 'Add to form failed', details: err },
         { status: 500 }
@@ -53,7 +52,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ ok: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: 'Unexpected error' }, { status: 500 });
   }
 }
