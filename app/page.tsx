@@ -89,6 +89,13 @@ export default function Index() {
         </div>
       </Section>
       <Section>
+        <Image
+          className="w-full sm:w-auto h-[150px] sm:h-[200px] object-contain sm:mx-10"
+          src={'/images/logo.webp'}
+          width={1000}
+          height={1778}
+          alt="Tactical board of Pass & Cut drill (5 out)"
+        />
         <div>
           <h2 className="flex flex-col text-center sm:text-left">
             <span className="text-xs text-gray-500 uppercase">About us</span>
@@ -110,17 +117,7 @@ export default function Index() {
             <TelescopeIcon size={16} strokeWidth={1.5} />
           </Link>
         </div>
-        <Image
-          className="aspect-[9/16] w-full sm:w-auto h-[150px] sm:h-[300px] object-contain"
-          src={'/images/logo.webp'}
-          width={1000}
-          height={1778}
-          alt="Tactical board of Pass & Cut drill (5 out)"
-        />
       </Section>
-      <FAQ />
-      <Newsletter />
-      <Testimonials />
       <Section>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <li className="flex">
@@ -177,7 +174,8 @@ export default function Index() {
         </ul>
       </Section>
       <Line />
-      <div className="mb-[-1rem] relative sm:h-[250px] h-[150px] rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
+      <FAQ />
+      <div className="my-10 relative sm:h-[300px] h-[200px] rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
         <Image
           src={'/images/floor.webp'}
           alt="Floor Plan"
@@ -204,25 +202,30 @@ export default function Index() {
           className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
         />
       </div>
+      <Newsletter />
       <Line />
-      <div className="flex flex-col items-center text-center gap-5">
-        <h2 className="text-xl font-semibold">
-          Team up with us on social&nbsp;media
-        </h2>
-        <div className="flex flex-col sm:flex-row w-full gap-5">
-          <div className="flex flex-1 flex-col text-center justify-center items-center">
-            <span className="text-5xl flex gap-2">{totalFollowers}</span>
-            <span>Followers</span>
-          </div>
-          <SoMe />
-          <div className="flex flex-1 flex-col text-center justify-center items-center">
-            <span className="text-5xl flex gap-2">{totalViews}</span>
-            <span>Views</span>
+      <Testimonials />
+      <Line />
+      <Section>
+        <div className="w-full flex flex-col gap-4">
+          <h2 className="text-xl font-semibold w-full text-center">
+            Team up with us on social&nbsp;media
+          </h2>
+          <div className="flex flex-col sm:flex-row w-full gap-5">
+            <div className="flex flex-1 flex-col text-center justify-center items-center">
+              <span className="text-5xl flex gap-2">{totalFollowers}</span>
+              <span>Followers</span>
+            </div>
+            <SoMe />
+            <div className="flex flex-1 flex-col text-center justify-center items-center">
+              <span className="text-5xl flex gap-2">{totalViews}</span>
+              <span>Views</span>
+            </div>
           </div>
         </div>
-      </div>
+      </Section>
       <Line />
-      <div className="flex flex-col sm:flex-row gap-10 items-center">
+      <Section>
         <div className="flex flex-col gap-4 items-center sm:items-start">
           <h2 className="flex flex-col text-center sm:text-left">
             <span className="text-xs text-gray-500 uppercase">
@@ -253,7 +256,7 @@ export default function Index() {
           height={1778}
           alt="Tactical board of Pass & Cut drill (5 out)"
         />
-      </div>
+      </Section>
       <B2BDisclaimer />
     </>
   );
