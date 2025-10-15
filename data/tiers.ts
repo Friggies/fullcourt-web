@@ -22,7 +22,7 @@ const tiers = [
     tagline: 'For serious players & coaches',
     cta: {
       label: 'Go Premium Now',
-      href: '/auth/sign-up',
+      href: '/profile',
       variant: 'primary' as const,
     },
     popular: true, // highlight this card
