@@ -3,6 +3,7 @@ import { ThemeSwitcher } from '../theme-switcher';
 import { SoMe } from '../some';
 import Link from 'next/link';
 import { MailIcon } from 'lucide-react';
+import { Copy } from '../atoms/Copy';
 
 export function Footer() {
   return (
@@ -21,9 +22,7 @@ export function Footer() {
           <ThemeSwitcher />
           <SoMe />
         </div>
-        <p className="text-sm text-muted-foreground uppercase font-black">
-          &copy; {new Date().getFullYear()} Fullcourt Training
-        </p>
+        <Copy />
       </div>
     </footer>
   );

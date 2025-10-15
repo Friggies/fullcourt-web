@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { InfoIcon } from 'lucide-react';
 import { LogoutButton } from '@/components/logout-button';
 import { Hero } from '@/components/hero';
+import { Section } from '@/components/section';
 
 export default async function Profile() {
   const supabase = await createClient();
@@ -19,7 +20,7 @@ export default async function Profile() {
 
   const { data: profile, error: profileError } = await supabase
     .from('profiles')
-    .select('username, premium')
+    .select('premium')
     .eq('id', user.id)
     .single();
 
@@ -30,16 +31,16 @@ export default async function Profile() {
 
   return (
     <>
-      <>
-        <Hero title={`Welcome, ${profile.username}`} />
-        <LogoutButton />
-        <div className="bg-accent text-sm p-3 px-5 rounded-md flex gap-3 items-center mt-4">
+      <Hero title="Your Profile" />
+      <Section>
+        <div className="bg-accent border text-sm p-3 px-5 rounded-md flex gap-3 items-center mt-4">
           <InfoIcon size={16} strokeWidth={2} />
           {profile.premium
             ? 'You are a Premium user'
             : 'You are on the free plan'}
         </div>
-      </>
+        <LogoutButton />
+      </Section>
     </>
   );
 }

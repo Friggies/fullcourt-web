@@ -8,6 +8,8 @@ import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeftIcon, CircleXIcon, LoaderIcon } from 'lucide-react';
 import { Hero } from '@/components/hero';
 import Link from 'next/link';
+import { Section } from '@/components/section';
+import { Copy } from '@/components/atoms/Copy';
 
 export default function DrillPage() {
   const [drill, setDrill] = useState<drill | null>(null);
@@ -97,44 +99,50 @@ export default function DrillPage() {
   return (
     <>
       <Hero title={drill.name} />
-      <div className="flex flex-col-reverse sm:flex-row gap-6">
-        <div className="flex flex-col flex-1 gap-4">
-          <div className="flex items-center justify-between text-sm">
-            <Link
-              className="flex items-center gap-1 underline text-gray-500"
-              href={'/drills'}
-            >
-              <ArrowLeftIcon size={16} />
-              Back to all drills
-            </Link>
-            <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
-              {drill.category}
-            </span>
+      <Section>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="sm:col-span-2 order-1 sm:order-none flex flex-col gap-4">
+            <div className="flex items-center justify-between text-sm">
+              <Link
+                className="flex items-center gap-1 underline text-gray-500"
+                href={'/drills'}
+              >
+                <ArrowLeftIcon size={16} />
+                Back to all drills
+              </Link>
+              <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                {drill.category}
+              </span>
+            </div>
+            <div>{drill.description}</div>
+            <Copy />
           </div>
-          <div>{drill.description}</div>
+          <div className="w-full aspect-[9/16] rounded-lg shadow overflow-hidden flex justify-center items-center bg-black">
+            {videoLoading ? (
+              <LoaderIcon className="animate-spin text-white" />
+            ) : !videoUri ? (
+              <div className="text-white">No video available</div>
+            ) : isYouTube ? (
+              <iframe
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${drill.link}?rel=0&modestbranding=1&mute=1`}
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <video
+                className="w-full h-full"
+                controls
+                controlsList="nodownload"
+              >
+                <source src={videoUri} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
         </div>
-
-        <div className="sm:w-[250px] sm:h-[444px] w-full aspect-[9/16] rounded-lg shadow overflow-hidden flex justify-center items-center bg-black">
-          {videoLoading ? (
-            <LoaderIcon className="animate-spin text-white" />
-          ) : !videoUri ? (
-            <div className="text-white">No video available</div>
-          ) : isYouTube ? (
-            <iframe
-              className="w-full h-full"
-              src={`https://www.youtube.com/embed/${drill.link}?rel=0&modestbranding=1&mute=1`}
-              frameBorder={0}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          ) : (
-            <video className="w-full h-full" controls controlsList="nodownload">
-              <source src={videoUri} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )}
-        </div>
-      </div>
+      </Section>
     </>
   );
 }
