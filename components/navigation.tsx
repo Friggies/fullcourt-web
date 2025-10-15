@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { SoMe } from './some';
 import { User } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/client';
+import Button from './atoms/Button';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,26 +69,13 @@ export default function Navigation() {
           </div>
           <div className="flex gap-4 items-center">
             {user ? (
-              <Link
-                href="/profile"
-                className="px-4 py-2 rounded border border-2 border-brand1 hover:bg-accent hover:text-accent-foreground transition"
-              >
-                Profile
-              </Link>
+              <Button href="/profile">Profile</Button>
             ) : (
               <>
-                <Link
-                  href="/auth/login"
-                  className="px-4 py-2 rounded border border-2 border-brand1 hover:bg-accent hover:text-accent-foreground transition"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/auth/sign-up"
-                  className="px-4 py-2 rounded border border-2 border-brand1 bg-brand1 text-black hover:opacity-90 transition"
-                >
+                <Button href="/auth/login">Login</Button>
+                <Button href="/auth/sign-up" variant="fill">
                   Get Started
-                </Link>
+                </Button>
               </>
             )}
             <button onClick={() => setIsOpen(o => !o)} className="sm:hidden">

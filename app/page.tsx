@@ -1,4 +1,6 @@
-import { B2BDisclaimer } from '@/components/b2b-disclaimer';
+import Button from '@/components/atoms/Button';
+import { Card } from '@/components/atoms/Card';
+import { Court } from '@/components/atoms/Court';
 import { FAQ } from '@/components/faq';
 import { Line } from '@/components/line';
 import { Newsletter } from '@/components/newsletter';
@@ -6,7 +8,7 @@ import { Section } from '@/components/section';
 import { SoMe } from '@/components/some';
 import Testimonials from '@/components/testimonials';
 import some from '@/data/some';
-import { DownloadIcon, StarIcon, TelescopeIcon } from 'lucide-react';
+import { StarIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -27,52 +29,34 @@ export default function Index() {
 
   return (
     <>
-      <div className="relative overflow-hidden flex items-center justify-center gap-[100px]">
+      <Court>
+        <Card>
+          <h1 className="text-2xl lg:text-3xl font-semibold">
+            Animated Basketball Drills
+          </h1>
+          <p>
+            Easily visualize, understand and practice complex basketball plays
+            with our animated drills.
+          </p>
+          <Line />
+          <Button className="/drills">Explore Playbook</Button>
+        </Card>
         <Image
-          src={'/images/floor.webp'}
-          alt="Floor Plan"
+          src={'/animations/passing.gif'}
+          alt="Fun Passing Animation"
+          unoptimized
           priority
-          width={1600}
-          height={1013}
-          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+          width={1080}
+          height={1080}
+          className="h-[100px] sm:h-[150px] w-auto animate-spin-slow"
         />
-
-        <div className="max-w-3xl flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-[100px] p-4 pt-8">
-          <div className="text-center z-10 relative p-4 sm:p-8 max-w-2xl bg-background/50 backdrop-blur-sm flex flex-col gap-2 rounded-lg shadow-md sm:mt-[50px] mb-[50px]">
-            <h1 className="text-2xl lg:text-3xl font-semibold">
-              Animated basketball drills
-            </h1>
-            <p className="text-balance">
-              Easily visualize, understand and practice complex basketball plays
-              with our animated drills.
-            </p>
-            <Line />
-            <div className="mt-2 flex flex-col gap-2">
-              <Link
-                href="/drills"
-                className="px-4 py-2 rounded border border-2 border-brand1 hover:bg-accent hover:text-accent-foreground transition"
-              >
-                Explore Playbook
-              </Link>
-            </div>
-          </div>
-          <Image
-            src={'/animations/passing.gif'}
-            alt="Fun Passing Animation"
-            unoptimized
-            priority
-            width={1080}
-            height={1080}
-            className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
-          />
-        </div>
-      </div>
-      <Section style="bg-muted py-5 text-muted-foreground mb-10">
+      </Court>
+      <Section className="bg-muted py-5 text-muted-foreground mb-10">
         <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-1 sm:gap-5">
           <p>
-            Trusted by{' '}
-            <span className="font-bold text-xl uppercase">hundreds</span> of
-            players and coaches worldwide.
+            Loved by{' '}
+            <span className="font-semibold text-xl uppercase">thousands</span>{' '}
+            of players and coaches worldwide.
           </p>
           <div className="w-full sm:w-auto flex flex-row gap-2 items-center justify-between">
             <div className="flex justify-center gap-1 text-yellow-500">
@@ -89,127 +73,107 @@ export default function Index() {
         </div>
       </Section>
       <Section>
-        <Image
-          className="w-full sm:w-auto h-[150px] sm:h-[200px] object-contain sm:mx-10"
-          src={'/images/logo.webp'}
-          width={1000}
-          height={1778}
-          alt="Tactical board of Pass & Cut drill (5 out)"
-        />
-        <div>
-          <h2 className="flex flex-col text-center sm:text-left">
-            <span className="text-xs text-gray-500 uppercase">About us</span>
-            <span className="font-semibold text-xl lg:text-2xl">
-              A modern basketball&nbsp;playbook
-            </span>
-          </h2>
-          <p className="text-justify">
-            We help players and coaches visualize and practice various
-            basketball plays and movements. With an extensive library of drills,
-            users can easily find and follow along with animations that
-            demonstrate proper techniques and strategies.
-          </p>
-          <Link
-            href="/drills"
-            className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-          >
-            Explore the playbook now
-            <TelescopeIcon size={16} strokeWidth={1.5} />
-          </Link>
-        </div>
-      </Section>
-      <Section>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <li className="flex">
-            <Link
-              href={`/drills/3`}
-              className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
-            >
-              <Image
-                src={`/thumbnails/3.webp`}
-                alt={`Drill 3 preview`}
-                width={600}
-                height={1067}
-              />
-              <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                <h2 className="text-lg font-semibold">Drill 3</h2>
-                <p className="text-sm">Category</p>
-              </div>
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              href={`/drills/3`}
-              className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
-            >
-              <Image
-                src={`/thumbnails/3.webp`}
-                alt={`Drill 3 preview`}
-                width={600}
-                height={1067}
-              />
-              <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                <h2 className="text-lg font-semibold">Drill 3</h2>
-                <p className="text-sm">Category</p>
-              </div>
-            </Link>
-          </li>
-          <li className="flex">
-            <Link
-              href={`/drills/3`}
-              className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
-            >
-              <Image
-                src={`/thumbnails/3.webp`}
-                alt={`Drill 3 preview`}
-                width={600}
-                height={1067}
-              />
-              <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                <h2 className="text-lg font-semibold">Drill 3</h2>
-                <p className="text-sm">Category</p>
-              </div>
-            </Link>
-          </li>
+          <Image
+            className="w-full h-[150px] object-contain m-auto"
+            src={'/images/logo.webp'}
+            width={1000}
+            height={1778}
+            alt="Tactical board of Pass & Cut drill (5 out)"
+          />
+          <div className="col-span-2 sm:px-4 flex flex-col gap-2">
+            <h2 className="flex flex-col">
+              <span className="text-xs text-gray-500 uppercase">About us</span>
+              <span className="font-semibold text-xl lg:text-2xl">
+                A Modern Basketball&nbsp;Playbook
+              </span>
+            </h2>
+            <p>
+              We help players and coaches visualize and practice various
+              basketball plays and movements. With an extensive library of
+              drills and plays, users can easily find and follow along with
+              animations that demonstrate proper techniques and strategies.
+            </p>
+          </div>
         </ul>
       </Section>
-      <Line />
-      <FAQ />
-      <div className="my-10 relative sm:h-[300px] h-[200px] rounded-lg border shadow-sm overflow-hidden flex items-center justify-center">
-        <Image
-          src={'/images/floor.webp'}
-          alt="Floor Plan"
-          priority
-          width={1600}
-          height={1013}
-          className="absolute top-0 left-0 w-full h-full object-cover"
-        />
-        <Image
-          src={'/images/lines.png'}
-          alt="Floor Plan"
-          priority
-          width={1600}
-          height={1013}
-          className="absolute top-0 left-0 w-full h-full object-cover"
-        />
-        <Image
-          src={'/animations/passing.gif'}
-          alt="Fun Passing Animation"
-          unoptimized
-          priority
-          width={1080}
-          height={1080}
-          className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
-        />
-      </div>
-      <Newsletter />
+      <Section>
+        <div className="flex flex-col gap-5 items-center">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <li className="flex relative">
+              <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs font-semibold text-brand1 shadow">
+                <StarIcon fill="currentColor" size={14} />
+                <span className="text-foreground">Top Drill</span>
+              </div>
+              <Link
+                href={`/drills/3`}
+                className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
+              >
+                <Image
+                  src={`/thumbnails/3.webp`}
+                  alt={`Drill 3 preview`}
+                  width={600}
+                  height={1067}
+                />
+                <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
+                  <h2 className="text-lg font-semibold">Drill 3</h2>
+                  <p className="text-sm">Category</p>
+                </div>
+              </Link>
+            </li>
+            <li className="flex relative">
+              <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs font-semibold text-brand1 shadow">
+                <StarIcon fill="currentColor" size={14} />
+                <span className="text-foreground">Top Drill</span>
+              </div>
+              <Link
+                href={`/drills/3`}
+                className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
+              >
+                <Image
+                  src={`/thumbnails/3.webp`}
+                  alt={`Drill 3 preview`}
+                  width={600}
+                  height={1067}
+                />
+                <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
+                  <h2 className="text-lg font-semibold">Drill 3</h2>
+                  <p className="text-sm">Category</p>
+                </div>
+              </Link>
+            </li>
+            <li className="flex relative">
+              <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs font-semibold text-brand1 shadow">
+                <StarIcon fill="currentColor" size={14} />
+                <span className="text-foreground">Top Drill</span>
+              </div>
+              <Link
+                href={`/drills/3`}
+                className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
+              >
+                <Image
+                  src={`/thumbnails/3.webp`}
+                  alt={`Drill 3 preview`}
+                  width={600}
+                  height={1067}
+                />
+                <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
+                  <h2 className="text-lg font-semibold">Drill 3</h2>
+                  <p className="text-sm">Category</p>
+                </div>
+              </Link>
+            </li>
+          </ul>
+          <Button href="/drills">Browse all drills and plays</Button>
+        </div>
+      </Section>
       <Line />
       <Testimonials />
-      <Line />
+      <Newsletter />
       <Section>
         <div className="w-full flex flex-col gap-4">
-          <h2 className="text-xl font-semibold w-full text-center">
-            Team up with us on social&nbsp;media
+          <h2 className="text-xl sm:text-2xl font-semibold w-full text-center">
+            Team Up with us on Social&nbsp;Media
           </h2>
           <div className="flex flex-col sm:flex-row w-full gap-5">
             <div className="flex flex-1 flex-col text-center justify-center items-center">
@@ -225,39 +189,7 @@ export default function Index() {
         </div>
       </Section>
       <Line />
-      <Section>
-        <div className="flex flex-col gap-4 items-center sm:items-start">
-          <h2 className="flex flex-col text-center sm:text-left">
-            <span className="text-xs text-gray-500 uppercase">
-              The app experience
-            </span>
-            <span className="font-semibold text-xl lg:text-2xl">
-              A playbook in your pocket
-            </span>
-          </h2>
-          <p className="text-justify">
-            Our app is designed to provide a seamless experience for players and
-            coaches. With a user-friendly interface, you can easily access our
-            library of drills and access a digital tactical board right on your
-            phone.
-          </p>
-          <Link
-            href="/"
-            className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-          >
-            Download the app now
-            <DownloadIcon size={16} strokeWidth={1.5} />
-          </Link>
-        </div>
-        <Image
-          className="aspect-[9/16] w-full sm:w-auto sm:h-[400px] border rounded-lg shadow-sm"
-          src={'/thumbnails/3.webp'}
-          width={1000}
-          height={1778}
-          alt="Tactical board of Pass & Cut drill (5 out)"
-        />
-      </Section>
-      <B2BDisclaimer />
+      <FAQ />
     </>
   );
 }

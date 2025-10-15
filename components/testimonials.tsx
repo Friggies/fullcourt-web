@@ -98,7 +98,7 @@ export default function Testimonials() {
             Testimonials
           </span>
           <h2 className="text-xl lg:text-2xl font-semibold">
-            Loved by players & coaches
+            Loved by Players & Coaches
           </h2>
         </header>
 

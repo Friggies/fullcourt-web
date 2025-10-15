@@ -1,4 +1,3 @@
-import { B2BDisclaimer } from '@/components/b2b-disclaimer';
 import DrillsGrid from '@/components/drills-grid';
 import { Hero } from '@/components/hero';
 import { Section } from '@/components/section';
@@ -14,12 +13,11 @@ export default function Drills() {
         <div className="my-4 w-full text-gray-500 flex flex-col items-center text-center">
           <CrownIcon className="mb-2" />
           <p>Looking for more animated drills?</p>
-          <Link className="text-lg underline" href={'/profile'}>
+          <Link className="text-lg underline" href={'/pricing'}>
             Become a premium member&nbsp;today
           </Link>
         </div>
       </Section>
-      <B2BDisclaimer />
     </>
   );
 }

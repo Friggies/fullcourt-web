@@ -15,10 +15,7 @@ export default function Pricing() {
         </p>
       </Section>
       <Section>
-        <div
-          className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:[&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(odd)]:col-span-1
-            "
-        >
+        <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:[&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(odd)]:col-span-1">
           {tiers.map(tier => (
             <div
               key={tier.name}

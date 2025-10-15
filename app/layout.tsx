@@ -1,11 +1,8 @@
 import localFont from 'next/font/local';
 import { ThemeProvider } from 'next-themes';
 import './globals.css';
-import Link from 'next/link';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 import Navigation from '@/components/navigation';
-import { MailIcon } from 'lucide-react';
-import { SoMe } from '@/components/some';
+import { Footer } from '@/components/organisms/Footer';
 
 const inter = localFont({
   src: [
@@ -73,32 +70,7 @@ export default async function RootLayout({
         >
           <Navigation />
           <main className="flex flex-col">{children}</main>
-          <footer className="p-4 border-t border-t-foreground/10">
-            <div className="max-w-3xl mx-auto flex flex-col gap-5 items-start mt-4">
-              <div>
-                <Link href="/" className="font-black uppercase">
-                  Fullcourt Training
-                </Link>
-                <p>
-                  Animated Basketball Drills and Plays for Players and Coaches
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <Link
-                  href="mailto:contact@fullcourt-training.com"
-                  className="flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300"
-                >
-                  Contact us
-                  <MailIcon size={16} strokeWidth={1.5} />
-                </Link>
-                <ThemeSwitcher />
-              </div>
-              <SoMe />
-              <p className="text-sm text-gray-500 uppercase font-black">
-                &copy; {new Date().getFullYear()} Fullcourt Training
-              </p>
-            </div>
-          </footer>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

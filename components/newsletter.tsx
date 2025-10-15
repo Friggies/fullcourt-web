@@ -1,7 +1,11 @@
 'use client';
 
-import { Section } from '@/components/section';
 import { useState } from 'react';
+import { Card } from './atoms/Card';
+import Image from 'next/image';
+import { Court } from './atoms/Court';
+import Button from './atoms/Button';
+import Link from 'next/link';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');
@@ -38,42 +42,51 @@ export function Newsletter() {
   }
 
   return (
-    <Section>
-      <div className="flex flex-col gap-6 w-full">
-        <header className="text-center sm:text-left">
-          <span className="text-xs uppercase text-muted-foreground">
-            Stay informed
-          </span>
-          <h2 className="text-xl lg:text-2xl font-semibold">
-            Get the newsletter
-          </h2>
-        </header>
+    <Court className="my-5">
+      <Image
+        src={'/animations/passing.gif'}
+        alt="Fun Passing Animation"
+        unoptimized
+        priority
+        width={1080}
+        height={1080}
+        className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
+      />
+      <Card>
+        <span className="text-xs uppercase text-muted-foreground">
+          Stay informed
+        </span>
+        <h2 className="text-xl lg:text-2xl font-semibold">
+          Sign Up for the Newsletter
+        </h2>
 
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, alias.
-          Earum nam voluptates cumque ea quasi modi atque commodi qui quae quam
-          minima unde corrupti sunt animi eligendi, dolorem nisi?
+          We will pass along exciting information about new drills, plays,
+          sponsored content and updates to FULLCOURT TRAINING.
         </p>
 
-        <form onSubmit={onSubmit} className="flex w-full gap-2 sm:gap-3">
+        <form
+          onSubmit={onSubmit}
+          className="flex flex-col w-full gap-2 sm:gap-3"
+        >
           <input
             type="email"
             required
             placeholder="you@example.com"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="flex-1 border rounded px-3 py-2"
+            className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2"
           />
-          <button
+          <Button
+            variant="fill"
             type="submit"
             disabled={status === 'loading'}
             className="px-4 py-2 rounded border"
           >
             {status === 'loading' ? 'Submitting…' : 'Subscribe'}
-          </button>
+          </Button>
         </form>
-
-        <div aria-live="polite" className="text-sm min-h-[1.25rem]">
+        <div aria-live="polite" className="text-sm">
           {status === 'ok' && (
             <span className="text-green-600">
               Thanks! Please check your email.
@@ -81,7 +94,14 @@ export function Newsletter() {
           )}
           {status === 'error' && <span className="text-red-600">{error}</span>}
         </div>
-      </div>
-    </Section>
+        <p className="text-muted-foreground text-xs">
+          By subscribing, you agree to our{' '}
+          <Link className="underline" href="/privacy-policy">
+            Privacy Policy
+          </Link>
+          . Unsubscribe anytime.
+        </p>
+      </Card>
+    </Court>
   );
 }
