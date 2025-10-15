@@ -39,7 +39,7 @@ export default function Index() {
             with our animated drills.
           </p>
           <Line />
-          <Button className="/drills">Explore Playbook</Button>
+          <Button href="/drills">Explore Playbook</Button>
         </Card>
         <Image
           src={'/animations/passing.gif'}
