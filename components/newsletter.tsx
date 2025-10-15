@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Court } from './atoms/Court';
 import Button from './atoms/Button';
 import Link from 'next/link';
+import { Line } from './line';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');
@@ -75,7 +76,7 @@ export function Newsletter() {
             placeholder="you@example.com"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2"
+            className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2 bg-white"
           />
           <Button
             variant="fill"
@@ -94,6 +95,7 @@ export function Newsletter() {
           )}
           {status === 'error' && <span className="text-red-600">{error}</span>}
         </div>
+        <Line />
         <p className="text-muted-foreground text-xs">
           By subscribing, you agree to our{' '}
           <Link className="underline" href="/privacy-policy">
