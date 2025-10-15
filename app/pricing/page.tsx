@@ -69,7 +69,7 @@ export default function Pricing() {
                 {tier.cta.href.startsWith('mailto:') ? (
                   <Link
                     href={tier.cta.href}
-                    className="mt-auto inline-flex items-center justify-center gap-1 rounded border border-brand1 border-2 px-4 py-2 hover:bg-accent hover:text-accent-foreground transition"
+                    className="mt-auto inline-flex items-center justify-center gap-1 rounded border-brand1 border-2 px-4 py-2 hover:bg-accent hover:text-accent-foreground transition"
                   >
                     {tier.cta.label}
                     <MailIcon size={16} strokeWidth={1.5} />
@@ -80,7 +80,7 @@ export default function Pricing() {
                     className={
                       tier.cta.variant === 'primary'
                         ? 'inline-flex items-center justify-center rounded bg-brand1 text-black px-4 py-2 hover:opacity-90 transition'
-                        : 'inline-flex items-center justify-center rounded border border-brand1 border-2 px-4 py-2 hover:bg-accent hover:text-accent-foreground transition'
+                        : 'inline-flex items-center justify-center rounded border-brand1 border-2 px-4 py-2 hover:bg-accent hover:text-accent-foreground transition'
                     }
                   >
                     {tier.cta.label}
