@@ -111,7 +111,7 @@ export default function DrillPage() {
                 Back to all drills
               </Link>
               <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
-                {drill.category}
+                {drill.type}
               </span>
             </div>
             <div>{drill.description}</div>
