@@ -49,11 +49,7 @@ export default function DrillsGrid() {
         const normalized = (data ?? []).map(d => ({
           ...d,
           categories: Array.isArray(d.categories)
-            ? [
-                ...new Set(
-                  d.categories.map(c => c?.name).filter(Boolean as any)
-                ),
-              ]
+            ? [...new Set(d.categories.map(c => c?.name).filter(Boolean))]
             : [],
         }));
         setDrills(normalized);
