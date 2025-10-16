@@ -4,8 +4,9 @@ export interface drill {
   name: string;
   description: string;
   link: string;
-  image: string;
-  category: Category;
+  type: 'Drill' | 'Play';
+  categories: Category[];
+  players: number;
 }
 
 export const CATEGORIES = [
