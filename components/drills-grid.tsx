@@ -120,19 +120,13 @@ export default function DrillsGrid() {
       <Section>
         <div className="flex w-full gap-4 items-end">
           {/* Search */}
-          <label className="flex flex-col flex-1 gap-1">
-            <div className="flex items-center gap-1">
-              Search
-              <SearchIcon size={16} strokeWidth={1.5} />
-            </div>
-            <input
-              type="text"
-              placeholder="Type here..."
-              value={filterSearch}
-              onChange={e => setFilterSearch(e.target.value)}
-              className="shadow-sm border rounded-md w-full p-2 h-[42px] bg-background placeholder:text-foreground hover:bg-accent focus:outline-none"
-            />
-          </label>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={filterSearch}
+            onChange={e => setFilterSearch(e.target.value)}
+            className="shadow-sm border rounded-md w-full p-2 h-[42px] bg-background placeholder:text-foreground hover:bg-accent focus:outline-none"
+          />
 
           {/* Toggle filter menu */}
           <button
@@ -149,10 +143,7 @@ export default function DrillsGrid() {
 
         {/* Filters menu */}
         {showFilters && (
-          <div
-            id="filters-panel"
-            className="mt-4 p-4 rounded-md border bg-muted"
-          >
+          <div id="filters-panel" className="p-4 rounded-md border bg-muted">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Categories multi-select */}
               <label className="flex flex-col gap-1">
@@ -179,7 +170,7 @@ export default function DrillsGrid() {
                     </option>
                   ))}
                 </select>
-                <span className="text-xs text-muted-foreground">
+                <span className="hidden sm:flex text-xs text-muted-foreground">
                   Hold Ctrl/Cmd to select multiple
                 </span>
               </label>
@@ -236,9 +227,7 @@ export default function DrillsGrid() {
             </div>
           </div>
         )}
-      </Section>
 
-      <Section>
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredDrills.length > 0 ? (
             filteredDrills.map(d => (
