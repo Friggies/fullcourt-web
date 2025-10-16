@@ -5,7 +5,6 @@ import { PostgrestError } from '@supabase/supabase-js';
 import {
   CircleXIcon,
   LoaderIcon,
-  SearchIcon,
   TagIcon,
   UsersIcon,
   SlidersHorizontalIcon,
