@@ -80,8 +80,6 @@ export default function DrillsGrid() {
         filterCategories.length === 0 ||
         filterCategories.some(cat => d.categories.includes(cat as Category));
 
-      // players filter interpreted as "max players available":
-      // show drills where d.players <= filterPlayers
       const matchesPlayers =
         filterPlayers === '' ||
         (typeof filterPlayers === 'number' &&
@@ -124,14 +122,14 @@ export default function DrillsGrid() {
             placeholder="Search..."
             value={filterSearch}
             onChange={e => setFilterSearch(e.target.value)}
-            className="shadow-sm border rounded-md w-full p-2 h-[42px] bg-background placeholder:text-foreground hover:bg-accent focus:outline-none"
+            className="shadow-sm border-2 rounded-md w-full p-2 h-[42px] bg-background placeholder:text-foreground hover:bg-accent focus:outline-none"
           />
 
           {/* Toggle filter menu */}
           <button
             type="button"
             onClick={() => setShowFilters(v => !v)}
-            className="px-4 py-2 h-[42px] border rounded-md shadow-sm bg-muted text-foreground flex items-center gap-1"
+            className="px-4 py-2 h-[42px] border-2 rounded-md shadow-sm bg-muted text-foreground flex items-center gap-1"
             aria-expanded={showFilters}
             aria-controls="filters-panel"
           >
@@ -142,13 +140,13 @@ export default function DrillsGrid() {
 
         {/* Filters menu */}
         {showFilters && (
-          <div id="filters-panel" className="p-4 rounded-md border bg-muted">
+          <div id="filters-panel" className="p-4 rounded-md border-2 bg-muted">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Categories multi-select */}
               <label className="flex flex-col gap-1">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 text-sm">
                   Categories
-                  <TagIcon size={16} strokeWidth={1.5} />
+                  <TagIcon size={12} strokeWidth={1} />
                 </div>
                 <select
                   multiple
@@ -174,16 +172,17 @@ export default function DrillsGrid() {
                 </span>
               </label>
 
-              {/* Players (max) */}
               <label className="flex flex-col gap-1">
-                <div className="flex items-center gap-1">
-                  Max players
-                  <UsersIcon size={16} strokeWidth={1.5} />
+                <div className="flex items-center gap-1 text-sm">
+                  Players
+                  <UsersIcon size={12} strokeWidth={1} />
                 </div>
                 <input
                   type="number"
                   min={1}
                   placeholder="Any"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   value={filterPlayers}
                   onChange={e => {
                     const v = e.target.value;
@@ -197,7 +196,7 @@ export default function DrillsGrid() {
 
               {/* Type */}
               <label className="flex flex-col gap-1">
-                <div className="flex items-center gap-1">Type</div>
+                <div className="flex items-center gap-1 text-sm">Type</div>
                 <select
                   value={filterType}
                   onChange={e => setFilterType(e.target.value)}
@@ -232,7 +231,10 @@ export default function DrillsGrid() {
             filteredDrills.map(d => (
               <li key={d.id} className="flex relative">
                 <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs text-brand1 shadow">
-                  <span className="text-foreground">{d.type}</span>
+                  <span className="text-foreground flex items-center gap-1">
+                    {d.players}
+                    <UsersIcon size={12} />
+                  </span>
                 </div>
                 <Link
                   href={`/drills/${d.id}`}
@@ -247,7 +249,7 @@ export default function DrillsGrid() {
                   />
                   <div className="absolute bottom-0 w-full bg-background/60 backdrop-blur-sm p-4 flex flex-col">
                     <h2 className="text-lg font-semibold">{d.name}</h2>
-                    <p className="text-sm">{d.categories}</p>
+                    <p className="text-sm">{d.categories.join(', ')}</p>
                   </div>
                 </Link>
               </li>
