@@ -8,6 +8,9 @@ import {
   TagIcon,
   UsersIcon,
   SlidersHorizontalIcon,
+  PersonStanding,
+  PersonStandingIcon,
+  UserIcon,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -230,11 +233,9 @@ export default function DrillsGrid() {
           {filteredDrills.length > 0 ? (
             filteredDrills.map(d => (
               <li key={d.id} className="flex relative">
-                <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs text-brand1 shadow">
-                  <span className="text-foreground flex items-center gap-1">
-                    {d.players} players
-                    <UsersIcon size={12} />
-                  </span>
+                <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs text-brand2 shadow">
+                  <UsersIcon size={12} />
+                  <span className="text-foreground">{d.players} players</span>
                 </div>
                 <Link
                   href={`/drills/${d.id}`}
