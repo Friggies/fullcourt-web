@@ -2,65 +2,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { Section } from '@/components/section';
 import { StarIcon } from 'lucide-react';
-
-type Testimonial = {
-  name: string;
-  role?: string;
-  quote: string;
-  rating?: number;
-  avatar?: string;
-};
-
-const TESTIMONIALS: Testimonial[] = [
-  {
-    name: 'Coach Miller',
-    role: 'Varsity Coach',
-    quote:
-      'The animated drills make spacing and timing so much easier to teach. Our practices run smoother.',
-    rating: 5,
-    avatar: '/images/logo.webp',
-  },
-  {
-    name: 'Ava K.',
-    role: 'Point Guard',
-    quote:
-      'Seeing actions play out helped me memorize sets faster. I’m reacting instead of thinking.',
-    rating: 4,
-    avatar: '/images/logo.webp',
-  },
-  {
-    name: 'Jonas L.',
-    role: 'Youth Coach (DK)',
-    quote:
-      'Great for beginners—my U13s picked up cuts and reads in just a couple of sessions.',
-    rating: 5,
-    avatar: '/images/logo.webp',
-  },
-  {
-    name: 'Riley S.',
-    role: 'Assistant Coach',
-    quote:
-      'Clear visuals turned our whiteboard sets into something players could actually feel.',
-    rating: 5,
-    avatar: '/images/logo.webp',
-  },
-  {
-    name: 'Jonas L.',
-    role: 'Youth Coach (DK)',
-    quote:
-      'Great for beginners—my U13s picked up cuts and reads in just a couple of sessions.',
-    rating: 5,
-    avatar: '/images/logo.webp',
-  },
-  {
-    name: 'Riley S.',
-    role: 'Assistant Coach',
-    quote:
-      'Clear visuals turned our whiteboard sets into something players could actually feel.',
-    rating: 4,
-    avatar: '/images/logo.webp',
-  },
-];
+import TESTIMONIALS from '@/data/testimonials';
 
 function Stars({ value = 5 }: { value?: number }) {
   const rounded = Math.min(5, Math.max(0, Math.ceil(value)));
