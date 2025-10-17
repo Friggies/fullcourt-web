@@ -5,7 +5,12 @@ import { createClient } from '@/lib/supabase/client';
 import { drill } from '@/lib/types';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeftIcon, CircleXIcon, LoaderIcon } from 'lucide-react';
+import {
+  ArrowLeftIcon,
+  CircleXIcon,
+  LoaderIcon,
+  UsersIcon,
+} from 'lucide-react';
 import { Hero } from '@/components/hero';
 import Link from 'next/link';
 import { Section } from '@/components/section';
@@ -110,8 +115,10 @@ export default function DrillPage() {
                 <ArrowLeftIcon size={16} />
                 Back to all drills
               </Link>
-              <span className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
-                {drill.type}
+              <span className="inline-flex gap-1 items-center px-3 py-1 bg-muted text-muted-foreground font-medium rounded-full">
+                <UsersIcon size={14} />
+                {drill.type} for {drill.players}{' '}
+                {drill.players === 1 ? 'player' : 'players'}
               </span>
             </div>
             <div>{drill.description}</div>
