@@ -8,7 +8,7 @@ import { Section } from '@/components/section';
 import { SoMe } from '@/components/some';
 import Testimonials from '@/components/testimonials';
 import some from '@/data/some';
-import { AwardIcon, StarIcon, TrophyIcon } from 'lucide-react';
+import { StarIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';

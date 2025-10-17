@@ -8,9 +8,6 @@ import {
   TagIcon,
   UsersIcon,
   SlidersHorizontalIcon,
-  PersonStanding,
-  PersonStandingIcon,
-  UserIcon,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
