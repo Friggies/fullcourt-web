@@ -10,6 +10,7 @@ type BaseProps = {
   variant?: Variant;
   className?: string;
   children: React.ReactNode;
+  disabled?: boolean;
 };
 
 type ButtonAsButton = BaseProps &
@@ -24,12 +25,13 @@ export function Button({
   variant = 'outline',
   className,
   children,
+  disabled,
   ...rest
 }: ButtonProps) {
   const base =
     'inline-flex items-center justify-center gap-1 rounded px-4 py-2 transition ' +
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ' +
-    'disabled:opacity-50 disabled:pointer-events-none';
+    'disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed';
   const variants: Record<Variant, string> = {
     outline:
       'border-2 border-brand1 hover:bg-accent hover:text-accent-foreground',
@@ -50,6 +52,7 @@ export function Button({
   return (
     <button
       className={classes}
+      disabled={disabled}
       {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {children}

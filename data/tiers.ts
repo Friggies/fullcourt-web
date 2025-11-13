@@ -10,9 +10,9 @@ const tiers = [
     },
     popular: false,
     features: [
-      { text: 'Access to free drills', included: true },
-      { text: 'Save drills to your profile', included: true },
-      { text: 'Access to premium drills', included: false },
+      { text: 'Save drills and plays to your profile', included: true },
+      { text: 'Access to free drills and plays', included: true },
+      { text: 'Access to premium drills and plays', included: false },
       { text: 'Priority email support', included: false },
     ],
   },
@@ -27,9 +27,9 @@ const tiers = [
     },
     popular: true, // highlight this card
     features: [
-      { text: 'Access to free drills', included: true },
-      { text: 'Save drills to your profile', included: true },
-      { text: 'Access to premium drills', included: true },
+      { text: 'Save drills and plays to your profile', included: true },
+      { text: 'Access to free drills and plays', included: true },
+      { text: 'Access to premium drills and plays', included: true },
       { text: 'Priority email support', included: true },
     ],
   },
@@ -47,7 +47,7 @@ const tiers = [
       { text: 'Multiple premium accounts', included: true },
       { text: 'Custom drill animations', included: true },
       { text: 'Newsletter & SoMe exposure', included: true },
-      { text: 'Premium support', included: true },
+      { text: 'Dedicated contact person', included: true },
     ],
   },
 ];

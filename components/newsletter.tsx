@@ -101,7 +101,7 @@ export function Newsletter() {
           <Link className="underline" href="/privacy-policy">
             Privacy Policy
           </Link>
-          . Unsubscribe anytime.
+          .
         </p>
       </Card>
     </Court>

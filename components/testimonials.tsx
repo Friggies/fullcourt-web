@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Image from 'next/image';
 import { Section } from '@/components/section';
 import { StarIcon } from 'lucide-react';
