@@ -44,8 +44,8 @@ export default async function Profile() {
         )}
         <ManageSubscriptionButton
           appUserId={user.id}
-          rcPublicApiKey="rcb_BPxXMSobsiEGkbeFhWRkvvEVMigl"
-          fallbackPurchaseUrl="https://pay.rev.cat/azitqxgvbsdmvyri/"
+          rcPublicApiKey="rcb_xHycYyUtOQsCPNvUrHtcIVyjFWLe"
+          fallbackPurchaseUrl="https://pay.rev.cat/bnawrhaexwjxtrbz/"
         />
         <div className="bg-accent border rounded-md p-10 gap-10 grid grid-cols-1 sm:grid-cols-2">
           <div></div>
