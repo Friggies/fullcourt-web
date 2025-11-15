@@ -162,7 +162,7 @@ export default function DrillsGrid() {
                   style={{ minHeight: 90 }}
                 >
                   {allCategoryOptions.map(cat => (
-                    <option className="text-black" key={cat} value={cat}>
+                    <option key={cat} value={cat}>
                       {cat}
                     </option>
                   ))}
