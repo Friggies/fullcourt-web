@@ -230,9 +230,9 @@ export default function DrillsGrid() {
           {filteredDrills.length > 0 ? (
             filteredDrills.map(d => (
               <li key={d.id} className="flex relative">
-                <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs text-brand2 shadow">
+                <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-foreground shadow">
                   <UsersIcon size={12} />
-                  <span className="text-foreground">{d.players} players</span>
+                  {d.players} players
                 </div>
                 <Link
                   href={`/drills/${d.id}`}

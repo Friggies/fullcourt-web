@@ -101,7 +101,7 @@ export default function Index() {
         <div className="flex flex-col gap-5 items-center">
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <li className="flex relative">
-              <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs text-yellow-500 shadow">
+              <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-yellow-500 shadow">
                 <StarIcon fill="currentColor" size={14} />
                 <span className="text-foreground">Highlighted Drill</span>
               </div>
@@ -122,7 +122,7 @@ export default function Index() {
               </Link>
             </li>
             <li className="flex relative">
-              <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs text-yellow-500 shadow">
+              <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-yellow-500 shadow">
                 <StarIcon fill="currentColor" size={14} />
                 <span className="text-foreground">Highlighted Drill</span>
               </div>
@@ -143,7 +143,7 @@ export default function Index() {
               </Link>
             </li>
             <li className="flex relative">
-              <div className="z-10 absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full border border-brand2 bg-muted px-3 py-1 text-xs text-yellow-500 shadow">
+              <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-yellow-500 shadow">
                 <StarIcon fill="currentColor" size={14} />
                 <span className="text-foreground">Highlighted Drill</span>
               </div>
