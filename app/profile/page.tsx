@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/lib/supabase/server';
-import { DownloadIcon, InfoIcon } from 'lucide-react';
+import { DownloadIcon } from 'lucide-react';
 import { LogoutButton } from '@/components/logout-button';
 import { Hero } from '@/components/hero';
 import { Section } from '@/components/section';
