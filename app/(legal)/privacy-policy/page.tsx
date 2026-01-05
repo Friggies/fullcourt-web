@@ -79,9 +79,9 @@ export default function PrivacyPolicy() {
             premium access.
           </li>
           <li>
-            <strong>Bookmarks (App only):</strong> if you use the native app's
-            bookmark features, we store bookmark relationships so you can see
-            what you bookmarked.
+            <strong>Bookmarks (App only):</strong> if you use the native
+            app&apos;s bookmark features, we store bookmark relationships so you
+            can see what you bookmarked.
           </li>
         </ul>
 
@@ -157,12 +157,12 @@ export default function PrivacyPolicy() {
           <li>
             <strong>Web subscriptions:</strong> if you subscribe on the website,
             payments are processed through <strong>Stripe</strong> via
-            RevenueCat's web billing setup. We do not receive your full payment
-            card number.
+            RevenueCat&apos;s web billing setup. We do not receive your full
+            payment card number.
           </li>
           <li>
             <strong>iOS subscriptions:</strong> if you subscribe through the iOS
-            app, purchases are processed by Apple's App Store. We receive
+            app, purchases are processed by Apple&apos;s App Store. We receive
             entitlement/subscription status needed to provide premium access.
           </li>
           <li>
@@ -282,7 +282,7 @@ export default function PrivacyPolicy() {
       </Section>
 
       <Section>
-        <h2 className="text-xl font-semibold mb-2">Children's Privacy</h2>
+        <h2 className="text-xl font-semibold mb-2">Children&apos;s Privacy</h2>
         <p>
           Our Services are not directed to children under the age of 13 (or the
           age of digital consent in your country). We do not knowingly collect
