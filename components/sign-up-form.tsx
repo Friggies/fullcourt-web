@@ -101,10 +101,22 @@ export function SignUpForm({
                   onChange={e => setRepeatPassword(e.target.value)}
                 />
               </div>
+
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? 'Creating an account...' : 'Sign up'}
               </Button>
+              <p className="text-center text-xs opacity-80">
+                By creating an account, you agree to the{' '}
+                <Link href="/privacy-policy" className="hover:underline">
+                  Privacy Policy
+                </Link>{' '}
+                and the{' '}
+                <Link href="/terms-and-conditions" className="hover:underline">
+                  Terms & Conditions
+                </Link>
+                .
+              </p>
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{' '}

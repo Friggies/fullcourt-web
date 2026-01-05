@@ -1,208 +1,373 @@
 import { Hero } from '@/components/hero';
 import { Section } from '@/components/section';
+import Link from 'next/link';
 
 export default function TermsAndConditions() {
   return (
     <>
-      <Hero title="Terms and Conditions" />
+      <Hero title="Terms & Conditions" />
+
       <Section>
         <p className="w-full text-center text-muted-foreground">
-          Last updated: October 15, 2025
+          Last updated: January 5, 2026
         </p>
       </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Agreement to These Terms</h2>
+        <p>
+          These Terms &amp; Conditions (“<strong>Terms</strong>”) govern your
+          use of <strong>FULLCOURT TRAINING</strong> (the “
+          <strong>Services</strong>
+          ”), including our website and our native mobile applications (iOS and
+          Android when available).
+        </p>
+        <p className="mt-2">
+          By accessing or using the Services, creating an account, or purchasing
+          a subscription, you agree to these Terms. If you do not agree, do not
+          use the Services.
+        </p>
+      </Section>
+
       <Section>
         <h2 className="text-xl font-semibold mb-2">Who We Are</h2>
         <p>
-          This Privacy Policy explains how <strong>FULLCOURT TRAINING</strong>{' '}
-          (“<strong>we</strong>,” “<strong>us</strong>,” or “
-          <strong>our</strong>”) collects, uses, and shares personal information
-          when you visit our website, create an account, or subscribe to our
-          newsletter.
+          The Services are operated by <strong>FULLCOURT TRAINING</strong>.
         </p>
         <p className="mt-2">
-          Controller: <strong>FULLCOURT TRAINING</strong>
-          <br />
           Contact:{' '}
           <a className="underline" href="mailto:contact@fullcourt-training.com">
             contact@fullcourt-training.com
           </a>
         </p>
       </Section>
+
       <Section>
-        <h2 className="text-xl font-semibold mb-2">Scope</h2>
+        <h2 className="text-xl font-semibold mb-2">The Services</h2>
         <p>
-          This Policy covers personal information we collect online through our
-          website and related services. It does not cover third-party websites
-          or services that we do not control.
+          FULLCOURT TRAINING provides a digital basketball playbook with
+          animated basketball drills and plays (animated video/animations plus
+          descriptive text). Premium subscriptions expand the playbook by
+          unlocking additional premium drills and plays.
+        </p>
+        <p className="mt-2">
+          We may add, remove, or update content and features over time to
+          improve the Services or comply with legal/technical requirements.
         </p>
       </Section>
+
       <Section>
-        <h2 className="text-xl font-semibold mb-2">Information We Collect</h2>
+        <h2 className="text-xl font-semibold mb-2">Eligibility</h2>
+        <p>
+          The Services are not intended for children under 13. If you are under
+          18, you must have permission from a parent or legal guardian to use
+          the Services and to make purchases.
+        </p>
+        <p className="mt-2">
+          You are responsible for ensuring your use of the Services is lawful in
+          your jurisdiction.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Accounts</h2>
         <ul className="list-disc pl-6 space-y-1">
           <li>
-            <strong>Contact details</strong> when you subscribe to our
-            newsletter or contact us (email).
+            <strong>Registration:</strong> You create an account using your
+            email address.
           </li>
           <li>
-            <strong>Account & profile info</strong> you provide if you create an
-            account (email).
+            <strong>Security:</strong> You are responsible for maintaining the
+            confidentiality of your login credentials and for all activity under
+            your account.
+          </li>
+          <li>
+            <strong>No sharing:</strong> You may not share, sell, transfer, or
+            sublicense your account to anyone else.
+          </li>
+          <li>
+            <strong>Multiple devices:</strong> You may use your account on your
+            own devices (present and future), provided you do not share access
+            with others.
           </li>
         </ul>
       </Section>
+
       <Section>
-        <h2 className="text-xl font-semibold mb-2">How We Use Information</h2>
+        <h2 className="text-xl font-semibold mb-2">
+          Subscriptions, Billing &amp; Cancellation
+        </h2>
+
+        <h3 className="text-lg font-semibold mt-4 mb-2">Plans</h3>
+        <p>
+          We offer Free and Premium access. Premium is a monthly subscription
+          that unlocks premium drills and plays.
+        </p>
+
+        <h3 className="text-lg font-semibold mt-4 mb-2">Pricing</h3>
+        <p className="mt-2">
+          Pricing is shown on our{' '}
+          <Link className="underline" href="/pricing">
+            pricing page
+          </Link>
+          .
+        </p>
+        <p>
+          Pricing may vary slightly due to store pricing tiers, currency
+          conversion, and taxes.
+        </p>
+
+        <h3 className="text-lg font-semibold mt-4 mb-2">How billing works</h3>
         <ul className="list-disc pl-6 space-y-1">
-          <li>Provide and improve our website, content, and services.</li>
-          <li>Send newsletters, updates, and announcements you request.</li>
-          <li>Respond to comments and support requests.</li>
-          <li>Protect against fraud, abuse, and misuse; ensure security.</li>
-          <li>Comply with legal obligations and enforce our terms.</li>
+          <li>
+            <strong>Web:</strong> Web subscriptions are processed through Stripe
+            via RevenueCat web billing. We do not receive your full payment card
+            number.
+          </li>
+          <li>
+            <strong>iOS:</strong> Subscriptions purchased in the iOS app are
+            processed by Apple (App Store).
+          </li>
+          <li>
+            <strong>Android:</strong> When available, subscriptions purchased in
+            the Android app are processed by Google (Google Play).
+          </li>
+        </ul>
+
+        <h3 className="text-lg font-semibold mt-4 mb-2">
+          Auto-renewal &amp; cancellation
+        </h3>
+        <p>
+          Premium subscriptions generally auto-renew unless you cancel.
+          Cancellation stops future renewals. How you cancel depends on where
+          you purchased:
+        </p>
+        <ul className="list-disc pl-6 space-y-1 mt-2">
+          <li>
+            <strong>Web:</strong> Cancel via the RevenueCat web portal (as made
+            available to you during purchase/management).
+          </li>
+          <li>
+            <strong>iOS:</strong> Cancel in your Apple ID subscription settings.
+          </li>
+          <li>
+            <strong>Android:</strong> Cancel in your Google Play subscription
+            settings (when available).
+          </li>
         </ul>
         <p className="mt-2">
-          If you are in the EEA/UK, our lawful bases typically include{' '}
-          <strong>consent</strong> (for newsletters),{' '}
-          <strong>legitimate interests</strong> (site functionality, analytics,
-          security), and <strong>legal obligation</strong> (compliance).
+          After cancellation, you will generally retain access until the end of
+          the current paid period, unless otherwise indicated at purchase or
+          required by the platform you purchased through.
+        </p>
+
+        <h3 className="text-lg font-semibold mt-4 mb-2">Refunds</h3>
+        <p>
+          <strong>No refunds</strong> except where required by law. Purchases
+          made through Apple or Google are also subject to their refund policies
+          and processes.
         </p>
       </Section>
+
       <Section>
-        <h2 className="text-xl font-semibold mb-2">Email Newsletters (Kit)</h2>
+        <h2 className="text-xl font-semibold mb-2">
+          License, Permitted Use &amp; Restrictions
+        </h2>
         <p>
-          We use <strong>Kit (kit.com)</strong> to manage email newsletters,
-          subscriber lists, and email delivery. When you subscribe, your email
-          address (and any other information you provide for the subscription)
-          is processed by Kit as our service provider. Kit acts as a processor
-          on our behalf and may process your information on servers outside your
-          country.
+          We grant you a limited, non-exclusive, non-transferable, revocable
+          license to access and use the Services and the content solely for your
+          personal or internal coaching/team practice purposes, in accordance
+          with these Terms.
+        </p>
+
+        <h3 className="text-lg font-semibold mt-4 mb-2">Permitted use</h3>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>
+            You may view drills/plays and use them to teach, explain, and run
+            practices.
+          </li>
+          <li>
+            You may display the content on larger screens (e.g., TV/projector)
+            to help players/coaches understand drills and plays.
+          </li>
+          <li>
+            You may show content to teams/players/coaches during instruction,
+            provided you do not give them a way to save, download, or
+            redistribute premium content.
+          </li>
+        </ul>
+
+        <h3 className="text-lg font-semibold mt-4 mb-2">Restrictions</h3>
+        <ul className="list-disc pl-6 space-y-1">
+          <li>
+            <strong>No account sharing:</strong> You may not share access to
+            your account.
+          </li>
+          <li>
+            <strong>No copying or redistribution:</strong> You may not copy,
+            reproduce, distribute, publish, transmit, sell, sublicense, or
+            otherwise exploit any portion of the Services or content.
+          </li>
+          <li>
+            <strong>No downloading/screen recording:</strong> You may not
+            download, screen record, capture, or otherwise extract premium
+            content (in whole or in part) for storage or redistribution.
+          </li>
+          <li>
+            <strong>No scraping or API access:</strong> You may not access the
+            content through automated means (including scraping, crawling, or
+            use of an API) unless we explicitly authorize it in writing.
+          </li>
+        </ul>
+
+        <p className="mt-2">
+          Free content that appears on third-party platforms (for example,
+          YouTube) may also be available directly on those platforms, but these
+          Terms still prohibit using automated methods to scrape or bulk extract
+          content from our Services.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Intellectual Property</h2>
+        <p>
+          The Services, including all drills, plays, animations, text, design,
+          software, and branding, are owned by FULLCOURT TRAINING and/or its
+          licensors and are protected by intellectual property laws. Except for
+          the limited license granted above, no rights are granted to you.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">User Conduct</h2>
+        <p>You agree not to:</p>
+        <ul className="list-disc pl-6 space-y-1 mt-2">
+          <li>Use the Services in bad faith or for unlawful purposes.</li>
+          <li>
+            Attempt to bypass paywalls, access controls, or security measures.
+          </li>
+          <li>Interfere with or disrupt the Services or related systems.</li>
+          <li>
+            Reverse engineer, decompile, or attempt to derive source code except
+            where such restriction is prohibited by law.
+          </li>
+        </ul>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">
+          Termination &amp; Suspension
+        </h2>
+        <p>
+          We may suspend or terminate your access to the Services (including any
+          Premium access) if we reasonably believe you have violated these
+          Terms, acted in bad faith, attempted to redistribute premium content,
+          or otherwise harmed the Services or other users.
         </p>
         <p className="mt-2">
-          You can unsubscribe at any time using the link in any email from us,
-          or by contacting us at{' '}
+          You may stop using the Services at any time. To request account
+          deletion, email{' '}
+          <Link
+            className="underline"
+            href="mailto:contact@fullcourt-training.com"
+          >
+            contact@fullcourt-training.com
+          </Link>
+          .
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Disclaimers</h2>
+        <p>
+          The Services and content are provided for general educational and
+          training information purposes only. They are not medical advice and do
+          not replace professional medical guidance.
+        </p>
+        <p className="mt-2">
+          Basketball training and physical activity involve inherent risks. You
+          assume all risks associated with your use of the Services and your
+          participation in any drills/activities described.
+        </p>
+        <p className="mt-2">
+          To the maximum extent permitted by law, the Services are provided “as
+          is” and “as available,” without warranties of any kind, including
+          implied warranties of merchantability, fitness for a particular
+          purpose, and non-infringement.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Limitation of Liability</h2>
+        <p>
+          To the maximum extent permitted by law, FULLCOURT TRAINING will not be
+          liable for any indirect, incidental, special, consequential, or
+          punitive damages, or any loss of profits, revenue, data, or goodwill,
+          arising out of or related to your use of the Services.
+        </p>
+        <p className="mt-2">
+          To the maximum extent permitted by law, our total liability for any
+          claim arising out of or relating to the Services will not exceed the
+          amount you paid to us for the Services in the 12 months before the
+          event giving rise to the claim (or, if you have not paid, 0).
+        </p>
+        <p className="mt-2">
+          Nothing in these Terms limits any consumer rights that cannot be
+          limited under applicable law, or liability that cannot be excluded
+          (such as liability for intent or gross negligence where applicable).
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Indemnity</h2>
+        <p>
+          To the extent permitted by law, you agree to indemnify and hold
+          harmless FULLCOURT TRAINING from and against claims, liabilities,
+          damages, losses, and expenses (including reasonable legal fees)
+          arising from your misuse of the Services or your violation of these
+          Terms.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Privacy</h2>
+        <p>
+          Our collection and use of personal information is described in our{' '}
+          <a className="underline" href="/privacy-policy">
+            Privacy Policy
+          </a>
+          . By using the Services, you acknowledge that you have read it.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Changes to These Terms</h2>
+        <p>
+          We may update these Terms from time to time. The “Last updated” date
+          above reflects the most recent changes. If changes are material, we
+          will post the updated Terms on this page and may also provide
+          additional notice where appropriate.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Governing Law</h2>
+        <p>
+          These Terms are governed by the laws of Denmark, without regard to
+          conflict of law principles. Subject to mandatory consumer protections,
+          courts located in Denmark will have jurisdiction over disputes arising
+          out of or relating to these Terms or the Services.
+        </p>
+      </Section>
+
+      <Section>
+        <h2 className="text-xl font-semibold mb-2">Contact Us</h2>
+        <p>
+          Questions about these Terms? Email{' '}
           <a className="underline" href="mailto:contact@fullcourt-training.com">
             contact@fullcourt-training.com
           </a>
           .
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">Cookies & Analytics</h2>
-        <p>
-          We may use cookies and similar technologies to keep you signed in,
-          remember preferences, and understand aggregate site usage. You can
-          adjust cookie settings in your browser. If we use analytics tools, we
-          configure them to respect applicable privacy requirements and to avoid
-          collecting more data than necessary.
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">How We Share Information</h2>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>
-            <strong>Service providers</strong> who perform services for us
-            (e.g., email delivery via Kit, hosting, analytics). They may only
-            use the data as instructed by us.
-          </li>
-          <li>
-            <strong>Legal reasons</strong> when required by law, regulation,
-            legal process, or to protect rights, safety, and security.
-          </li>
-          <li>
-            <strong>Business transfers</strong> in connection with a merger,
-            acquisition, or asset sale, subject to this Policy.
-          </li>
-        </ul>
-        <p className="mt-2">
-          We do <strong>not</strong> sell or rent your personal information.
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">
-          International Data Transfers
-        </h2>
-        <p>
-          We may process and store information in countries other than where you
-          live. Where required (e.g., EEA/UK), we rely on appropriate safeguards
-          such as standard contractual clauses to protect your information
-          during transfers.
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">Data Retention</h2>
-        <p>
-          We keep personal information only as long as needed for the purposes
-          described in this Policy (for example, while you remain subscribed to
-          our newsletter), unless a longer retention period is required or
-          permitted by law.
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">Security</h2>
-        <p>
-          We use reasonable technical and organizational measures designed to
-          protect personal information. However, no method of transmission or
-          storage is completely secure. If you believe your account or data has
-          been compromised, contact us immediately.
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">Your Privacy Rights</h2>
-        <p>
-          Depending on your location, you may have rights over your personal
-          information, such as to access, correct, delete, restrict or object to
-          processing, portability, and to withdraw consent.
-        </p>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>
-            <strong>EEA/UK:</strong> You may also lodge a complaint with your
-            local supervisory authority. Where we rely on consent, you can
-            withdraw it at any time without affecting the lawfulness of
-            processing before withdrawal.
-          </li>
-          <li>
-            <strong>California:</strong> Subject to exceptions, you may request
-            access to, correction of, or deletion of personal information. We do
-            not sell or share personal information for cross-context behavioral
-            advertising.
-          </li>
-        </ul>
-        <p className="mt-2">
-          To exercise your rights, contact us at{' '}
-          <a className="underline" href="mailto:contact@fullcourt-training.com">
-            contact@fullcourt-training.com
-          </a>
-          . We may need to verify your identity before responding.
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">Children's Privacy</h2>
-        <p>
-          Our services are not directed to children under the age of 13 (or the
-          age of digital consent in your country). We do not knowingly collect
-          personal information from children. If you believe a child has
-          provided us information, contact us and we will take appropriate steps
-          to delete it.
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">Changes to This Policy</h2>
-        <p>
-          We may update this Policy from time to time. The “Last updated” date
-          above reflects the most recent changes. Material changes will be
-          posted on this page and, where appropriate, notified to you (for
-          example, by email).
-        </p>
-      </Section>
-      <Section>
-        <h2 className="text-xl font-semibold mb-2">Contact Us</h2>
-        <p>
-          Questions about this Policy or our privacy practices? Email{' '}
-          <a className="underline" href="mailto:contact@fullcourt-training.com">
-            contact@fullcourt-training.com
-          </a>{' '}
-          or write to:
-        </p>
-        <p className="mt-2">
-          <strong>FULLCOURT TRAINING</strong>
         </p>
       </Section>
     </>

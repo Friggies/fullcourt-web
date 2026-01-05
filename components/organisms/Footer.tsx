@@ -15,6 +15,14 @@ export function Footer() {
           </Link>
           <p>Animated Basketball Drills and Plays for Players and Coaches</p>
         </div>
+        <div className="flex flex-col opacity-80">
+          <Link href="/privacy-policy" className="hover:underline">
+            Privacy Policy
+          </Link>
+          <Link href="/terms-and-conditions" className="hover:underline">
+            Terms & Conditions
+          </Link>
+        </div>
         <Button href="mailto:contact@fullcourt-training.com">
           Contact Us <MailIcon size={16} strokeWidth={1.5} />
         </Button>
