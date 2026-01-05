@@ -14,7 +14,7 @@ const FAQS: FaqItem[] = [
     a: 'No account is required to browse public drills. Creating a free account lets you save drills to your profile. A Premium account unlocks all drills.',
   },
   {
-    q: 'What’s included in Free vs Premium?',
+    q: "What's included in Free vs Premium?",
     a: 'Free: access to all public drills (same as anonymously browsing the playbook) plus the ability to save favorites to your account. Premium: access to all drills, including Premium ones.',
   },
   {

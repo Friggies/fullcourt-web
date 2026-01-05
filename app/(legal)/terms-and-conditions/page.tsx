@@ -174,7 +174,7 @@ export default function TermsAndConditions() {
         </p>
       </Section>
       <Section>
-        <h2 className="text-xl font-semibold mb-2">Children’s Privacy</h2>
+        <h2 className="text-xl font-semibold mb-2">Children's Privacy</h2>
         <p>
           Our services are not directed to children under the age of 13 (or the
           age of digital consent in your country). We do not knowingly collect
