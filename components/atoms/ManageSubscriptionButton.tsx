@@ -45,7 +45,7 @@ export function ManageSubscriptionButton({
     } finally {
       setBusy(false);
     }
-  }, [fallbackPurchaseUrl]);
+  }, [appUserId, fallbackPurchaseUrl]);
 
   return (
     <Button variant="fill" onClick={openPortal} disabled={busy}>
