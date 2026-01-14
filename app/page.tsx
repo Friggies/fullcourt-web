@@ -106,18 +106,19 @@ export default function Index() {
                 <span className="text-foreground">Highlighted Drill</span>
               </div>
               <Link
-                href={`/drills/3`}
+                href={`/drills/6`}
                 className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
               >
                 <Image
-                  src={`/thumbnails/3.webp`}
-                  alt={`Drill 3 preview`}
+                  src={`/thumbnails/6.webp`}
+                  alt={`Play 3-2 X Screen to Corner`}
                   width={600}
                   height={1067}
                 />
                 <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                  <h2 className="text-lg font-semibold">Drill 3</h2>
-                  <p className="text-sm">Category</p>
+                  <h2 className="text-lg font-semibold">
+                    3-2 X Screen to Corner
+                  </h2>
                 </div>
               </Link>
             </li>
@@ -127,18 +128,19 @@ export default function Index() {
                 <span className="text-foreground">Highlighted Drill</span>
               </div>
               <Link
-                href={`/drills/3`}
+                href={`/drills/5`}
                 className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
               >
                 <Image
-                  src={`/thumbnails/3.webp`}
-                  alt={`Drill 3 preview`}
+                  src={`/thumbnails/5.webp`}
+                  alt={`Play 3-2 X Screen to Layup`}
                   width={600}
                   height={1067}
                 />
                 <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                  <h2 className="text-lg font-semibold">Drill 3</h2>
-                  <p className="text-sm">Category</p>
+                  <h2 className="text-lg font-semibold">
+                    3-2 X Screen to Layup
+                  </h2>
                 </div>
               </Link>
             </li>
@@ -148,18 +150,19 @@ export default function Index() {
                 <span className="text-foreground">Highlighted Drill</span>
               </div>
               <Link
-                href={`/drills/3`}
+                href={`/drills/5`}
                 className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
               >
                 <Image
-                  src={`/thumbnails/3.webp`}
-                  alt={`Drill 3 preview`}
+                  src={`/thumbnails/5.webp`}
+                  alt={`Play 3-2 X Screen to Layup`}
                   width={600}
                   height={1067}
                 />
                 <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                  <h2 className="text-lg font-semibold">Drill 3</h2>
-                  <p className="text-sm">Category</p>
+                  <h2 className="text-lg font-semibold">
+                    3-2 X Screen to Layup
+                  </h2>
                 </div>
               </Link>
             </li>
