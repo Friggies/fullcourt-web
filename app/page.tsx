@@ -111,13 +111,13 @@ export default function Index() {
               >
                 <Image
                   src={`/thumbnails/6.webp`}
-                  alt={`Play 3-2 X Screen to Corner`}
+                  alt={`Play 3-2 X-Screen to Corner`}
                   width={600}
                   height={1067}
                 />
                 <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
                   <h2 className="text-lg font-semibold">
-                    3-2 X Screen to Corner
+                    3-2 X-Screen to Corner
                   </h2>
                 </div>
               </Link>
@@ -133,13 +133,13 @@ export default function Index() {
               >
                 <Image
                   src={`/thumbnails/5.webp`}
-                  alt={`Play 3-2 X Screen to Layup`}
+                  alt={`Play 3-2 X-Screen to Layup`}
                   width={600}
                   height={1067}
                 />
                 <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
                   <h2 className="text-lg font-semibold">
-                    3-2 X Screen to Layup
+                    3-2 X-Screen to Layup
                   </h2>
                 </div>
               </Link>
@@ -155,13 +155,13 @@ export default function Index() {
               >
                 <Image
                   src={`/thumbnails/7.webp`}
-                  alt={`Play 2-3 X Screen Boomerang to Layup`}
+                  alt={`Play 2-3 X-Screen Boomerang to Layup`}
                   width={600}
                   height={1067}
                 />
                 <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
                   <h2 className="text-lg font-semibold">
-                    2-3 X Screen Boomerang to Layup
+                    2-3 X-Screen Boomerang to Layup
                   </h2>
                 </div>
               </Link>
