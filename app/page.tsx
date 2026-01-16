@@ -150,18 +150,18 @@ export default function Index() {
                 <span className="text-foreground">Highlighted Drill</span>
               </div>
               <Link
-                href={`/drills/5`}
+                href={`/drills/7`}
                 className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
               >
                 <Image
-                  src={`/thumbnails/5.webp`}
-                  alt={`Play 3-2 X Screen to Layup`}
+                  src={`/thumbnails/7.webp`}
+                  alt={`Play 2-3 X-Screen Boomerang to Layup`}
                   width={600}
                   height={1067}
                 />
                 <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
                   <h2 className="text-lg font-semibold">
-                    3-2 X Screen to Layup
+                    2-3 X-Screen Boomerang to Layup
                   </h2>
                 </div>
               </Link>
