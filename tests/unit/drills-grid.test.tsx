@@ -18,7 +18,7 @@ const mockDrills = [
   },
 ];
 
-// Mock Supabase client
+// Mock Supabase client (ARRANGE)
 jest.mock('@/lib/supabase/client', () => ({
   createClient: () => ({
     from: () => ({
@@ -28,14 +28,14 @@ jest.mock('@/lib/supabase/client', () => ({
 }));
 
 test('filters drills using UI', async () => {
-  render(<Drills />);
+  render(<Drills />); //ACT
 
-  expect(await screen.findByText('Pick & Roll')).toBeInTheDocument();
+  expect(await screen.findByText('Pick & Roll')).toBeInTheDocument(); //ASSERT INITIIAL STATE
   expect(screen.getByText('Zone Defense')).toBeInTheDocument();
 
   const search = screen.getByPlaceholderText('Search...');
-  await userEvent.type(search, 'zone');
+  await userEvent.type(search, 'zone'); //ACT
 
-  expect(screen.getByText('Zone Defense')).toBeInTheDocument();
+  expect(screen.getByText('Zone Defense')).toBeInTheDocument(); //ASSERT FINAL STATE
   expect(screen.queryByText('Pick & Roll')).not.toBeInTheDocument();
 });
