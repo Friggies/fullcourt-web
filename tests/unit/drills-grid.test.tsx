@@ -28,16 +28,19 @@ const mockDrills: Drill[] = [
 ];
 
 test('filters drills using search UI', async () => {
+  //Arrange
   const user = userEvent.setup();
-
   render(<DrillGridClient initialDrills={mockDrills} />);
 
+  //Assert
   expect(screen.getByText('Pick & Roll')).toBeInTheDocument();
   expect(screen.getByText('Zone Defense')).toBeInTheDocument();
 
+  //Act
   const search = screen.getByPlaceholderText('Search...');
   await user.type(search, 'zone');
 
+  //Assert
   expect(screen.getByText('Zone Defense')).toBeInTheDocument();
   expect(screen.queryByText('Pick & Roll')).not.toBeInTheDocument();
 });
