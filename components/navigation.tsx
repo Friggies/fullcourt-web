@@ -1,5 +1,5 @@
 'use client';
-import { MenuIcon, XIcon } from 'lucide-react';
+import { LoaderIcon, MenuIcon, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ import Button from './atoms/Button';
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => setUser(data.user ?? null));
@@ -21,6 +22,7 @@ export default function Navigation() {
     } = supabase.auth.onAuthStateChange((_e, session) => {
       setUser(session?.user ?? null);
     });
+    setIsLoadingUser(false);
     return () => subscription.unsubscribe();
   }, []);
 
@@ -68,7 +70,9 @@ export default function Navigation() {
             ))}
           </div>
           <div className="flex gap-4 items-center">
-            {user ? (
+            {isLoadingUser ? (
+              <LoaderIcon className="animate-spin" />
+            ) : user ? (
               <Button href="/profile">Profile</Button>
             ) : (
               <>
