@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import './globals.css';
 import Navigation from '@/components/navigation';
 import { Footer } from '@/components/organisms/Footer';
+import Script from 'next/script';
 
 const inter = localFont({
   src: [
@@ -73,6 +74,7 @@ export default async function RootLayout({
           <Footer />
         </ThemeProvider>
       </body>
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>
   );
 }
