@@ -15,6 +15,7 @@ import { Hero } from '@/components/hero';
 import Link from 'next/link';
 import { Section } from '@/components/section';
 import { Copy } from '@/components/atoms/Copy';
+import Markdown from 'react-markdown';
 
 export default function DrillPage() {
   const [drill, setDrill] = useState<drill | null>(null);
@@ -121,10 +122,12 @@ export default function DrillPage() {
                 {drill.players === 1 ? 'player' : 'players'}
               </span>
             </div>
-            <div>{drill.description}</div>
+            <div className="prose prose-sm max-w-none dark:prose-invert">
+              <Markdown>{drill.description}</Markdown>
+            </div>
             <Copy />
           </div>
-          <div className="w-full aspect-[9/16] rounded-lg shadow overflow-hidden flex justify-center items-center bg-black">
+          <div className="w-full aspect-[9/16] rounded-lg shadow overflow-hidden flex justify-center items-center bg-black sm:top-[100px] sm:sticky">
             {videoLoading ? (
               <LoaderIcon className="animate-spin text-white" />
             ) : !videoUri ? (
