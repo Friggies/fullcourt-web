@@ -14,8 +14,8 @@ const some = [
   {
     name: 'TikTok',
     link: 'https://www.tiktok.com/@fullcourt_training/',
-    followers: 1200,
-    views: 301000,
+    followers: 2000,
+    views: 393000,
     backgroundGradient: 'linear-gradient(135deg, #25f4ee, #fe2c55, #000000)',
     image: {
       width: 512,
