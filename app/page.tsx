@@ -51,7 +51,7 @@ export default function Index() {
           className="h-[100px] sm:h-[150px] w-auto animate-spin-slow"
         />
       </Court>
-      <Section className="bg-muted py-3 text-muted-foreground mb-10">
+      <Section className="bg-muted py-5 text-muted-foreground mb-10">
         <div className="flex flex-wrap justify-center items-center gap-x-1 gap-y-1">
           <span className="whitespace-nowrap">Used by</span>
           <span className="flex -space-x-2">
