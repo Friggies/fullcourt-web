@@ -127,6 +127,7 @@ export default function Index() {
                   <h2 className="text-lg font-semibold">
                     3-2 X-Screen to Corner
                   </h2>
+                  <p className="text-sm">Attacking 2-3</p>
                 </div>
               </Link>
             </li>
@@ -149,6 +150,7 @@ export default function Index() {
                   <h2 className="text-lg font-semibold">
                     3-2 X-Screen to Layup
                   </h2>
+                  <p className="text-sm">Attacking 2-3</p>
                 </div>
               </Link>
             </li>
@@ -171,6 +173,7 @@ export default function Index() {
                   <h2 className="text-lg font-semibold">
                     2-3 X-Screen Boomerang to Layup
                   </h2>
+                  <p className="text-sm">Attacking 2-3</p>
                 </div>
               </Link>
             </li>
