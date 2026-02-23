@@ -92,7 +92,8 @@ export default function Index() {
             <h2 className="flex flex-col">
               <span className="text-xs text-gray-500 uppercase">About us</span>
               <span className="font-semibold text-xl lg:text-2xl">
-                A Modern Basketball&nbsp;Playbook Loved and Used by Thousands
+                A Digital Basketball Playbook Used by Thousands of Players and
+                Coaches
               </span>
             </h2>
             <p>
