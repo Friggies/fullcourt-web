@@ -51,25 +51,32 @@ export default function Index() {
           className="h-[100px] sm:h-[150px] w-auto animate-spin-slow"
         />
       </Court>
-      <Section className="bg-muted py-5 text-muted-foreground mb-10">
-        <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-between gap-1 sm:gap-5">
-          <p>
-            Loved by{' '}
-            <span className="font-semibold text-xl uppercase">thousands</span>{' '}
-            of players and coaches worldwide.
-          </p>
-          <div className="w-full sm:w-auto flex flex-row gap-2 items-center justify-between">
-            <div className="flex justify-center gap-1 text-yellow-500">
-              <StarIcon fill="currentColor" />
-              <StarIcon fill="currentColor" />
-              <StarIcon fill="currentColor" />
-              <StarIcon fill="currentColor" />
-              <StarIcon fill="currentColor" />
-            </div>
-            <p>
-              <span className="font-bold text-xl">4.9</span>/5
-            </p>
-          </div>
+      <Section className="bg-muted py-3 text-muted-foreground mb-10">
+        <div className="flex flex-wrap justify-center items-center gap-x-1 gap-y-1">
+          <span className="whitespace-nowrap">Used by</span>
+          <span className="flex -space-x-2">
+            {[
+              '/images/avatars/marcus_lin.jpeg',
+              '/images/avatars/luca_bennett.jpeg',
+              '/images/avatars/ray_donovan.jpeg',
+              '/images/avatars/eli_torres.jpeg',
+              '/images/avatars/tariq_adams.jpeg',
+              '/images/avatars/chris_walker.jpeg',
+            ].map((src, i, arr) => (
+              <Image
+                key={src}
+                src={src}
+                alt=""
+                width={40}
+                height={40}
+                className="relative h-10 w-10 object-cover rounded-full border border-muted"
+                style={{ zIndex: arr.length - i }}
+              />
+            ))}
+          </span>
+          <span className="w-full text-center sm:w-auto sm:text-left whitespace-nowrap">
+            and +{totalFollowers} other players and coaches
+          </span>
         </div>
       </Section>
       <Section>
@@ -85,7 +92,7 @@ export default function Index() {
             <h2 className="flex flex-col">
               <span className="text-xs text-gray-500 uppercase">About us</span>
               <span className="font-semibold text-xl lg:text-2xl">
-                A Modern Basketball&nbsp;Playbook
+                A Modern Basketball&nbsp;Playbook Loved and Used by Thousands
               </span>
             </h2>
             <p>
