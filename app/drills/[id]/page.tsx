@@ -79,7 +79,7 @@ export default function DrillPage() {
 
   if (loading) {
     return (
-      <div className="flex flex-col justify-center items-center mt-10 gap-2">
+      <div className="flex flex-col justify-center items-center my-10 gap-2">
         <LoaderIcon className="animate-spin" />
         Loading
       </div>
