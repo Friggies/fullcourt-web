@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Section } from '@/components/section';
+import { Section } from '@/components/common/Section';
 import FAQS from '@/data/faq';
 
 export function FAQ() {

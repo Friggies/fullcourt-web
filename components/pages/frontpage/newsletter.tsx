@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Card } from './atoms/Card';
+import { Card } from '../../common/Card';
 import Image from 'next/image';
-import { Court } from './atoms/Court';
-import Button from './atoms/Button';
+import { Court } from '../../common/Court';
+import Button from '../../common/Button';
 import Link from 'next/link';
-import { Line } from './line';
+import { Line } from '../../common/Line';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');

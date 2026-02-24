@@ -3,12 +3,12 @@ import { LoaderIcon, MenuIcon, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { ThemeSwitcher } from './theme-switcher';
+import { ThemeSwitcher } from '../theme-switcher';
 import Image from 'next/image';
-import { SoMe } from './some';
+import { SoMe } from './Some';
 import { User } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/client';
-import Button from './atoms/Button';
+import Button from './Button';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);

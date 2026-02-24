@@ -1,9 +1,9 @@
 import localFont from 'next/font/local';
 import { ThemeProvider } from 'next-themes';
 import './globals.css';
-import Navigation from '@/components/navigation';
-import { Footer } from '@/components/organisms/Footer';
+import { Footer } from '@/components/common/Footer';
 import Script from 'next/script';
+import Navigation from '@/components/common/Navigation';
 
 const inter = localFont({
   src: [

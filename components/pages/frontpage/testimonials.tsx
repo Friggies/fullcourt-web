@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Section } from '@/components/section';
+import { Section } from '@/components/common/Section';
 import { StarIcon } from 'lucide-react';
 import TESTIMONIALS from '@/data/testimonials';
 

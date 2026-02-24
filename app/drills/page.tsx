@@ -1,6 +1,6 @@
-import DrillsGrid from '@/components/drills-grid';
-import { Hero } from '@/components/hero';
-import { Section } from '@/components/section';
+import DrillGrid from '@/components/features/Drilll/DrillGrid';
+import { Hero } from '@/components/common/Hero';
+import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/server';
 import { CrownIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -29,7 +29,7 @@ export default async function Drills() {
   return (
     <>
       <Hero title="All Drills & Plays" />
-      <DrillsGrid />
+      <DrillGrid />
 
       {!isPremium && (
         <Section>

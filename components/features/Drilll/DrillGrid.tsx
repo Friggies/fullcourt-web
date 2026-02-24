@@ -1,6 +1,6 @@
 'use client';
+import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/client';
-import { Category, drill } from '@/lib/types';
 import { PostgrestError } from '@supabase/supabase-js';
 import {
   CircleXIcon,
@@ -9,15 +9,14 @@ import {
   UsersIcon,
   SlidersHorizontalIcon,
 } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useState, useEffect, useMemo } from 'react';
-import { Section } from './section';
+import DrillCard from './DrillCard';
+import { Drill } from '@/lib/types';
 
-export default function DrillsGrid() {
+export default function DrillGrid() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<PostgrestError | null>(null);
-  const [drills, setDrills] = useState<drill[]>([]);
+  const [drills, setDrills] = useState<Drill[]>([]);
 
   // Filters
   const [filterSearch, setFilterSearch] = useState<string>('');
@@ -78,7 +77,7 @@ export default function DrillsGrid() {
 
       const matchesCategories =
         filterCategories.length === 0 ||
-        filterCategories.some(cat => d.categories.includes(cat as Category));
+        filterCategories.some(cat => d.categories.includes(cat));
 
       const matchesPlayers =
         filterPlayers === '' ||
@@ -228,30 +227,7 @@ export default function DrillsGrid() {
 
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {filteredDrills.length > 0 ? (
-            filteredDrills.map(d => (
-              <li key={d.id} className="flex relative">
-                <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-foreground shadow">
-                  <UsersIcon size={12} />
-                  {d.players} players
-                </div>
-                <Link
-                  href={`/drills/${d.id}`}
-                  className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
-                >
-                  <Image
-                    src={`/thumbnails/${d.id}.webp`}
-                    alt={`${d.name} preview`}
-                    width={600}
-                    height={400}
-                    className="object-cover w-full h-auto"
-                  />
-                  <div className="absolute bottom-0 w-full bg-background/60 backdrop-blur-sm p-4 flex flex-col">
-                    <h2 className="text-lg font-semibold">{d.name}</h2>
-                    <p className="text-sm">{d.categories.join(', ')}</p>
-                  </div>
-                </Link>
-              </li>
-            ))
+            filteredDrills.map(d => <DrillCard drill={d} key={d.id} />)
           ) : (
             <li className="col-span-full text-center text-gray-500">
               No drills found

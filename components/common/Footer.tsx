@@ -1,9 +1,9 @@
-import Button from '../atoms/Button';
+import Button from './Button';
 import { ThemeSwitcher } from '../theme-switcher';
-import { SoMe } from '../some';
+import { SoMe } from './Some';
 import Link from 'next/link';
 import { MailIcon } from 'lucide-react';
-import { Copy } from '../atoms/Copy';
+import { Copy } from './Copy';
 
 export function Footer() {
   return (

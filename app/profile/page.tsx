@@ -3,10 +3,10 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { DownloadIcon } from 'lucide-react';
 import { LogoutButton } from '@/components/logout-button';
-import { Hero } from '@/components/hero';
-import { Section } from '@/components/section';
-import { ManageSubscriptionButton } from '@/components/atoms/ManageSubscriptionButton';
-import Button from '@/components/atoms/Button';
+import { Hero } from '@/components/common/Hero';
+import { Section } from '@/components/common/Section';
+import { ManageSubscriptionButton } from '@/components/common/ManageSubscriptionButton';
+import Button from '@/components/common/Button';
 
 export default async function Profile() {
   const supabase = await createClient();

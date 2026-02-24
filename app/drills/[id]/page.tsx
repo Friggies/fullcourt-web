@@ -11,10 +11,10 @@ import {
   LoaderIcon,
   UsersIcon,
 } from 'lucide-react';
-import { Hero } from '@/components/hero';
+import { Hero } from '@/components/common/Hero';
 import Link from 'next/link';
-import { Section } from '@/components/section';
-import { Copy } from '@/components/atoms/Copy';
+import { Section } from '@/components/common/Section';
+import { Copy } from '@/components/common/Copy';
 import Markdown from 'react-markdown';
 
 export default function DrillPage() {

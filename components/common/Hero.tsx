@@ -1,4 +1,4 @@
-import { Line } from './line';
+import { Line } from './Line';
 
 export function Hero({ title }: { title: string }) {
   return (

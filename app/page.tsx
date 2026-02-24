@@ -1,31 +1,78 @@
-import Button from '@/components/atoms/Button';
-import { Card } from '@/components/atoms/Card';
-import { Court } from '@/components/atoms/Court';
-import { FAQ } from '@/components/faq';
-import { Line } from '@/components/line';
-import { Newsletter } from '@/components/newsletter';
-import { Section } from '@/components/section';
-import { SoMe } from '@/components/some';
-import Testimonials from '@/components/testimonials';
-import some from '@/data/some';
-import { StarIcon } from 'lucide-react';
-import { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import type { Metadata } from 'next';
+import Button from '@/components/common/Button';
+import { Card } from '@/components/common/Card';
+import { Court } from '@/components/common/Court';
+import { FAQ } from '@/components/pages/frontpage/faq';
+import { Line } from '@/components/common/Line';
+import { Newsletter } from '@/components/pages/frontpage/newsletter';
+import { Section } from '@/components/common/Section';
+import { SoMe } from '@/components/common/Some';
+import Testimonials from '@/components/pages/frontpage/testimonials';
+import some from '@/data/some';
+import DrillCard from '@/components/features/Drilll/DrillCard';
+import { HighlightedDrill } from '@/lib/types';
 
 export const metadata: Metadata = {
   title: 'FULLCOURT TRAINING',
-  description: '',
+  description:
+    'Animated basketball drills and playbook for players and coaches.',
 };
 
-export default function Index() {
-  const { totalFollowers, totalViews } = some.reduce(
-    (acc, cur) => ({
-      totalFollowers: acc.totalFollowers + cur.followers,
-      totalViews: acc.totalViews + cur.views,
-    }),
+const Headshots = [
+  '/images/avatars/marcus_lin.jpeg',
+  '/images/avatars/luca_bennett.jpeg',
+  '/images/avatars/ray_donovan.jpeg',
+  '/images/avatars/eli_torres.jpeg',
+  '/images/avatars/tariq_adams.jpeg',
+  '/images/avatars/chris_walker.jpeg',
+];
+
+const HighlightedDrills: HighlightedDrill[] = [
+  {
+    id: 6,
+    name: '3-2 X-Screen to Corner',
+    categories: ['Attacking 2-3'],
+    players: 5,
+  },
+  {
+    id: 5,
+    name: '3-2 X-Screen to Layup',
+    categories: ['Attacking 2-3'],
+    players: 5,
+  },
+  {
+    id: 7,
+    name: '2-3 X-Screen Boomerang to Layup',
+    categories: ['Attacking 2-3'],
+    players: 5,
+  },
+];
+
+function calculateSoMeTotals(items: typeof some) {
+  return items.reduce(
+    (acc, cur) => {
+      acc.totalFollowers += cur.followers;
+      acc.totalViews += cur.views;
+      return acc;
+    },
     { totalFollowers: 0, totalViews: 0 }
   );
+}
+
+const nf = new Intl.NumberFormat('en-US');
+
+function Stat({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="flex flex-1 flex-col text-center justify-center items-center">
+      <span className="text-5xl flex gap-2">{nf.format(value)}</span>
+      <span>{label}</span>
+    </div>
+  );
+}
+
+export default function Index() {
+  const { totalFollowers, totalViews } = calculateSoMeTotals(some);
 
   return (
     <>
@@ -41,9 +88,10 @@ export default function Index() {
           <Line />
           <Button href="/drills">Explore Playbook</Button>
         </Card>
+
         <Image
-          src={'/animations/passing.gif'}
-          alt="Fun Passing Animation"
+          src="/animations/passing.gif"
+          alt="Animated passing drill"
           unoptimized
           priority
           width={1080}
@@ -51,44 +99,42 @@ export default function Index() {
           className="h-[100px] sm:h-[150px] w-auto animate-spin-slow"
         />
       </Court>
-      <Section className="bg-muted py-5 text-muted-foreground mb-10">
+
+      <Section className="bg-muted py-5 text-muted-foreground mb-5">
         <div className="flex flex-wrap justify-center items-center gap-x-1 gap-y-1">
           <span className="whitespace-nowrap">Used by</span>
-          <span className="flex -space-x-2">
-            {[
-              '/images/avatars/marcus_lin.jpeg',
-              '/images/avatars/luca_bennett.jpeg',
-              '/images/avatars/ray_donovan.jpeg',
-              '/images/avatars/eli_torres.jpeg',
-              '/images/avatars/tariq_adams.jpeg',
-              '/images/avatars/chris_walker.jpeg',
-            ].map((src, i, arr) => (
+
+          <span className="flex -space-x-2" aria-label="User headshots">
+            {Headshots.map((src, i) => (
               <Image
                 key={src}
                 src={src}
                 alt=""
+                aria-hidden
                 width={40}
                 height={40}
                 className="relative h-10 w-10 object-cover rounded-full border border-muted"
-                style={{ zIndex: arr.length - i }}
+                style={{ zIndex: Headshots.length - i }}
               />
             ))}
           </span>
+
           <span className="w-full text-center sm:w-auto sm:text-left whitespace-nowrap">
-            and +{totalFollowers} other players and coaches
+            and +{nf.format(totalFollowers)} other players and coaches
           </span>
         </div>
       </Section>
+
       <Section>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center">
           <Image
             className="w-full h-[150px] object-contain m-auto"
-            src={'/images/logo.webp'}
+            src="/images/logo.webp"
             width={1000}
             height={1778}
-            alt="Tactical board of Pass & Cut drill (5 out)"
+            alt="Fullcourt Training logo"
           />
-          <div className="col-span-2 sm:px-4 flex flex-col gap-2">
+          <div className="md:col-span-2 sm:px-4 flex flex-col gap-2">
             <h2 className="flex flex-col">
               <span className="text-xs text-gray-500 uppercase">About us</span>
               <span className="font-semibold text-xl lg:text-2xl">
@@ -97,111 +143,43 @@ export default function Index() {
               </span>
             </h2>
             <p>
-              We help players and coaches visualize and practice various
-              basketball plays and movements. With an extensive library of
-              drills and plays, users can easily find and follow along with
-              animations that demonstrate proper techniques and strategies.
+              We help players and coaches visualize and practice basketball
+              plays and movements. With an extensive library of drills, users
+              can follow along with animations that demonstrate proper
+              techniques and strategies.
             </p>
           </div>
-        </ul>
+        </div>
       </Section>
+
       <Section>
         <div className="flex flex-col gap-5 items-center">
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <li className="flex relative">
-              <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-yellow-500 shadow">
-                <StarIcon fill="currentColor" size={14} />
-                <span className="text-foreground">Highlighted Drill</span>
-              </div>
-              <Link
-                href={`/drills/6`}
-                className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
-              >
-                <Image
-                  src={`/thumbnails/6.webp`}
-                  alt={`Play 3-2 X-Screen to Corner`}
-                  width={600}
-                  height={1067}
-                />
-                <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                  <h2 className="text-lg font-semibold">
-                    3-2 X-Screen to Corner
-                  </h2>
-                  <p className="text-sm">Attacking 2-3</p>
-                </div>
-              </Link>
-            </li>
-            <li className="flex relative">
-              <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-yellow-500 shadow">
-                <StarIcon fill="currentColor" size={14} />
-                <span className="text-foreground">Highlighted Drill</span>
-              </div>
-              <Link
-                href={`/drills/5`}
-                className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
-              >
-                <Image
-                  src={`/thumbnails/5.webp`}
-                  alt={`Play 3-2 X-Screen to Layup`}
-                  width={600}
-                  height={1067}
-                />
-                <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                  <h2 className="text-lg font-semibold">
-                    3-2 X-Screen to Layup
-                  </h2>
-                  <p className="text-sm">Attacking 2-3</p>
-                </div>
-              </Link>
-            </li>
-            <li className="flex relative">
-              <div className="z-10 absolute top-2 right-2 inline-flex items-center gap-1 rounded-md bg-background/60 backdrop-blur-sm px-3 py-1 text-xs text-yellow-500 shadow">
-                <StarIcon fill="currentColor" size={14} />
-                <span className="text-foreground">Highlighted Drill</span>
-              </div>
-              <Link
-                href={`/drills/7`}
-                className="relative flex flex-col border rounded-md shadow-sm overflow-hidden"
-              >
-                <Image
-                  src={`/thumbnails/7.webp`}
-                  alt={`Play 2-3 X-Screen Boomerang to Layup`}
-                  width={600}
-                  height={1067}
-                />
-                <div className="absolute bottom-0 w-full bg-background/50 backdrop-blur-sm p-4 flex flex-col flex-1 justify-between">
-                  <h2 className="text-lg font-semibold">
-                    2-3 X-Screen Boomerang to Layup
-                  </h2>
-                  <p className="text-sm">Attacking 2-3</p>
-                </div>
-              </Link>
-            </li>
+            {HighlightedDrills.map(drill => (
+              <DrillCard drill={drill} key={drill.id} />
+            ))}
           </ul>
-          <Button href="/drills">Browse all drills and plays</Button>
+          <Button href="/drills">Browse all Drills and Plays</Button>
         </div>
       </Section>
+
       <Line />
       <Testimonials />
       <Newsletter />
+
       <Section>
         <div className="w-full flex flex-col gap-4">
           <h2 className="text-xl sm:text-2xl font-semibold w-full text-center">
             Team Up with us on Social&nbsp;Media
           </h2>
           <div className="flex flex-col sm:flex-row w-full gap-5">
-            <div className="flex flex-1 flex-col text-center justify-center items-center">
-              <span className="text-5xl flex gap-2">{totalFollowers}</span>
-              <span>Followers</span>
-            </div>
+            <Stat value={totalFollowers} label="Followers" />
             <SoMe />
-            <div className="flex flex-1 flex-col text-center justify-center items-center">
-              <span className="text-5xl flex gap-2">{totalViews}</span>
-              <span>Views</span>
-            </div>
+            <Stat value={totalViews} label="Views" />
           </div>
         </div>
       </Section>
+
       <Line />
       <FAQ />
     </>
