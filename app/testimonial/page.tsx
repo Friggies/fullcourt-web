@@ -80,8 +80,8 @@ export default function TestimonialSubmitPage() {
       setContent('');
       setRating(5);
       setImageFile(null);
-    } catch (err: any) {
-      setResult({ ok: false, error: err?.message ?? 'Something went wrong.' });
+    } catch {
+      setResult({ ok: false, error: 'Something went wrong.' });
     } finally {
       setLoading(false);
     }

@@ -130,7 +130,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ ok: true, id: insert.data.id }, { status: 200 });
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { ok: false, error: 'Unexpected error.' },
       { status: 500 }
