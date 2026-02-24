@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
-import { drill } from '@/lib/types';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useParams, useRouter } from 'next/navigation';
 import {
@@ -16,9 +15,10 @@ import Link from 'next/link';
 import { Section } from '@/components/common/Section';
 import { Copy } from '@/components/common/Copy';
 import Markdown from 'react-markdown';
+import { Drill } from '@/lib/types';
 
 export default function DrillPage() {
-  const [drill, setDrill] = useState<drill | null>(null);
+  const [drill, setDrill] = useState<Drill | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [videoUri, setVideoUri] = useState<string | null>(null);
   const [videoLoading, setVideoLoading] = useState(true);
