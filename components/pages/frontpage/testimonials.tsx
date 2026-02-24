@@ -8,7 +8,10 @@ function Stars({ value = 5 }: { value?: number }) {
   const empty = 5 - rounded;
 
   return (
-    <div className="flex items-center" aria-label={`${rounded} out of 5 stars`}>
+    <div
+      className="flex items-center justify-end"
+      aria-label={`${rounded} out of 5 stars`}
+    >
       {Array.from({ length: rounded }).map((_, i) => (
         <StarIcon
           key={`f${i}`}
@@ -46,12 +49,8 @@ export default function Testimonials() {
         <ul className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {TESTIMONIALS.map((t, i) => (
             <li key={i} className="flex">
-              <figure className="relative flex flex-col rounded-lg border bg-background p-5 shadow-sm">
-                <Stars value={t.rating ?? 5} />
-                <blockquote className="text-sm leading-relaxed mb-auto">
-                  “{t.quote}”
-                </blockquote>
-                <figcaption className="mt-4 flex items-center gap-3">
+              <figure className="relative flex flex-col rounded-lg border gap-2 bg-background p-5 shadow-sm">
+                <figcaption className="flex items-center gap-3">
                   {t.avatar ? (
                     <Image
                       src={t.avatar}
@@ -72,6 +71,10 @@ export default function Testimonials() {
                     )}
                   </div>
                 </figcaption>
+                <blockquote className="text-sm leading-relaxed mb-auto">
+                  “{t.quote}”
+                </blockquote>
+                <Stars value={t.rating ?? 5} />
               </figure>
             </li>
           ))}
