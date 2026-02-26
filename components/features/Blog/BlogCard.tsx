@@ -19,7 +19,7 @@ export default function BlogCard({ article }: { article: Article }) {
         className="relative block w-full h-full border rounded-md shadow-sm overflow-hidden"
       >
         <Image
-          src="/thumbnails/15.webp"
+          src={`https://crbswbfgtbkjinzagblg.supabase.co/storage/v1/object/public/article_thumbnails/${article.title.toLowerCase().replaceAll(' ', '-')}.webp`}
           alt={`${article.title} preview`}
           fill
           className="object-cover"

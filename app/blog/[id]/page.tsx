@@ -1,6 +1,7 @@
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/server';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 
@@ -35,6 +36,13 @@ export default async function ArticlePage({ params }: Props) {
             })}
           </p>
         </div>
+        <Image
+          src={`https://crbswbfgtbkjinzagblg.supabase.co/storage/v1/object/public/article_thumbnails/${article.title.toLowerCase().replaceAll(' ', '-')}.webp`}
+          alt={`${article.title}`}
+          className="block w-auto rounded-lg"
+          width={1920}
+          height={1080}
+        />
         <article className="mt-8 prose prose-neutral dark:prose-invert max-w-none">
           <ReactMarkdown>{article.content}</ReactMarkdown>
         </article>
