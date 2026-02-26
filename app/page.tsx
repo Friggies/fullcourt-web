@@ -127,13 +127,6 @@ export default function Index() {
 
       <Section>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center">
-          <Image
-            className="w-full h-[150px] object-contain m-auto"
-            src="/images/logo.webp"
-            width={1000}
-            height={1778}
-            alt="Fullcourt Training logo"
-          />
           <div className="md:col-span-2 sm:px-4 flex flex-col gap-2">
             <h2 className="flex flex-col">
               <span className="text-xs text-gray-500 uppercase">About us</span>
@@ -149,6 +142,15 @@ export default function Index() {
               techniques and strategies.
             </p>
           </div>
+          <Image
+            src="/animations/straight_passing.gif"
+            alt="Animated passing drill"
+            unoptimized
+            priority
+            width={1080}
+            height={270}
+            className="sm:animate-spin-slow order-first sm:order-last sm:w-[80%] mx-auto"
+          />
         </div>
       </Section>
 
