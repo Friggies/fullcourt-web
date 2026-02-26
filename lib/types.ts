@@ -15,3 +15,10 @@ export interface HighlightedDrill {
   categories: string[];
   players: number;
 }
+
+export interface Article {
+  id: number;
+  title: string;
+  author: string;
+  created_at: string;
+}
