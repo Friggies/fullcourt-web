@@ -50,8 +50,8 @@ export default async function Pricing() {
 
             const ctaLabel = ctaDisabled
               ? isPremiumTier
-                ? 'Current plan'
-                : 'Already signed up'
+                ? 'Current Plan'
+                : 'Already Signed Up'
               : tier.cta.label;
 
             const baseCtaClasses =
@@ -77,7 +77,7 @@ export default async function Pricing() {
                 {tier.popular && (
                   <div className="absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full bg-brand1 px-3 py-1 text-xs font-semibold text-black shadow">
                     <StarIcon size={14} />
-                    Best value
+                    Best Value
                   </div>
                 )}
 
@@ -99,24 +99,47 @@ export default async function Pricing() {
                     )}
                   </div>
 
-                  <ul className="space-y-3 mb-6">
-                    {tier.features.map(f => (
-                      <li key={f.text} className="flex items-start gap-3">
-                        {f.included ? (
-                          <CheckIcon className="mt-0.5" size={18} />
-                        ) : (
-                          <MinusIcon className="mt-0.5 opacity-50" size={18} />
-                        )}
-                        <span
-                          className={f.included ? '' : 'text-muted-foreground'}
-                        >
-                          {f.text}
-                        </span>
-                      </li>
-                    ))}
+                  <ul
+                    className="space-y-3 mb-6"
+                    aria-label={`${tier.name} features`}
+                  >
+                    {tier.features.map(f => {
+                      const status = f.included ? 'Included' : 'Not included';
+
+                      return (
+                        <li key={f.text} className="flex items-start gap-3">
+                          <span
+                            aria-hidden="true"
+                            className={f.included ? '' : 'opacity-50'}
+                          >
+                            {f.included ? (
+                              <CheckIcon
+                                className="mt-0.5"
+                                size={18}
+                                focusable="false"
+                              />
+                            ) : (
+                              <MinusIcon
+                                className="mt-0.5"
+                                size={18}
+                                focusable="false"
+                              />
+                            )}
+                          </span>
+
+                          <span
+                            className={
+                              f.included ? '' : 'text-muted-foreground'
+                            }
+                          >
+                            <span className="sr-only">{status}:</span>
+                            {f.text}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
 
-                  {/* CTA */}
                   {tier.cta.href.startsWith('mailto:') ? (
                     <Link
                       href={tier.cta.href}
