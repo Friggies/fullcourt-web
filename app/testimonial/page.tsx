@@ -4,7 +4,7 @@ import Button from '@/components/common/Button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type ApiOk = {
   ok: true;
@@ -27,9 +27,19 @@ export default function TestimonialSubmitPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ApiOk | ApiErr | null>(null);
 
-  const previewUrl = useMemo(() => {
-    if (!imageFile) return null;
-    return URL.createObjectURL(imageFile);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  useEffect(() => {
+    if (!imageFile) {
+      setPreviewUrl(null);
+      return;
+    }
+
+    const url = URL.createObjectURL(imageFile);
+    setPreviewUrl(url);
+
+    return () => {
+      URL.revokeObjectURL(url);
+    };
   }, [imageFile]);
 
   async function onSubmit(e: React.FormEvent) {
