@@ -155,7 +155,7 @@ export default function Index() {
       </Section>
 
       <Section>
-        <div className="flex flex-col gap-5 items-center">
+        <div className="flex flex-col gap-5">
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {HighlightedDrills.map(drill => (
               <DrillCard drill={drill} key={drill.id} />
