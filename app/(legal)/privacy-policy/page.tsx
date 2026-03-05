@@ -1,5 +1,24 @@
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'Learn how FULLCOURT TRAINING collects, uses, and protects your information.',
+  alternates: { canonical: '/privacy-policy' },
+  openGraph: {
+    url: '/privacy-policy',
+    title: 'Privacy Policy | FULLCOURT TRAINING',
+    description:
+      'Learn how FULLCOURT TRAINING collects, uses, and protects your information.',
+  },
+  twitter: {
+    title: 'Privacy Policy | FULLCOURT TRAINING',
+    description:
+      'Learn how FULLCOURT TRAINING collects, uses, and protects your information.',
+  },
+};
 
 export default function PrivacyPolicy() {
   return (

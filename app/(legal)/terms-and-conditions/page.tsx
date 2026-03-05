@@ -1,6 +1,25 @@
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Terms & Conditions',
+  description:
+    'Review the terms that govern use of FULLCOURT TRAINING and its services.',
+  alternates: { canonical: '/terms-and-conditions' },
+  openGraph: {
+    url: '/terms-and-conditions',
+    title: 'Terms & Conditions | FULLCOURT TRAINING',
+    description:
+      'Review the terms that govern use of FULLCOURT TRAINING and its services.',
+  },
+  twitter: {
+    title: 'Terms & Conditions | FULLCOURT TRAINING',
+    description:
+      'Review the terms that govern use of FULLCOURT TRAINING and its services.',
+  },
+};
 
 export default function TermsAndConditions() {
   return (

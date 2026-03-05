@@ -1,16 +1,17 @@
+import type { Metadata } from 'next';
+import { cache } from 'react';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/server';
-import Image from 'next/image';
-import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
+import { stripMarkdown, truncate } from '@/lib/utils';
 
-type Props = {
-  params: Promise<{ id: string }>;
-};
+type Props = { params: Promise<{ id: string }> };
 
-export default async function ArticlePage({ params }: Props) {
-  const { id } = await params;
+const getArticle = cache(async (id: string) => {
   const supabase = await createClient();
 
   const { data: article, error } = await supabase
@@ -19,7 +20,52 @@ export default async function ArticlePage({ params }: Props) {
     .eq('id', id)
     .single();
 
-  if (error || !article) notFound();
+  if (error || !article) return null;
+  return article;
+});
+
+function articleImageUrl(title: string) {
+  const filename = title.toLowerCase().replaceAll(' ', '-');
+  return `https://crbswbfgtbkjinzagblg.supabase.co/storage/v1/object/public/article_thumbnails/${filename}.webp`;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const article = await getArticle(id);
+  if (!article) notFound();
+
+  const description =
+    truncate(stripMarkdown(article.content ?? ''), 160) ||
+    'Read the latest FULLCOURT TRAINING article.';
+
+  const ogImage = articleImageUrl(article.title);
+
+  return {
+    title: article.title,
+    description,
+    alternates: { canonical: `/blog/${article.id}` },
+    openGraph: {
+      type: 'article',
+      url: `/blog/${article.id}`,
+      title: article.title,
+      description,
+      publishedTime: article.created_at,
+      authors: article.author ? [article.author] : undefined,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
+export default async function ArticlePage({ params }: Props) {
+  const { id } = await params;
+  const article = await getArticle(id);
+  if (!article) notFound();
 
   return (
     <>
@@ -37,8 +83,8 @@ export default async function ArticlePage({ params }: Props) {
           </p>
         </div>
         <Image
-          src={`https://crbswbfgtbkjinzagblg.supabase.co/storage/v1/object/public/article_thumbnails/${article.title.toLowerCase().replaceAll(' ', '-')}.webp`}
-          alt={`${article.title}`}
+          src={articleImageUrl(article.title)}
+          alt={article.title}
           className="block w-auto rounded-lg"
           width={1920}
           height={1080}

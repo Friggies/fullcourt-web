@@ -4,6 +4,18 @@ import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/server';
 import { CrownIcon } from 'lucide-react';
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Drills and Plays',
+  description: 'Browse animated basketball drills and plays.',
+  alternates: { canonical: '/drills' },
+  openGraph: {
+    url: '/drills',
+    title: 'Drills | FULLCOURT TRAINING',
+    description: 'Browse animated basketball drills and plays.',
+  },
+};
 
 export default async function Drills() {
   const supabase = await createClient();

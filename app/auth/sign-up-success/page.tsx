@@ -5,6 +5,26 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Check Your Email',
+  description:
+    'We’ve sent a confirmation link to finish creating your FULLCOURT TRAINING account.',
+  alternates: { canonical: '/auth/sign-up-success' },
+  robots: { index: false, follow: false },
+  openGraph: {
+    url: '/auth/sign-up-success',
+    title: 'Check Your Email | FULLCOURT TRAINING',
+    description:
+      'We’ve sent a confirmation link to finish creating your FULLCOURT TRAINING account.',
+  },
+  twitter: {
+    title: 'Check Your Email | FULLCOURT TRAINING',
+    description:
+      'We’ve sent a confirmation link to finish creating your FULLCOURT TRAINING account.',
+  },
+};
 
 export default function Page() {
   return (

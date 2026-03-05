@@ -4,7 +4,23 @@ import Testimonials from '@/components/pages/frontpage/testimonials';
 import tiers from '@/data/tiers';
 import { createClient } from '@/lib/supabase/server';
 import { CheckIcon, MinusIcon, MailIcon, StarIcon } from 'lucide-react';
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Pricing',
+  description: 'Choose a plan for FULLCOURT TRAINING basketball animations.',
+  alternates: { canonical: '/pricing' },
+  openGraph: {
+    url: '/pricing',
+    title: 'Pricing | FULLCOURT TRAINING',
+    description: 'Choose a plan for FULLCOURT TRAINING basketball animations.',
+  },
+  twitter: {
+    title: 'Pricing | FULLCOURT TRAINING',
+    description: 'Choose a plan for FULLCOURT TRAINING basketball animations.',
+  },
+};
 
 export default async function Pricing() {
   const supabase = await createClient();

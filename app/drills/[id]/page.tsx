@@ -1,33 +1,77 @@
+import type { Metadata } from 'next';
+import { cache } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
-import { ArrowLeftIcon, CrownIcon, LoaderIcon, UsersIcon } from 'lucide-react';
+import { ArrowLeftIcon, UsersIcon } from 'lucide-react';
 
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { Copy } from '@/components/common/Copy';
 import { createClient } from '@/lib/supabase/server';
 import type { Drill } from '@/lib/types';
+import { stripMarkdown, truncate } from '@/lib/utils';
+
+type Props = { params: Promise<{ id: string }> };
+
+const getDrill = cache(async (id: string) => {
+  const supabase = await createClient();
+
+  const { data: drill, error } = await supabase
+    .from('drills')
+    .select('id,name,type,premium,description,link,players')
+    .eq('id', id)
+    .maybeSingle<Drill>();
+
+  if (error) throw new Error(error.message);
+  return drill ?? null;
+});
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const drill = await getDrill(id);
+  if (!drill) notFound();
+
+  const baseDesc = drill.description?.trim()
+    ? truncate(stripMarkdown(drill.description), 160)
+    : `Animated basketball drill: ${drill.type} for ${drill.players} ${drill.players === 1 ? 'player' : 'players'}.`;
+
+  const ogImage = `/thumbnails/${drill.id}.webp`;
+
+  return {
+    title: drill.name,
+    description: baseDesc,
+    alternates: { canonical: `/drills/${drill.id}` },
+    openGraph: {
+      type: 'article',
+      url: `/drills/${drill.id}`,
+      title: drill.name,
+      description: baseDesc,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: drill.name }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: drill.name,
+      description: baseDesc,
+      images: [ogImage],
+    },
+  };
+}
 
 function extractYouTubeId(input: string): string | null {
   const s = input.trim();
-
-  // If it looks like a bare YouTube ID (common case in your code)
   if (!s.startsWith('http') && /^[a-zA-Z0-9_-]{6,}$/.test(s)) return s;
 
   try {
     const url = new URL(s);
-    // youtube.com/watch?v=...
     const v = url.searchParams.get('v');
     if (v) return v;
 
-    // youtu.be/<id>
     if (url.hostname.includes('youtu.be')) {
       const id = url.pathname.replace('/', '');
       return id || null;
     }
 
-    // youtube.com/embed/<id>
     const parts = url.pathname.split('/').filter(Boolean);
     const embedIdx = parts.indexOf('embed');
     if (embedIdx !== -1 && parts[embedIdx + 1]) return parts[embedIdx + 1];
@@ -38,27 +82,12 @@ function extractYouTubeId(input: string): string | null {
   }
 }
 
-export default async function DrillPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function DrillPage({ params }: Props) {
+  const { id } = await params;
   const supabase = await createClient();
-  const { id } = await Promise.resolve(params);
+  const drill = await getDrill(id);
 
-  const { data: drill, error } = await supabase
-    .from('drills')
-    .select('id,name,type,premium,description,link,players')
-    .eq('id', id)
-    .maybeSingle<Drill>();
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  if (!drill) {
-    notFound();
-  }
+  if (!drill) notFound();
 
   let videoUri: string | null = null;
 
@@ -69,11 +98,7 @@ export default async function DrillPage({
       .from('premium-drills')
       .createSignedUrl(`${drill.id}.mp4`, 60 * 60 * 5);
 
-    if (!signedErr && signed?.signedUrl) {
-      videoUri = signed.signedUrl;
-    } else {
-      videoUri = null;
-    }
+    videoUri = !signedErr && signed?.signedUrl ? signed.signedUrl : null;
   }
 
   const youtubeId = videoUri ? extractYouTubeId(videoUri) : null;
@@ -105,6 +130,7 @@ export default async function DrillPage({
             <div className="prose prose-sm max-w-none dark:prose-invert">
               <Markdown>{drill.description ?? ''}</Markdown>
             </div>
+
             <Copy />
           </div>
 

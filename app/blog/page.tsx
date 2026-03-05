@@ -2,6 +2,18 @@ import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import BlogCard from '@/components/features/Blog/BlogCard';
 import { createClient } from '@/lib/supabase/server';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'Coaching notes, drill breakdowns, and training insights.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    url: '/blog',
+    title: 'Blog | FULLCOURT TRAINING',
+    description: 'Coaching notes, drill breakdowns, and training insights.',
+  },
+};
 
 export default async function Blog() {
   const supabase = await createClient();

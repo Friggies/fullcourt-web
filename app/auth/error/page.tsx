@@ -1,4 +1,21 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Something Went Wrong',
+  description: 'An unexpected error occurred. Please try again.',
+  alternates: { canonical: '/auth/error' },
+  robots: { index: false, follow: false },
+  openGraph: {
+    url: '/auth/error',
+    title: 'Something Went Wrong | FULLCOURT TRAINING',
+    description: 'An unexpected error occurred. Please try again.',
+  },
+  twitter: {
+    title: 'Something Went Wrong | FULLCOURT TRAINING',
+    description: 'An unexpected error occurred. Please try again.',
+  },
+};
 
 export default async function Page({
   searchParams,

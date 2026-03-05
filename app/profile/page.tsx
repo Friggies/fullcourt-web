@@ -7,6 +7,22 @@ import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { ManageSubscriptionButton } from '@/components/common/ManageSubscriptionButton';
 import Button from '@/components/common/Button';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Profile Page',
+  description: 'Manage your current subscription.',
+  alternates: { canonical: '/profile' },
+  openGraph: {
+    url: '/profile',
+    title: 'Profile Page | FULLCOURT TRAINING',
+    description: 'Manage your current subscription.',
+  },
+  twitter: {
+    title: 'Profile Page | FULLCOURT TRAINING',
+    description: 'Manage your current subscription.',
+  },
+};
 
 export default async function Profile() {
   const supabase = await createClient();

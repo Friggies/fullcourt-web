@@ -4,6 +4,7 @@ import './globals.css';
 import { Footer } from '@/components/common/Footer';
 import Script from 'next/script';
 import Navigation from '@/components/common/Navigation';
+import { Metadata } from 'next';
 
 const inter = localFont({
   src: [
@@ -18,6 +19,47 @@ const inter = localFont({
   ],
 });
 
+export const metadata: Metadata = {
+  metadataBase: new URL('https://fullcourt-training.com'),
+  title: {
+    default: 'FULLCOURT TRAINING - Basketball Animations',
+    template: '%s | FULLCOURT TRAINING',
+  },
+  description: 'Animated Basketball Drills and Plays',
+  alternates: { canonical: '/' },
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    title: 'FULLCOURT TRAINING - Basketball Animations',
+    description: 'Animated Basketball Drills and Plays',
+    siteName: 'FULLCOURT TRAINING',
+    images: [
+      {
+        url: '/images/cover.webp',
+        width: 1200,
+        height: 630,
+        type: 'image/webp',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FULLCOURT TRAINING - Basketball Animations',
+    description: 'Animated Basketball Drills and Plays',
+    images: ['/images/cover.webp'],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    shortcut: ['/favicon/favicon.ico'],
+    apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  manifest: '/favicon/site.webmanifest',
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -25,43 +67,6 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          rel="icon"
-          type="image/png"
-          href="/favicon/favicon-96x96.png"
-          sizes="96x96"
-        />
-        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon/favicon.ico" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
-        />
-        <meta name="apple-mobile-web-app-title" content="FULLCOURT" />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
-
-        <meta property="og:title" content="FULLCOURT - Basketball Training" />
-        <meta property="og:description" content="Animated Basketball Drills" />
-        <meta
-          property="og:image"
-          content="https://fullcourt-training.com/images/cover.webp"
-        />
-        <meta property="og:image:type" content="image/webp" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://fullcourt-training.com" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FULLCOURT - Basketball Training" />
-        <meta name="twitter:description" content="Animated Basketball Drills" />
-        <meta
-          name="twitter:image"
-          content="https://fullcourt-training.com/images/cover.webp"
-        />
-      </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -73,8 +78,8 @@ export default async function RootLayout({
           <main className="flex flex-col">{children}</main>
           <Footer />
         </ThemeProvider>
+        <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
       </body>
-      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>
   );
 }
