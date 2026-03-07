@@ -120,7 +120,7 @@ export default function Index() {
           </span>
 
           <span className="w-full text-center sm:w-auto sm:text-left whitespace-nowrap">
-            and +{nf.format(totalFollowers)} other players and coaches
+            and {nf.format(totalFollowers)}+ other players and coaches
           </span>
         </div>
       </Section>
