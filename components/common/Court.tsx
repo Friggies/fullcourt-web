@@ -19,8 +19,8 @@ export function Court({
       <Image
         src={'/images/floor.webp'}
         alt="Floor Plan"
-        priority
         fill
+        preload
         className="object-cover z-0"
         sizes="100vw"
         placeholder="blur"
@@ -30,6 +30,7 @@ export function Court({
         src={'/images/lines.png'}
         alt="Floor Plan"
         fill
+        preload
         className="object-cover"
         sizes="100vw"
       />

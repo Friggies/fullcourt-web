@@ -93,7 +93,7 @@ export default function Index() {
           src="/animations/passing.gif"
           alt="Animated passing drill"
           unoptimized
-          priority
+          loading="eager"
           width={1080}
           height={1080}
           className="h-[100px] sm:h-[150px] w-auto animate-spin-slow"
@@ -146,7 +146,6 @@ export default function Index() {
             src="/animations/straight_passing.gif"
             alt="Animated passing drill"
             unoptimized
-            priority
             width={1080}
             height={270}
             className="sm:animate-spin-slow order-first sm:order-last sm:w-[80%] mx-auto"

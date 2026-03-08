@@ -52,11 +52,11 @@ export default function Navigation() {
             <Image
               src="/images/logo.webp"
               alt="Fullcourt Training Logo"
-              priority
               width={1000}
               height={934}
+              unoptimized
               sizes="(min-width: 640px) 200px, 100px"
-              className="h-[40px] sm:h-[60px] w-auto object-contain"
+              className="h-[40px] sm:h-[60px] w-auto object-contain pointer-events-none"
             />
           </Link>
           <div className="hidden sm:flex gap-4 font-normal align-middle items-center">

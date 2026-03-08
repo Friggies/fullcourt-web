@@ -48,7 +48,6 @@ export function Newsletter() {
         src={'/animations/passing.gif'}
         alt="Fun Passing Animation"
         unoptimized
-        priority
         width={1080}
         height={1080}
         className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
