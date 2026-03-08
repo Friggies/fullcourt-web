@@ -48,7 +48,12 @@ export default function Navigation() {
     <>
       <nav className="p-4 mx-auto border-b border-b-foreground/10 bg-background sticky top-0 z-40">
         <div className="max-w-3xl w-full flex gap-4 justify-end items-center mx-auto">
-          <Link className="mr-auto" href="/">
+          <Link
+            className="mr-auto"
+            href="/"
+            prefetch={false}
+            aria-label="Go to homepage"
+          >
             <Image
               src="/images/logo.webp"
               alt="Fullcourt Training Logo"
