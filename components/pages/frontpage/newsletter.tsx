@@ -23,7 +23,10 @@ export function Newsletter() {
     try {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-deployment-id': process.env.NEXT_DEPLOYMENT_ID!,
+        },
         body: JSON.stringify({ email }),
       });
 

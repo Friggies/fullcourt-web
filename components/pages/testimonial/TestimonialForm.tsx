@@ -74,6 +74,9 @@ export default function TestimonialForm() {
       const res = await fetch('/api/testimonial', {
         method: 'POST',
         body: form,
+        headers: {
+          'x-deployment-id': process.env.NEXT_DEPLOYMENT_ID!,
+        },
       });
 
       const json = (await res.json()) as ApiOk | ApiErr;
