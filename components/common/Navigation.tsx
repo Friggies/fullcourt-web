@@ -55,7 +55,7 @@ export default function Navigation() {
               width={1000}
               height={934}
               unoptimized
-              sizes="(min-width: 640px) 200px, 100px"
+              loading="eager"
               className="h-[40px] sm:h-[60px] w-auto object-contain pointer-events-none"
             />
           </Link>
