@@ -1,4 +1,4 @@
-import DrillGrid from '@/components/features/Drilll/DrillGrid';
+import DrillGrid from '@/components/features/Drill/DrillGrid';
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/server';

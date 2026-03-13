@@ -10,7 +10,7 @@ import { Section } from '@/components/common/Section';
 import { SoMe } from '@/components/common/Some';
 import Testimonials from '@/components/pages/frontpage/testimonials';
 import some from '@/data/some';
-import DrillCard from '@/components/features/Drilll/DrillCard';
+import DrillCard from '@/components/features/Drill/DrillCard';
 import { HighlightedDrill } from '@/lib/types';
 
 export const metadata: Metadata = {
