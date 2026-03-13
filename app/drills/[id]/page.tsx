@@ -36,7 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? truncate(stripMarkdown(drill.description), 160)
     : `Animated basketball drill: ${drill.type} for ${drill.players} ${drill.players === 1 ? 'player' : 'players'}.`;
 
-  const ogImage = `/thumbnails/${drill.id}.webp`;
+  const ogImage = `https://crbswbfgtbkjinzagblg.supabase.co/storage/v1/object/public/drill_thumbnails/${
+    drill.id
+  }.webp`;
 
   return {
     title: drill.name,

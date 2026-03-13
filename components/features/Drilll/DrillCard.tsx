@@ -20,7 +20,9 @@ export default function DrillCard({
       >
         <div className="relative w-full aspect-[9/16] bg-muted">
           <Image
-            src={`/thumbnails/${drill.id}.webp`}
+            src={`https://crbswbfgtbkjinzagblg.supabase.co/storage/v1/object/public/drill_thumbnails/${
+              drill.id
+            }.webp`}
             alt={`${drill.name} preview`}
             fill
             className="object-cover"
