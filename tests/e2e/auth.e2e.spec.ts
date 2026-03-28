@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test';
 
+const userEmail = process.env.TEST_USER_EMAIL!;
+const userPassword = process.env.TEST_USER_PASSWORD!;
+
 test('user can login and logout', async ({ page }) => {
   await page.goto('/auth/login');
 
-  await page.fill('input[type="email"]', 'matejrolko2@gmail.com');
-  await page.fill('input[type="password"]', 'Matej1234');
+  await page.fill('input[type="email"]', userEmail);
+  await page.fill('input[type="password"]', userPassword);
 
   await page.click('button:has-text("Login")');
 
