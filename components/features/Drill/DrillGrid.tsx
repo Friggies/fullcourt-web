@@ -5,7 +5,7 @@ import DrillGridClient from './DrillGridClient';
 export default async function DrillGrid() {
   const supabase = await createClient();
 
-  let query = supabase.from('drills').select(
+  const query = supabase.from('drills').select(
     `
       id,
       name,
