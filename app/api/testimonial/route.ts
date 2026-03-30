@@ -2,10 +2,17 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import sharp from 'sharp';
 
+import { rateLimiters } from '@/lib/upstash';
+import {
+  applyRateLimitHeaders,
+  limitByIp,
+  rateLimitExceeded,
+} from '@/lib/rate-limit';
+
 export const runtime = 'nodejs'; // required for sharp (not Edge)
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 function slugify(input: string) {
   return input
@@ -18,6 +25,15 @@ function slugify(input: string) {
 
 export async function POST(req: Request) {
   try {
+    const rate = await limitByIp(req, rateLimiters.testimonialSubmit);
+
+    if (!rate.success) {
+      return rateLimitExceeded(
+        rate,
+        'Too many testimonial submissions from this IP. Please try again later.'
+      );
+    }
+
     if (!supabaseUrl || !serviceRoleKey) {
       return NextResponse.json(
         { ok: false, error: 'Server not configured (missing env vars).' },
@@ -88,7 +104,7 @@ export async function POST(req: Request) {
       const bucket = 'testimonial_headshots';
       const safeName = slugify(display_name || 'user');
       const filename = `${safeName}-${crypto.randomUUID()}.webp`;
-      const path = filename; // or `headshots/${filename}`
+      const path = filename;
 
       const upload = await supabase.storage
         .from(bucket)
@@ -116,7 +132,7 @@ export async function POST(req: Request) {
         display_name,
         title,
         content,
-        image: publicUrl, // store public URL (or store path if you prefer)
+        image: publicUrl,
         rating,
       })
       .select('id')
@@ -129,7 +145,13 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json({ ok: true, id: insert.data.id }, { status: 200 });
+    const response = NextResponse.json(
+      { ok: true, id: insert.data.id },
+      { status: 200 }
+    );
+
+    applyRateLimitHeaders(response, rate);
+    return response;
   } catch {
     return NextResponse.json(
       { ok: false, error: 'Unexpected error.' },

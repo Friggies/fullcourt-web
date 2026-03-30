@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card } from '../../common/Card';
 import Image from 'next/image';
 import { Court } from '../../common/Court';
 import Button from '../../common/Button';
 import Link from 'next/link';
 import { Line } from '../../common/Line';
+import { getClientApiError } from '@/lib/client-rate-limit';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');
@@ -14,9 +15,37 @@ export function Newsletter() {
     'idle'
   );
   const [error, setError] = useState<string | null>(null);
+  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
+
+  const isCoolingDown = cooldownUntil !== null && cooldownUntil > Date.now();
+
+  useEffect(() => {
+    if (!cooldownUntil) return;
+
+    const remainingMs = cooldownUntil - Date.now();
+    if (remainingMs <= 0) {
+      setCooldownUntil(null);
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCooldownUntil(null);
+    }, remainingMs);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [cooldownUntil]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if (isCoolingDown) {
+      setStatus('error');
+      setError('Please wait a bit before trying again.');
+      return;
+    }
+
     setStatus('loading');
     setError(null);
 
@@ -27,12 +56,20 @@ export function Newsletter() {
           'Content-Type': 'application/json',
           'x-deployment-id': process.env.NEXT_DEPLOYMENT_ID!,
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email.trim() }),
       });
 
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setError(data?.error || 'Something went wrong. Please try again.');
+        const apiError = await getClientApiError(
+          res,
+          'Something went wrong. Please try again.'
+        );
+
+        if (apiError.isRateLimited && apiError.retryAfterMs) {
+          setCooldownUntil(Date.now() + apiError.retryAfterMs);
+        }
+
+        setError(apiError.message);
         setStatus('error');
         return;
       }
@@ -53,7 +90,7 @@ export function Newsletter() {
         unoptimized
         width={1080}
         height={1080}
-        className="h-[100px] sm:h-[150px] w-auto  animate-spin-slow"
+        className="h-[100px] sm:h-[150px] w-auto animate-spin-slow"
       />
       <Card>
         <span className="text-xs uppercase text-muted-foreground">
@@ -78,26 +115,36 @@ export function Newsletter() {
             placeholder="you@example.com"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2 bg-white"
+            disabled={status === 'loading' || isCoolingDown}
+            className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2 bg-white disabled:opacity-60"
           />
           <Button
             variant="fill"
             type="submit"
-            disabled={status === 'loading'}
+            disabled={status === 'loading' || isCoolingDown}
             className="px-4 py-2 rounded border"
           >
-            {status === 'loading' ? 'Submitting…' : 'Subscribe'}
+            {status === 'loading'
+              ? 'Submitting…'
+              : isCoolingDown
+                ? 'Please wait…'
+                : 'Subscribe'}
           </Button>
         </form>
+
         <div aria-live="polite" className="text-sm">
           {status === 'ok' && (
             <span className="text-green-600">
               Thanks! Please check your email.
             </span>
           )}
-          {status === 'error' && <span className="text-red-600">{error}</span>}
+          {status === 'error' && error && (
+            <span className="text-red-600">{error}</span>
+          )}
         </div>
+
         <Line />
+
         <p className="text-muted-foreground text-xs">
           By subscribing, you agree to our{' '}
           <Link className="underline" href="/privacy-policy">

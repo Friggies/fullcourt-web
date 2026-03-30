@@ -6,6 +6,7 @@ import Button from '@/components/common/Button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { getClientApiError } from '@/lib/client-rate-limit';
 
 type ApiOk = {
   ok: true;
@@ -17,6 +18,11 @@ type ApiErr = {
   error: string;
 };
 
+type Feedback =
+  | { type: 'success'; message: string }
+  | { type: 'error'; message: string }
+  | null;
+
 export default function TestimonialForm() {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -26,9 +32,12 @@ export default function TestimonialForm() {
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<ApiOk | ApiErr | null>(null);
+  const [feedback, setFeedback] = useState<Feedback>(null);
+  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
 
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  const isCoolingDown = cooldownUntil !== null && cooldownUntil > Date.now();
 
   useEffect(() => {
     if (!imageFile) {
@@ -44,9 +53,35 @@ export default function TestimonialForm() {
     };
   }, [imageFile]);
 
+  useEffect(() => {
+    if (!cooldownUntil) return;
+
+    const remainingMs = cooldownUntil - Date.now();
+    if (remainingMs <= 0) {
+      setCooldownUntil(null);
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCooldownUntil(null);
+    }, remainingMs);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [cooldownUntil]);
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setResult(null);
+    setFeedback(null);
+
+    if (isCoolingDown) {
+      setFeedback({
+        type: 'error',
+        message: 'Please wait a bit before submitting again.',
+      });
+      return;
+    }
 
     if (
       !displayName.trim() ||
@@ -54,14 +89,15 @@ export default function TestimonialForm() {
       !title.trim() ||
       !email.trim()
     ) {
-      setResult({
-        ok: false,
-        error: 'Please fill in your name, title, email and testimonial.',
+      setFeedback({
+        type: 'error',
+        message: 'Please fill in your name, title, email and testimonial.',
       });
       return;
     }
 
     setLoading(true);
+
     try {
       const form = new FormData();
       form.set('display_name', displayName.trim());
@@ -69,7 +105,10 @@ export default function TestimonialForm() {
       form.set('title', title.trim());
       form.set('content', content.trim());
       form.set('rating', String(rating));
-      if (imageFile) form.set('image', imageFile);
+
+      if (imageFile) {
+        form.set('image', imageFile);
+      }
 
       const res = await fetch('/api/testimonial', {
         method: 'POST',
@@ -79,17 +118,35 @@ export default function TestimonialForm() {
         },
       });
 
-      const json = (await res.json()) as ApiOk | ApiErr;
+      if (!res.ok) {
+        const apiError = await getClientApiError(res, 'Submission failed.');
 
-      if (!res.ok || !json.ok) {
-        setResult({
-          ok: false,
-          error: (json as ApiErr).error || 'Submission failed.',
+        if (apiError.isRateLimited && apiError.retryAfterMs) {
+          setCooldownUntil(Date.now() + apiError.retryAfterMs);
+        }
+
+        setFeedback({
+          type: 'error',
+          message: apiError.message,
         });
         return;
       }
 
-      setResult(json);
+      const json = (await res.json()) as ApiOk | ApiErr;
+
+      if (!json.ok) {
+        setFeedback({
+          type: 'error',
+          message: json.error || 'Submission failed.',
+        });
+        return;
+      }
+
+      setFeedback({
+        type: 'success',
+        message: 'Thanks! Your testimonial was submitted.',
+      });
+
       setDisplayName('');
       setEmail('');
       setTitle('');
@@ -97,7 +154,10 @@ export default function TestimonialForm() {
       setRating(5);
       setImageFile(null);
     } catch {
-      setResult({ ok: false, error: 'Something went wrong.' });
+      setFeedback({
+        type: 'error',
+        message: 'Something went wrong.',
+      });
     } finally {
       setLoading(false);
     }
@@ -113,6 +173,7 @@ export default function TestimonialForm() {
         placeholder="e.g. Mads N."
         maxLength={80}
         required
+        disabled={loading || isCoolingDown}
       />
 
       <Label htmlFor="title">Title</Label>
@@ -123,6 +184,7 @@ export default function TestimonialForm() {
         placeholder="e.g. Coach or Shooting Guard"
         maxLength={80}
         required
+        disabled={loading || isCoolingDown}
       />
 
       <Label htmlFor="email">Email</Label>
@@ -134,6 +196,7 @@ export default function TestimonialForm() {
         type="email"
         maxLength={200}
         required
+        disabled={loading || isCoolingDown}
       />
 
       <Label htmlFor="rating">Rating</Label>
@@ -142,6 +205,7 @@ export default function TestimonialForm() {
         className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
         value={rating}
         onChange={e => setRating(Number(e.target.value))}
+        disabled={loading || isCoolingDown}
       >
         {[5, 4, 3, 2, 1].map(r => (
           <option key={r} value={r}>
@@ -160,6 +224,7 @@ export default function TestimonialForm() {
         rows={5}
         maxLength={1200}
         required
+        disabled={loading || isCoolingDown}
       />
       <div className="text-xs text-muted-foreground">{content.length}/1200</div>
 
@@ -169,7 +234,9 @@ export default function TestimonialForm() {
         type="file"
         accept="image/*"
         onChange={e => setImageFile(e.target.files?.[0] ?? null)}
+        disabled={loading || isCoolingDown}
       />
+
       {previewUrl && (
         <img
           src={previewUrl}
@@ -177,12 +244,18 @@ export default function TestimonialForm() {
           className="h-16 w-16 rounded-full object-cover border"
         />
       )}
+
       <div className="text-xs text-muted-foreground">
         Tip: a square-ish image works best.
       </div>
 
       <label>
-        <Checkbox name="consent_all_purposes" required className="mr-2" />
+        <Checkbox
+          name="consent_all_purposes"
+          required
+          className="mr-2"
+          disabled={loading || isCoolingDown}
+        />
         <span className="text-muted-foreground">
           I agree that FULLCOURT TRAINING may use my testimonial, name, and
           image for marketing and other promotional purposes across all channels
@@ -194,28 +267,30 @@ export default function TestimonialForm() {
 
       <Button
         type="submit"
-        disabled={loading}
+        disabled={loading || isCoolingDown}
         variant="fill"
         className="w-full"
       >
-        {loading ? 'Submitting…' : 'Submit Testimonial'}
+        {loading
+          ? 'Submitting...'
+          : isCoolingDown
+            ? 'Please wait...'
+            : 'Submit Testimonial'}
       </Button>
 
-      {result && (
-        <div
-          className={`rounded-md border px-3 py-2 text-sm ${
-            result.ok ? 'border-green-500' : 'border-red-500'
-          }`}
-        >
-          {result.ok ? (
-            <div className="space-y-1">
-              <div>Thanks! Your testimonial was submitted.</div>
-            </div>
-          ) : (
-            <div>{result.error}</div>
-          )}
-        </div>
-      )}
+      <div aria-live="polite">
+        {feedback && (
+          <div
+            className={`rounded-md border px-3 py-2 text-sm ${
+              feedback.type === 'success'
+                ? 'border-green-500'
+                : 'border-red-500'
+            }`}
+          >
+            {feedback.message}
+          </div>
+        )}
+      </div>
     </form>
   );
 }
