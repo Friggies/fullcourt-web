@@ -6,6 +6,8 @@ import {
   rateLimitExceeded,
 } from '@/lib/rate-limit';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(req: Request) {
   const rate = await limitByIp(req, rateLimiters.kitSubscribe);
 
@@ -20,13 +22,21 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    email = typeof body?.email === 'string' ? body.email.trim() : '';
+    email =
+      typeof body?.email === 'string' ? body.email.trim().toLowerCase() : '';
   } catch {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
   }
 
   if (!email) {
     return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+  }
+
+  if (!EMAIL_REGEX.test(email)) {
+    return NextResponse.json(
+      { error: 'Invalid email format' },
+      { status: 400 }
+    );
   }
 
   const apiKey = process.env.KIT_API_KEY;
