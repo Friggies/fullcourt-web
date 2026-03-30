@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { getClientApiError } from '@/lib/client-rate-limit';
+import Image from 'next/image';
 
 type ApiOk = {
   ok: true;
@@ -238,7 +239,7 @@ export default function TestimonialForm() {
       />
 
       {previewUrl && (
-        <img
+        <Image
           src={previewUrl}
           alt="Preview"
           className="h-16 w-16 rounded-full object-cover border"
