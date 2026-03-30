@@ -24,10 +24,10 @@ export default async function DrillGrid() {
     throw new Error(error.message);
   }
 
-  const drills: Drill[] = (data ?? []).map((d: any) => ({
+  const drills: Drill[] = (data ?? []).map(d => ({
     ...d,
     categories: Array.isArray(d.categories)
-      ? [...new Set(d.categories.map((c: any) => c?.name).filter(Boolean))]
+      ? [...new Set(d.categories.map(c => c?.name).filter(Boolean))]
       : [],
   }));
 
