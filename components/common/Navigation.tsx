@@ -1,4 +1,5 @@
 'use client';
+
 import { LoaderIcon, MenuIcon, XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -12,21 +13,40 @@ import Button from './Button';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoadingUser, setIsLoadingUser] = useState(true);
+  const [user, setUser] = useState<User | null | undefined>(undefined);
+
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => setUser(data.user ?? null));
+    let active = true;
+
+    const loadUser = async () => {
+      try {
+        const { data } = await supabase.auth.getUser();
+        if (!active) return;
+        setUser(data.user ?? null);
+      } catch {
+        if (!active) return;
+        setUser(null);
+      }
+    };
+
+    loadUser();
+
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_e, session) => {
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!active) return;
       setUser(session?.user ?? null);
     });
-    setIsLoadingUser(false);
-    return () => subscription.unsubscribe();
+
+    return () => {
+      active = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const pathname = usePathname();
+
   const links = [
     { href: '/drills', label: 'Playbook' },
     { href: '/pricing', label: 'Pricing' },
@@ -59,19 +79,21 @@ export default function Navigation() {
               className="h-[40px] sm:h-[60px] w-auto object-contain pointer-events-none"
             />
           </Link>
+
           <div className="hidden sm:flex gap-4 font-normal align-middle items-center">
             {links.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={'hover:underline'}
+                className="hover:underline"
               >
                 {link.label}
               </Link>
             ))}
           </div>
+
           <div className="flex gap-4 items-center">
-            {isLoadingUser ? (
+            {user === undefined ? (
               <LoaderIcon className="animate-spin" />
             ) : user ? (
               <Button href="/profile">Profile</Button>
@@ -83,12 +105,14 @@ export default function Navigation() {
                 </Button>
               </>
             )}
+
             <button onClick={() => setIsOpen(o => !o)} className="sm:hidden">
               <MenuIcon size={30} />
             </button>
           </div>
         </div>
       </nav>
+
       <div
         className={`fixed inset-0 z-50 flex ${
           isOpen ? 'pointer-events-auto' : 'pointer-events-none'
@@ -96,7 +120,7 @@ export default function Navigation() {
       >
         <div
           className={`
-             w-full h-full bg-background p-4
+            w-full h-full bg-background p-4
             transform transition-transform duration-300 ease-in-out flex flex-col gap-4 motion-reduce:duration-0
             ${isOpen ? 'translate-x-0' : 'translate-x-full'}
           `}
@@ -104,23 +128,26 @@ export default function Navigation() {
           <button onClick={() => setIsOpen(false)} className="ml-auto">
             <XIcon size={30} />
           </button>
+
           <nav className="flex flex-col gap-4 font-normal items-start">
             <Link
-              href={'/'}
+              href="/"
               onClick={() => setIsOpen(false)}
               className="text-lg font-black uppercase"
             >
               Fullcourt Training
             </Link>
+
             {links.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={'hover:underline'}
+                className="hover:underline"
               >
                 {link.label}
               </Link>
             ))}
+
             <div className="flex gap-2 items-center">
               <ThemeSwitcher />
               <SoMe />
