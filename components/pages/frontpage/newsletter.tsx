@@ -20,17 +20,14 @@ export function Newsletter() {
   const isCoolingDown = cooldownUntil !== null;
 
   useEffect(() => {
-    if (!cooldownUntil) return;
+    if (cooldownUntil === null) return;
 
-    const remainingMs = cooldownUntil - Date.now();
-    if (remainingMs <= 0) {
-      setCooldownUntil(null);
-      return;
-    }
-
-    const timeoutId = window.setTimeout(() => {
-      setCooldownUntil(null);
-    }, remainingMs);
+    const timeoutId = window.setTimeout(
+      () => {
+        setCooldownUntil(null);
+      },
+      Math.max(0, cooldownUntil - Date.now())
+    );
 
     return () => {
       window.clearTimeout(timeoutId);
@@ -116,7 +113,7 @@ export function Newsletter() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             disabled={status === 'loading' || isCoolingDown}
-            className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2 bg-white disabled:opacity-60"
+            className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2 bg-white text-black disabled:opacity-60"
           />
           <Button
             variant="fill"
