@@ -10,18 +10,20 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Moon, Sun, SunMoon } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 const ThemeSwitcher = () => {
-  const [mounted, setMounted] = useState(false);
+  // Hide theme-dependent UI until after hydration because `next-themes`
+  // cannot know the active theme during SSR, and the old `mounted` +
+  // `useEffect` pattern is now flagged by the React hooks lint rule.
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const { theme, setTheme } = useTheme();
 
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
+  if (!isClient) {
     return null;
   }
 
