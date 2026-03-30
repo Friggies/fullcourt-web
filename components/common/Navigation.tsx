@@ -1,19 +1,24 @@
 'use client';
 
-import { LoaderIcon, MenuIcon, XIcon } from 'lucide-react';
+import { LoaderIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { ThemeSwitcher } from '../theme-switcher';
-import Image from 'next/image';
-import { SoMe } from './Some';
+import { useEffect, useState } from 'react';
 import { User } from '@supabase/supabase-js';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import Button from './Button';
+import MobileMenu from './MobileMenu';
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<User | null | undefined>(undefined);
+  const pathname = usePathname();
+
+  const links = [
+    { href: '/drills', label: 'Playbook' },
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/blog', label: 'Blog' },
+  ];
 
   useEffect(() => {
     const supabase = createClient();
@@ -44,25 +49,6 @@ export default function Navigation() {
       subscription.unsubscribe();
     };
   }, []);
-
-  const pathname = usePathname();
-
-  const links = [
-    { href: '/drills', label: 'Playbook' },
-    { href: '/pricing', label: 'Pricing' },
-    { href: '/blog', label: 'Blog' },
-  ];
-
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    document.body.classList.toggle('overflow-hidden', isOpen);
-    return () => {
-      document.body.classList.remove('overflow-hidden');
-    };
-  }, [isOpen]);
 
   return (
     <>
@@ -106,55 +92,10 @@ export default function Navigation() {
               </>
             )}
 
-            <button onClick={() => setIsOpen(o => !o)} className="sm:hidden">
-              <MenuIcon size={30} />
-            </button>
+            <MobileMenu key={pathname} links={links} />
           </div>
         </div>
       </nav>
-
-      <div
-        className={`fixed inset-0 z-50 flex ${
-          isOpen ? 'pointer-events-auto' : 'pointer-events-none'
-        }`}
-      >
-        <div
-          className={`
-            w-full h-full bg-background p-4
-            transform transition-transform duration-300 ease-in-out flex flex-col gap-4 motion-reduce:duration-0
-            ${isOpen ? 'translate-x-0' : 'translate-x-full'}
-          `}
-        >
-          <button onClick={() => setIsOpen(false)} className="ml-auto">
-            <XIcon size={30} />
-          </button>
-
-          <nav className="flex flex-col gap-4 font-normal items-start">
-            <Link
-              href="/"
-              onClick={() => setIsOpen(false)}
-              className="text-lg font-black uppercase"
-            >
-              Fullcourt Training
-            </Link>
-
-            {links.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="hover:underline"
-              >
-                {link.label}
-              </Link>
-            ))}
-
-            <div className="flex gap-2 items-center">
-              <ThemeSwitcher />
-              <SoMe />
-            </div>
-          </nav>
-        </div>
-      </div>
     </>
   );
 }
