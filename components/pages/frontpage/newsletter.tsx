@@ -17,7 +17,7 @@ export function Newsletter() {
   const [error, setError] = useState<string | null>(null);
   const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
 
-  const isCoolingDown = cooldownUntil !== null && cooldownUntil > Date.now();
+  const isCoolingDown = cooldownUntil !== null;
 
   useEffect(() => {
     if (!cooldownUntil) return;
