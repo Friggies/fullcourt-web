@@ -8,6 +8,7 @@ import Button from '../../common/Button';
 import Link from 'next/link';
 import { Line } from '../../common/Line';
 import { getClientApiError } from '@/lib/client-rate-limit';
+import { TurnstileWidget } from '@/components/common/Turnstile';
 
 export function Newsletter() {
   const [email, setEmail] = useState('');
@@ -17,17 +18,20 @@ export function Newsletter() {
   const [error, setError] = useState<string | null>(null);
   const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
 
-  const isCoolingDown = cooldownUntil !== null;
+  const isCoolingDown = cooldownUntil !== null && cooldownUntil > Date.now();
 
   useEffect(() => {
     if (cooldownUntil === null) return;
 
-    const timeoutId = window.setTimeout(
-      () => {
-        setCooldownUntil(null);
-      },
-      Math.max(0, cooldownUntil - Date.now())
-    );
+    const remainingMs = cooldownUntil - Date.now();
+    if (remainingMs <= 0) {
+      setCooldownUntil(null);
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setCooldownUntil(null);
+    }, remainingMs);
 
     return () => {
       window.clearTimeout(timeoutId);
@@ -46,14 +50,23 @@ export function Newsletter() {
     setStatus('loading');
     setError(null);
 
+    const form = new FormData(e.currentTarget);
+    form.set('email', email.trim());
+
+    const token = form.get('cf-turnstile-response');
+    if (typeof token !== 'string' || !token.trim()) {
+      setStatus('error');
+      setError('Please complete the verification first.');
+      return;
+    }
+
     try {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
+        body: form,
         headers: {
-          'Content-Type': 'application/json',
           'x-deployment-id': process.env.NEXT_DEPLOYMENT_ID!,
         },
-        body: JSON.stringify({ email: email.trim() }),
       });
 
       if (!res.ok) {
@@ -73,6 +86,7 @@ export function Newsletter() {
 
       setStatus('ok');
       setEmail('');
+      e.currentTarget.reset();
     } catch {
       setError('Network error. Please try again.');
       setStatus('error');
@@ -82,7 +96,7 @@ export function Newsletter() {
   return (
     <Court className="my-5">
       <Image
-        src={'/animations/passing.gif'}
+        src="/animations/passing.gif"
         alt="Fun Passing Animation"
         unoptimized
         width={1080}
@@ -108,6 +122,7 @@ export function Newsletter() {
         >
           <input
             type="email"
+            name="email"
             required
             placeholder="you@example.com"
             value={email}
@@ -115,6 +130,9 @@ export function Newsletter() {
             disabled={status === 'loading' || isCoolingDown}
             className="text-base flex-1 border-2 border-brand1 rounded px-3 py-2 bg-white text-black disabled:opacity-60"
           />
+
+          <TurnstileWidget action="newsletter_signup" />
+
           <Button
             variant="fill"
             type="submit"

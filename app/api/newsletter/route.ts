@@ -5,6 +5,7 @@ import {
   limitByIp,
   rateLimitExceeded,
 } from '@/lib/rate-limit';
+import { verifyTurnstileToken } from '@/lib/turnstile';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -19,13 +20,22 @@ export async function POST(req: Request) {
   }
 
   let email = '';
+  let turnstileToken = '';
 
   try {
-    const body = await req.json();
+    const form = await req.formData();
+
     email =
-      typeof body?.email === 'string' ? body.email.trim().toLowerCase() : '';
+      typeof form.get('email') === 'string'
+        ? String(form.get('email')).trim().toLowerCase()
+        : '';
+
+    turnstileToken =
+      typeof form.get('cf-turnstile-response') === 'string'
+        ? String(form.get('cf-turnstile-response')).trim()
+        : '';
   } catch {
-    return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
+    return NextResponse.json({ error: 'Invalid form body' }, { status: 400 });
   }
 
   if (!email) {
@@ -35,6 +45,37 @@ export async function POST(req: Request) {
   if (!EMAIL_REGEX.test(email)) {
     return NextResponse.json(
       { error: 'Invalid email format' },
+      { status: 400 }
+    );
+  }
+
+  if (!turnstileToken) {
+    return NextResponse.json(
+      { error: 'Missing verification token' },
+      { status: 400 }
+    );
+  }
+
+  const ip =
+    req.headers.get('cf-connecting-ip') ??
+    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+    undefined;
+
+  const turnstile = await verifyTurnstileToken({
+    token: turnstileToken,
+    ip,
+  });
+
+  if (!turnstile.success) {
+    return NextResponse.json(
+      { error: 'Verification failed. Please try again.' },
+      { status: 400 }
+    );
+  }
+
+  if (turnstile.action && turnstile.action !== 'newsletter_signup') {
+    return NextResponse.json(
+      { error: 'Invalid verification action' },
       { status: 400 }
     );
   }
