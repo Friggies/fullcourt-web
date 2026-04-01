@@ -8,6 +8,7 @@ import {
   limitByIp,
   rateLimitExceeded,
 } from '@/lib/rate-limit';
+import { verifyTurnstileToken } from '@/lib/turnstile';
 
 export const runtime = 'nodejs'; // required for sharp (not Edge)
 
@@ -47,6 +48,44 @@ export async function POST(req: Request) {
 
     const form = await req.formData();
 
+    const turnstileToken = String(
+      form.get('cf-turnstile-response') ?? ''
+    ).trim();
+
+    if (!turnstileToken) {
+      return NextResponse.json(
+        { ok: false, error: 'Missing Turnstile token.' },
+        { status: 400 }
+      );
+    }
+
+    const ip =
+      req.headers.get('cf-connecting-ip') ??
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+      undefined;
+
+    const turnstile = await verifyTurnstileToken({
+      token: turnstileToken,
+      ip,
+    });
+
+    if (!turnstile.success) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: 'Verification failed. Please try again.',
+        },
+        { status: 400 }
+      );
+    }
+
+    if (turnstile.action && turnstile.action !== 'testimonial_submit') {
+      return NextResponse.json(
+        { ok: false, error: 'Invalid Turnstile action.' },
+        { status: 400 }
+      );
+    }
+
     const display_name = String(form.get('display_name') ?? '').trim();
     const email = String(form.get('email') ?? '').trim();
     const title = String(form.get('title') ?? '').trim();
@@ -71,12 +110,11 @@ export async function POST(req: Request) {
       );
     }
 
-    // Optional image handling
     const file = form.get('image');
     let publicUrl: string | null = null;
 
     if (file && file instanceof File && file.size > 0) {
-      const MAX_BYTES = 5 * 1024 * 1024; // 5MB
+      const MAX_BYTES = 5 * 1024 * 1024;
       if (file.size > MAX_BYTES) {
         return NextResponse.json(
           { ok: false, error: 'Image too large (max 5MB).' },
@@ -94,9 +132,8 @@ export async function POST(req: Request) {
       const arrayBuffer = await file.arrayBuffer();
       const inputBuffer = Buffer.from(arrayBuffer);
 
-      // Convert to a reasonable headshot: square crop + webp compression
       const webpBuffer = await sharp(inputBuffer)
-        .rotate() // respects EXIF orientation
+        .rotate()
         .resize(256, 256, { fit: 'cover' })
         .webp()
         .toBuffer();
@@ -124,7 +161,6 @@ export async function POST(req: Request) {
       publicUrl = pub.publicUrl;
     }
 
-    // Insert testimonial row
     const insert = await supabase
       .from('testimonials')
       .insert({

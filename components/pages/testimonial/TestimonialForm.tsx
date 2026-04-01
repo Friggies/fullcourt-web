@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 import Button from '@/components/common/Button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { getClientApiError } from '@/lib/client-rate-limit';
-import Image from 'next/image';
+import { TurnstileWidget } from '@/components/common/Turnstile';
 
 type ApiOk = {
   ok: true;
@@ -72,7 +73,7 @@ export default function TestimonialForm() {
     };
   }, [cooldownUntil]);
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFeedback(null);
 
@@ -97,20 +98,33 @@ export default function TestimonialForm() {
       return;
     }
 
+    const formEl = e.currentTarget;
+    const form = new FormData(formEl);
+
+    form.set('display_name', displayName.trim());
+    form.set('email', email.trim());
+    form.set('title', title.trim());
+    form.set('content', content.trim());
+    form.set('rating', String(rating));
+
+    if (imageFile) {
+      form.set('image', imageFile);
+    } else {
+      form.delete('image');
+    }
+
+    const turnstileToken = form.get('cf-turnstile-response');
+    if (typeof turnstileToken !== 'string' || !turnstileToken.trim()) {
+      setFeedback({
+        type: 'error',
+        message: 'Please complete the verification first.',
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const form = new FormData();
-      form.set('display_name', displayName.trim());
-      form.set('email', email.trim());
-      form.set('title', title.trim());
-      form.set('content', content.trim());
-      form.set('rating', String(rating));
-
-      if (imageFile) {
-        form.set('image', imageFile);
-      }
-
       const res = await fetch('/api/testimonial', {
         method: 'POST',
         body: form,
@@ -154,6 +168,7 @@ export default function TestimonialForm() {
       setContent('');
       setRating(5);
       setImageFile(null);
+      formEl.reset();
     } catch {
       setFeedback({
         type: 'error',
@@ -265,6 +280,8 @@ export default function TestimonialForm() {
           limits.
         </span>
       </label>
+
+      <TurnstileWidget action="testimonial_submit" />
 
       <Button
         type="submit"
