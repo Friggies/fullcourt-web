@@ -9,7 +9,12 @@ export default defineConfig({
     baseURL: 'http://localhost:3000',
     actionTimeout: 0,
     ignoreHTTPSErrors: true,
+    trace: 'on-first-retry',
+  },
+  webServer: {
+    command: 'npm run start -- --port 3000',
+    url: 'http://127.0.0.1:3000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
   },
 });
-
-// To run the tests, use the command "npx playwright test" after starting the development server.
