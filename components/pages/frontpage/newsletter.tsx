@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Card } from '../../common/Card';
 import Image from 'next/image';
 import { Court } from '../../common/Court';
@@ -16,27 +16,30 @@ export function Newsletter() {
     'idle'
   );
   const [error, setError] = useState<string | null>(null);
-  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
+  const [isCoolingDown, setIsCoolingDown] = useState(false);
 
-  const isCoolingDown = cooldownUntil !== null && cooldownUntil > Date.now();
+  const cooldownTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (cooldownUntil === null) return;
+    return () => {
+      if (cooldownTimeoutRef.current !== null) {
+        window.clearTimeout(cooldownTimeoutRef.current);
+      }
+    };
+  }, []);
 
-    const remainingMs = cooldownUntil - Date.now();
-    if (remainingMs <= 0) {
-      setCooldownUntil(null);
-      return;
+  function startCooldown(retryAfterMs: number) {
+    if (cooldownTimeoutRef.current !== null) {
+      window.clearTimeout(cooldownTimeoutRef.current);
     }
 
-    const timeoutId = window.setTimeout(() => {
-      setCooldownUntil(null);
-    }, remainingMs);
+    setIsCoolingDown(true);
 
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [cooldownUntil]);
+    cooldownTimeoutRef.current = window.setTimeout(() => {
+      setIsCoolingDown(false);
+      cooldownTimeoutRef.current = null;
+    }, retryAfterMs);
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -76,7 +79,7 @@ export function Newsletter() {
         );
 
         if (apiError.isRateLimited && apiError.retryAfterMs) {
-          setCooldownUntil(Date.now() + apiError.retryAfterMs);
+          startCooldown(apiError.retryAfterMs);
         }
 
         setError(apiError.message);

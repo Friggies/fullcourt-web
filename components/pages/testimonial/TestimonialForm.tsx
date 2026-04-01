@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import Button from '@/components/common/Button';
@@ -35,11 +35,10 @@ export default function TestimonialForm() {
 
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState<Feedback>(null);
-  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
-
+  const [isCoolingDown, setIsCoolingDown] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  const isCoolingDown = cooldownUntil !== null && cooldownUntil > Date.now();
+  const cooldownTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!imageFile) {
@@ -56,22 +55,25 @@ export default function TestimonialForm() {
   }, [imageFile]);
 
   useEffect(() => {
-    if (!cooldownUntil) return;
+    return () => {
+      if (cooldownTimeoutRef.current !== null) {
+        window.clearTimeout(cooldownTimeoutRef.current);
+      }
+    };
+  }, []);
 
-    const remainingMs = cooldownUntil - Date.now();
-    if (remainingMs <= 0) {
-      setCooldownUntil(null);
-      return;
+  function startCooldown(retryAfterMs: number) {
+    if (cooldownTimeoutRef.current !== null) {
+      window.clearTimeout(cooldownTimeoutRef.current);
     }
 
-    const timeoutId = window.setTimeout(() => {
-      setCooldownUntil(null);
-    }, remainingMs);
+    setIsCoolingDown(true);
 
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [cooldownUntil]);
+    cooldownTimeoutRef.current = window.setTimeout(() => {
+      setIsCoolingDown(false);
+      cooldownTimeoutRef.current = null;
+    }, retryAfterMs);
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -137,7 +139,7 @@ export default function TestimonialForm() {
         const apiError = await getClientApiError(res, 'Submission failed.');
 
         if (apiError.isRateLimited && apiError.retryAfterMs) {
-          setCooldownUntil(Date.now() + apiError.retryAfterMs);
+          startCooldown(apiError.retryAfterMs);
         }
 
         setFeedback({
@@ -257,6 +259,9 @@ export default function TestimonialForm() {
         <Image
           src={previewUrl}
           alt="Preview"
+          width={64}
+          height={64}
+          unoptimized
           className="h-16 w-16 rounded-full object-cover border"
         />
       )}
