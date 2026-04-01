@@ -22,3 +22,17 @@ test('user can login and logout', async ({ page }) => {
 
   await expect(page.getByRole('button', { name: 'Login' })).toBeVisible();
 });
+
+test('free users can only access free drills', async ({ page }) => {
+  await page.goto('/drills/13');
+  await expect(page).toHaveURL(/\/drills\/13$/);
+  await expect(
+    page.getByRole('heading', { name: '2-3 X-Screen to Rim 2' })
+  ).toBeVisible();
+
+  await page.goto('/drills/21');
+  await expect(page).toHaveURL(/\/drills\/21$/);
+  await expect(
+    page.getByRole('heading', { name: 'We can not find this play' })
+  ).toBeVisible();
+});
