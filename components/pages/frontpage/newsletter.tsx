@@ -89,7 +89,6 @@ export function Newsletter() {
 
       setStatus('ok');
       setEmail('');
-      e.currentTarget.reset();
     } catch {
       setError('Network error. Please try again.');
       setStatus('error');
