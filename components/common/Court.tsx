@@ -30,7 +30,6 @@ export function Court({
         src={'/images/lines.png'}
         alt="Floor Plan"
         fill
-        preload
         className="object-cover"
         sizes="100vw"
       />
