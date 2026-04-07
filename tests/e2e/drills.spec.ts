@@ -5,7 +5,9 @@ test('drills page renders filters UI and shows premium upsell when not premium',
 }) => {
   await page.goto('/drills');
 
-  await expect(page.getByText('All Drills & Plays')).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'All Drills & Plays' })
+  ).toBeVisible();
 
   await expect(page.getByPlaceholder('Search...')).toBeVisible();
 
