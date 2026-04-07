@@ -89,15 +89,23 @@ export default function Index() {
           <Button href="/drills">Explore Playbook</Button>
         </Card>
 
-        <Image
-          src="/animations/passing.gif"
-          alt="Animated passing drill"
-          unoptimized
-          loading="eager"
-          width={1080}
-          height={1080}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
           className="h-[100px] sm:h-[150px] w-auto animate-spin-slow"
-        />
+        >
+          <source
+            src="/animations/mov/passing.mov"
+            type='video/quicktime; codecs="hvc1"'
+          />
+          <source
+            src="/animations/webm/passing.webm"
+            type='video/webm; codecs="vp9"'
+          />
+        </video>
       </Court>
 
       <Section className="bg-muted py-5 text-muted-foreground mb-5">
@@ -142,14 +150,23 @@ export default function Index() {
               techniques and strategies.
             </p>
           </div>
-          <Image
-            src="/animations/straight_passing.gif"
-            alt="Animated passing drill"
-            unoptimized
-            width={1080}
-            height={270}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
             className="sm:animate-spin-slow order-first sm:order-last sm:w-[80%] mx-auto"
-          />
+          >
+            <source
+              src="/animations/mov/straight_passing.mov"
+              type='video/quicktime; codecs="hvc1"'
+            />
+            <source
+              src="/animations/webm/straight_passing.webm"
+              type='video/webm; codecs="vp9"'
+            />
+          </video>
         </div>
       </Section>
 
