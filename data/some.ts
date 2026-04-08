@@ -2,9 +2,9 @@ const some = [
   {
     name: 'Instagram',
     link: 'https://www.instagram.com/fullcourt_training/',
-    followers: 12,
-    views: 602,
-    likes: 102,
+    followers: 13,
+    views: 712,
+    likes: 115,
     backgroundGradient:
       'linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5)',
     image: {
@@ -15,9 +15,9 @@ const some = [
   {
     name: 'TikTok',
     link: 'https://www.tiktok.com/@fullcourt_training/',
-    followers: 2937,
-    views: 546345,
-    likes: 35570,
+    followers: 4422,
+    views: 726263,
+    likes: 45261,
     backgroundGradient: 'linear-gradient(135deg, #25f4ee, #fe2c55, #000000)',
     image: {
       width: 512,
@@ -27,9 +27,9 @@ const some = [
   {
     name: 'YouTube',
     link: 'https://www.youtube.com/@fullcourt-training',
-    followers: 53,
-    views: 20697,
-    likes: 251,
+    followers: 54,
+    views: 21049,
+    likes: 258,
     backgroundGradient: 'linear-gradient(135deg, #ff0000, #cc0000)',
     image: {
       width: 500,
