@@ -28,7 +28,7 @@ export default function TermsAndConditions() {
 
       <Section>
         <p className="w-full text-center text-muted-foreground">
-          Last updated: January 5, 2026
+          Last updated: April 28, 2026
         </p>
       </Section>
 
@@ -66,8 +66,9 @@ export default function TermsAndConditions() {
         <p>
           FULLCOURT TRAINING provides a digital basketball playbook with
           animated basketball drills and plays (animated video/animations plus
-          descriptive text). Premium subscriptions expand the playbook by
-          unlocking additional premium drills and plays.
+          descriptive text). The Services may also allow users to comment on
+          drills, plays, and related pages. Premium subscriptions expand the
+          playbook by unlocking additional premium drills and plays.
         </p>
         <p className="mt-2">
           We may add, remove, or update content and features over time to
@@ -258,6 +259,39 @@ export default function TermsAndConditions() {
       </Section>
 
       <Section>
+        <h2 className="text-xl font-semibold mb-2">
+          User Content &amp; Comments
+        </h2>
+        <p>
+          The Services may allow you to submit comments or other content on
+          drills, plays, and pages (“<strong>User Content</strong>”). You are
+          solely responsible for the User Content you submit and for ensuring it
+          complies with these Terms and applicable law.
+        </p>
+        <p className="mt-2">
+          Comments must use a sober, respectful, and professional tone. Comments
+          may not include political commentary, racist or discriminatory
+          content, hate speech, harassment, threats, abusive language, obscene
+          or sexually explicit content, spam, unlawful content, or any content
+          that attacks, demeans, or targets a person or group based on protected
+          characteristics.
+        </p>
+        <p className="mt-2">
+          By submitting User Content, you grant FULLCOURT TRAINING a
+          non-exclusive, worldwide, royalty-free license to host, store,
+          display, reproduce, moderate, and otherwise use that User Content as
+          reasonably necessary to operate, provide, protect, and improve the
+          Services.
+        </p>
+        <p className="mt-2">
+          We may review, hide, remove, or refuse to publish User Content at our
+          discretion, including where we believe it violates these Terms or is
+          otherwise inappropriate for the Services. We may also suspend or
+          terminate accounts that misuse commenting features.
+        </p>
+      </Section>
+
+      <Section>
         <h2 className="text-xl font-semibold mb-2">User Conduct</h2>
         <p>You agree not to:</p>
         <ul className="list-disc pl-6 space-y-1 mt-2">
@@ -270,6 +304,10 @@ export default function TermsAndConditions() {
             Reverse engineer, decompile, or attempt to derive source code except
             where such restriction is prohibited by law.
           </li>
+          <li>
+            Submit comments or other User Content that violates the content
+            standards above or otherwise harms the Services or other users.
+          </li>
         </ul>
       </Section>
 
@@ -280,8 +318,9 @@ export default function TermsAndConditions() {
         <p>
           We may suspend or terminate your access to the Services (including any
           Premium access) if we reasonably believe you have violated these
-          Terms, acted in bad faith, attempted to redistribute premium content,
-          or otherwise harmed the Services or other users.
+          Terms, acted in bad faith, submitted inappropriate comments or other
+          User Content, attempted to redistribute premium content, or otherwise
+          harmed the Services or other users.
         </p>
         <p className="mt-2">
           You may stop using the Services at any time. To request account
