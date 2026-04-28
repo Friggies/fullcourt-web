@@ -76,7 +76,18 @@ export function TurnstileWidget({ action }: TurnstileWidgetProps) {
         onReady={() => setScriptReady(true)}
       />
 
-      <div ref={containerRef} />
+      <div className="w-full max-w-full min-w-0 overflow-hidden">
+        <div
+          ref={containerRef}
+          className="
+            w-full max-w-full min-w-0
+            [&_iframe]:block
+            [&_iframe]:!w-full
+            [&_iframe]:!max-w-full
+            [&_iframe]:!min-w-0
+          "
+        />
+      </div>
     </>
   );
 }
