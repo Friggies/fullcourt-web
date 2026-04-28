@@ -8,6 +8,7 @@ import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/server';
 import { stripMarkdown, truncate } from '@/lib/utils';
+import { CommentList } from '@/components/features/Comment/CommentList';
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -95,6 +96,8 @@ export default async function ArticlePage({ params }: Props) {
         <article className="mt-8 prose prose-neutral dark:prose-invert max-w-none">
           <ReactMarkdown>{article.content}</ReactMarkdown>
         </article>
+
+        <CommentList pageType="blog" pageId={Number(id)} />
       </Section>
     </>
   );
