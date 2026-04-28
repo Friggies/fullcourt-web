@@ -15,7 +15,7 @@ export function SoMe() {
         >
           <Image
             className="h-6 w-6 object-contain"
-            src={`/images/${some.name}.webp`}
+            src={`/images/${some.name.toLowerCase()}.webp`}
             alt={`${some.name} Logo`}
             width={some.image.width}
             height={some.image.height}
