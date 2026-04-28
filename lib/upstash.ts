@@ -39,4 +39,14 @@ export const rateLimiters = {
     limit: 5,
     window: '120 m',
   }),
+  commentSubmit: createSlidingWindowLimiter({
+    prefix: 'ratelimit:comment-submit',
+    limit: 5,
+    window: '60 m',
+  }),
+  reactionToggle: createSlidingWindowLimiter({
+    prefix: 'ratelimit:reaction-toggle',
+    limit: 20,
+    window: '60 m',
+  }),
 } as const;

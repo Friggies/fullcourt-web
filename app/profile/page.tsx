@@ -8,6 +8,7 @@ import { Section } from '@/components/common/Section';
 import { ManageSubscriptionButton } from '@/components/common/ManageSubscriptionButton';
 import Button from '@/components/common/Button';
 import { Metadata } from 'next';
+import { CommentList } from '@/components/features/Comment/CommentList';
 
 export const metadata: Metadata = {
   title: 'Profile Page',
@@ -81,6 +82,7 @@ export default async function Profile() {
           </div>
         </div>
         <LogoutButton />
+        <CommentList pageId={Number()} pageType="" authorId={user.id} />
       </Section>
     </>
   );

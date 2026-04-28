@@ -11,6 +11,7 @@ import { Copy } from '@/components/common/Copy';
 import { createClient } from '@/lib/supabase/server';
 import type { Drill } from '@/lib/types';
 import { stripMarkdown, truncate } from '@/lib/utils';
+import { CommentList } from '@/components/features/Comment/CommentList';
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -132,6 +133,8 @@ export default async function DrillPage({ params }: Props) {
             <div className="prose prose-sm max-w-none dark:prose-invert">
               <Markdown>{drill.description ?? ''}</Markdown>
             </div>
+
+            <CommentList pageType="drill" pageId={Number(id)} />
 
             <Copy />
           </div>

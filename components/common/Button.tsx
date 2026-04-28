@@ -34,7 +34,7 @@ export function Button({
     'disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed';
   const variants: Record<Variant, string> = {
     outline:
-      'border-2 border-brand1 hover:bg-accent hover:text-accent-foreground',
+      'border-2 border-brand1 text-foreground hover:bg-accent hover:text-accent-foreground',
     fill: 'border-2 border-brand1 bg-brand1 text-black hover:opacity-90',
   };
 
