@@ -2,9 +2,10 @@ import DrillGrid from '@/components/features/Drill/DrillGrid';
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { createClient } from '@/lib/supabase/server';
-import { CrownIcon } from 'lucide-react';
-import Link from 'next/link';
+import { LockIcon } from 'lucide-react';
 import { Metadata } from 'next';
+import { getStatsDrills } from '@/lib/stats-drills';
+import Button from '@/components/common/Button';
 
 export const metadata: Metadata = {
   title: 'Drills and Plays',
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
 
 export default async function Drills() {
   const supabase = await createClient();
+  const { premiumCount } = await getStatsDrills();
 
   const {
     data: { user },
@@ -45,12 +47,21 @@ export default async function Drills() {
 
       {!isPremium && (
         <Section>
-          <div className="my-4 w-full text-gray-500 flex flex-col items-center text-center">
-            <CrownIcon className="mb-2" />
-            <p>Looking for more drills and plays?</p>
-            <Link className="text-lg underline" href="/pricing">
-              Become a premium member&nbsp;now
-            </Link>
+          <div className="my-6 w-full rounded-2xl border-2 border-brand1 px-5 py-6 text-center shadow-sm">
+            <LockIcon className="mx-auto mb-3 h-7 w-7 text-brand1" />
+
+            <h3 className="text-xl font-semibold">
+              Want the Full Premium Playbook?
+            </h3>
+
+            <p className="mx-auto my-1 max-w-sm text-sm text-muted-foreground">
+              Unlock {premiumCount} additional premium drills and plays today,
+              plus every new drill and play we add in the future.
+            </p>
+
+            <Button className="mt-3" variant="fill" href="/pricing">
+              Upgrade to Premium
+            </Button>
           </div>
         </Section>
       )}

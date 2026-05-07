@@ -1,7 +1,7 @@
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import Testimonials from '@/components/pages/frontpage/testimonials';
-import tiers from '@/data/tiers';
+import { getTiers } from '@/data/tiers';
 import { createClient } from '@/lib/supabase/server';
 import { CheckIcon, MinusIcon, MailIcon, StarIcon } from 'lucide-react';
 import { Metadata } from 'next';
@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 
 export default async function Pricing() {
   const supabase = await createClient();
+  const tiers = await getTiers();
 
   const {
     data: { user },
