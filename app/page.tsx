@@ -12,6 +12,7 @@ import Testimonials from '@/components/pages/frontpage/testimonials';
 import some from '@/data/some';
 import DrillCard from '@/components/features/Drill/DrillCard';
 import { HighlightedDrill } from '@/lib/types';
+import { getStatsDrills } from '@/lib/stats-drills';
 
 export const metadata: Metadata = {
   title: 'FULLCOURT TRAINING',
@@ -71,19 +72,20 @@ function Stat({ value, label }: { value: number; label: string }) {
   );
 }
 
-export default function Index() {
+export default async function Index() {
   const { totalFollowers, totalViews } = calculateSoMeTotals(some);
+  const { totalCount } = await getStatsDrills();
 
   return (
     <>
       <Court>
         <Card>
           <h1 className="text-2xl lg:text-3xl font-semibold">
-            Animated Basketball Drills
+            Run Better Practices with {totalCount} Animated Drills & Plays{' '}
           </h1>
           <p>
-            Easily visualize, understand and practice complex basketball plays
-            with our animated drills.
+            Help players learn faster and coaches teach more effectively with
+            clear step-by-step animations for every training session.
           </p>
           <Line />
           <Button href="/drills">Explore Playbook</Button>
@@ -145,9 +147,9 @@ export default function Index() {
             </h2>
             <p>
               We help players and coaches visualize and practice basketball
-              plays and movements. With an extensive library of drills, users
-              can follow along with animations that demonstrate proper
-              techniques and strategies.
+              plays and movements. With an extensive library of {totalCount}{' '}
+              drills and plays, users can follow along with animations that
+              demonstrate proper techniques and strategies.
             </p>
           </div>
           <video

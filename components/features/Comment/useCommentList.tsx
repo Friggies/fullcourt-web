@@ -523,7 +523,17 @@ export function useCommentList({
   }, []);
 
   useEffect(() => {
-    fetchComments();
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (!cancelled) {
+        void fetchComments();
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [fetchComments]);
 
   return {

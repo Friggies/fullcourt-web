@@ -3,8 +3,7 @@ import { cache } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
-import { ArrowLeftIcon, UsersIcon } from 'lucide-react';
-
+import { ArrowLeftIcon, HeartIcon, UsersIcon } from 'lucide-react';
 import { Hero } from '@/components/common/Hero';
 import { Section } from '@/components/common/Section';
 import { Copy } from '@/components/common/Copy';
@@ -12,6 +11,8 @@ import { createClient } from '@/lib/supabase/server';
 import type { Drill } from '@/lib/types';
 import { stripMarkdown, truncate } from '@/lib/utils';
 import { CommentList } from '@/components/features/Comment/CommentList';
+import { getStatsDrills } from '@/lib/stats-drills';
+import Button from '@/components/common/Button';
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -107,6 +108,26 @@ export default async function DrillPage({ params }: Props) {
   const youtubeId = videoUri ? extractYouTubeId(videoUri) : null;
   const isYouTube = Boolean(youtubeId);
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let isPremium = false;
+
+  if (user) {
+    const { data: profile, error } = await supabase
+      .from('profiles')
+      .select('premium')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (!error && profile?.premium) {
+      isPremium = true;
+    }
+  }
+
+  const { premiumCount } = await getStatsDrills();
+
   return (
     <>
       <Hero title={drill.name} />
@@ -114,13 +135,26 @@ export default async function DrillPage({ params }: Props) {
       <Section>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="sm:col-span-2 order-1 sm:order-none flex flex-col gap-4">
+            {!isPremium && (
+              <Link
+                href="/pricing"
+                className="w-full bg-muted text-muted-foreground rounded-full underline p-2 text-sm text-center"
+              >
+                Support{' '}
+                <span className="uppercase font-semibold">
+                  Fullcourt Training
+                </span>{' '}
+                by&nbsp;going&nbsp;Premium
+              </Link>
+            )}
+
             <div className="flex items-center justify-between text-sm">
               <Link
                 className="flex items-center gap-1 underline text-gray-500"
                 href="/drills"
               >
                 <ArrowLeftIcon size={16} />
-                Back to all drills
+                Back to Playbook
               </Link>
 
               <span className="inline-flex gap-1 items-center px-3 py-1 bg-muted text-muted-foreground font-medium rounded-full">
@@ -133,6 +167,29 @@ export default async function DrillPage({ params }: Props) {
             <div className="prose prose-sm max-w-none dark:prose-invert">
               <Markdown>{drill.description ?? ''}</Markdown>
             </div>
+
+            {!isPremium && (
+              <div className="my-6 w-full rounded-2xl border-2 border-brand1 px-5 py-6 text-center shadow-sm">
+                <HeartIcon className="mx-auto mb-3 h-7 w-7 text-brand1" />
+
+                <h3 className="text-xl font-semibold">
+                  Enjoying these Free Drills?
+                </h3>
+
+                <p className="mx-auto my-1 max-w-sm text-sm text-muted-foreground">
+                  Support{' '}
+                  <span className="font-semibold uppercase">
+                    Fullcourt Training
+                  </span>{' '}
+                  by upgrading to Premium and unlock {premiumCount} more drills
+                  and plays, plus every new one we add in the future.
+                </p>
+
+                <Button className="mt-3" variant="fill" href="/pricing">
+                  Support & Unlock More
+                </Button>
+              </div>
+            )}
 
             <CommentList pageType="drill" pageId={Number(id)} />
 
