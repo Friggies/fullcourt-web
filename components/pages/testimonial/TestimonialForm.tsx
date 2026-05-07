@@ -39,28 +39,38 @@ export default function TestimonialForm() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const cooldownTimeoutRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (!imageFile) {
-      setPreviewUrl(null);
-      return;
-    }
-
-    const url = URL.createObjectURL(imageFile);
-    setPreviewUrl(url);
-
-    return () => {
-      URL.revokeObjectURL(url);
-    };
-  }, [imageFile]);
+  const previewUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
     return () => {
       if (cooldownTimeoutRef.current !== null) {
         window.clearTimeout(cooldownTimeoutRef.current);
       }
+
+      if (previewUrlRef.current !== null) {
+        URL.revokeObjectURL(previewUrlRef.current);
+        previewUrlRef.current = null;
+      }
     };
   }, []);
+
+  function setSelectedImage(file: File | null) {
+    if (previewUrlRef.current !== null) {
+      URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = null;
+    }
+
+    setImageFile(file);
+
+    if (!file) {
+      setPreviewUrl(null);
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    previewUrlRef.current = url;
+    setPreviewUrl(url);
+  }
 
   function startCooldown(retryAfterMs: number) {
     if (cooldownTimeoutRef.current !== null) {
@@ -169,7 +179,7 @@ export default function TestimonialForm() {
       setTitle('');
       setContent('');
       setRating(5);
-      setImageFile(null);
+      setSelectedImage(null);
       formEl.reset();
     } catch {
       setFeedback({
@@ -251,7 +261,7 @@ export default function TestimonialForm() {
         id="headshot"
         type="file"
         accept="image/*"
-        onChange={e => setImageFile(e.target.files?.[0] ?? null)}
+        onChange={e => setSelectedImage(e.target.files?.[0] ?? null)}
         disabled={loading || isCoolingDown}
       />
 
