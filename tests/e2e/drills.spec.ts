@@ -17,7 +17,7 @@ test('drills page renders filters UI and shows premium upsell when not premium',
     page.getByRole('button', { name: 'Clear filters' })
   ).toBeVisible();
 
-  const upsell = page.getByRole('link', { name: 'Become a premium member' });
+  const upsell = page.getByRole('link', { name: 'Upgrade to Premium' });
   await expect(upsell).toBeVisible();
 
   await upsell.click();

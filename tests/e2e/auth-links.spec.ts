@@ -8,16 +8,33 @@ test('login page links navigate to forgot-password and sign-up pages', async ({
     page.locator('div').filter({ hasText: /^Login$/ })
   ).toBeVisible();
 
-  await page.getByRole('link', { name: 'Forgot your password?' }).click();
-  await expect(page).toHaveURL('\/auth\/forgot-password');
+  const forgotPasswordLink = page.getByRole('link', {
+    name: 'Forgot your password?',
+  });
+
+  await expect(forgotPasswordLink).toBeVisible();
+  await expect(forgotPasswordLink).toHaveAttribute(
+    'href',
+    '/auth/forgot-password'
+  );
+
+  await forgotPasswordLink.click();
+
+  await expect(page).toHaveURL(/\/auth\/forgot-password$/);
   await expect(
     page.getByText('Reset Your Password', { exact: true })
   ).toBeVisible();
 
   await page.goto('/auth/login');
 
-  await page.getByRole('link', { name: 'Sign up' }).click();
-  await expect(page).toHaveURL('\/auth\/sign-up');
+  const signUpLink = page.getByRole('link', { name: 'Sign up' });
+
+  await expect(signUpLink).toBeVisible();
+  await expect(signUpLink).toHaveAttribute('href', '/auth/sign-up');
+
+  await signUpLink.click();
+
+  await expect(page).toHaveURL(/\/auth\/sign-up$/);
   await expect(
     page.locator('div').filter({ hasText: /^Sign up$/ })
   ).toBeVisible();
