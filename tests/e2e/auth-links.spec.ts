@@ -1,15 +1,16 @@
 import { test, expect } from '@playwright/test';
 
-test('login page links navigate to forgot-password and sign-up pages', async ({
+test('login page forgot password link navigates to forgot-password page', async ({
   page,
 }) => {
   await page.goto('/auth/login');
+
   await expect(
     page.locator('div').filter({ hasText: /^Login$/ })
   ).toBeVisible();
 
   const forgotPasswordLink = page.getByRole('link', {
-    name: 'Forgot your password?',
+    name: /^forgot your password\?$/i,
   });
 
   await expect(forgotPasswordLink).toBeVisible();
@@ -18,23 +19,30 @@ test('login page links navigate to forgot-password and sign-up pages', async ({
     '/auth/forgot-password'
   );
 
-  await forgotPasswordLink.click();
+  await Promise.all([
+    page.waitForURL(/\/auth\/forgot-password$/),
+    forgotPasswordLink.click(),
+  ]);
 
-  await expect(page).toHaveURL(/\/auth\/forgot-password$/);
   await expect(
     page.getByText('Reset Your Password', { exact: true })
   ).toBeVisible();
+});
 
+test('login page sign up link navigates to sign-up page', async ({ page }) => {
   await page.goto('/auth/login');
 
-  const signUpLink = page.getByRole('link', { name: 'Sign up' });
+  await expect(
+    page.locator('div').filter({ hasText: /^Login$/ })
+  ).toBeVisible();
+
+  const signUpLink = page.getByRole('link', { name: /^sign up$/i });
 
   await expect(signUpLink).toBeVisible();
   await expect(signUpLink).toHaveAttribute('href', '/auth/sign-up');
 
-  await signUpLink.click();
+  await Promise.all([page.waitForURL(/\/auth\/sign-up$/), signUpLink.click()]);
 
-  await expect(page).toHaveURL(/\/auth\/sign-up$/);
   await expect(
     page.locator('div').filter({ hasText: /^Sign up$/ })
   ).toBeVisible();

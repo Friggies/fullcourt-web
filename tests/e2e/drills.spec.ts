@@ -11,15 +11,24 @@ test('drills page renders filters UI and shows premium upsell when not premium',
 
   await expect(page.getByPlaceholder('Search...')).toBeVisible();
 
-  await page.getByRole('button', { name: 'Filters' }).click();
-  await expect(page.locator('#filters-panel')).toBeVisible();
+  const filtersButton = page.getByRole('button', { name: /^filters$/i });
+  await expect(filtersButton).toBeVisible();
+  await expect(filtersButton).toBeEnabled();
+
+  await filtersButton.click();
+
+  const filtersPanel = page.locator('#filters-panel');
+  await expect(filtersPanel).toBeVisible();
+
   await expect(
-    page.getByRole('button', { name: 'Clear filters' })
+    page.getByRole('button', { name: /^clear filters$/i })
   ).toBeVisible();
 
-  const upsell = page.getByRole('link', { name: 'Upgrade to Premium' });
+  const upsell = page.getByRole('link', { name: /^upgrade to premium$/i });
   await expect(upsell).toBeVisible();
+  await expect(upsell).toHaveAttribute('href', '/pricing');
 
   await upsell.click();
-  await expect(page).toHaveURL('\/pricing');
+
+  await expect(page).toHaveURL(/\/pricing$/);
 });
