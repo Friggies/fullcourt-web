@@ -1,15 +1,33 @@
 import { NextResponse } from 'next/server';
 
-type RateLimitResult = {
+export type RateLimitResult = {
   success: boolean;
   limit: number;
   remaining: number;
   reset: number;
 };
 
-type RateLimiter = {
+export type RateLimiter = {
   limit: (identifier: string) => Promise<RateLimitResult>;
 };
+
+export function shouldBypassRateLimit() {
+  // Never bypass rate limiting on Netlify deploy/runtime contexts.
+  if (process.env.NETLIFY) {
+    return false;
+  }
+
+  return process.env.BYPASS_UPSTASH_RATE_LIMIT === 'true';
+}
+
+export function createBypassedRateLimitResult(): RateLimitResult {
+  return {
+    success: true,
+    limit: Number.MAX_SAFE_INTEGER,
+    remaining: Number.MAX_SAFE_INTEGER,
+    reset: Date.now() + 60_000,
+  };
+}
 
 export function getClientIp(req: Request): string {
   // Best choice on deployed Netlify functions
@@ -35,6 +53,10 @@ export function getClientIp(req: Request): string {
 }
 
 export async function limitByIp(req: Request, limiter: RateLimiter) {
+  if (shouldBypassRateLimit()) {
+    return createBypassedRateLimitResult();
+  }
+
   const ip = getClientIp(req);
   return limiter.limit(ip);
 }

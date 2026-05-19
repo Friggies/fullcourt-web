@@ -5,8 +5,16 @@
 import {
   applyRateLimitHeaders,
   getClientIp,
+  limitByIp,
   rateLimitExceeded,
+  shouldBypassRateLimit,
 } from '@/lib/rate-limit';
+
+const originalEnv = process.env;
+
+afterEach(() => {
+  process.env = { ...originalEnv };
+});
 
 test('getClientIp prefers x-nf-client-connection-ip when present', () => {
   //Arrange
@@ -92,4 +100,52 @@ test('rateLimitExceeded returns 429 with Retry-After and rate limit headers', as
   expect(payload).toEqual({ error: 'Too many requests' });
 
   nowSpy.mockRestore();
+});
+
+test('limitByIp bypasses the limiter when explicitly enabled outside Netlify', async () => {
+  process.env = {
+    ...originalEnv,
+    BYPASS_UPSTASH_RATE_LIMIT: 'true',
+    NETLIFY: undefined,
+  };
+
+  const req = new Request('http://localhost');
+  const limiter = { limit: jest.fn() };
+
+  const result = await limitByIp(req, limiter);
+
+  expect(shouldBypassRateLimit()).toBe(true);
+  expect(limiter.limit).not.toHaveBeenCalled();
+  expect(result.success).toBe(true);
+});
+
+test('limitByIp still calls the limiter on Netlify even when bypass is set', async () => {
+  process.env = {
+    ...originalEnv,
+    BYPASS_UPSTASH_RATE_LIMIT: 'true',
+    NETLIFY: 'true',
+  };
+
+  const req = new Request('http://localhost', {
+    headers: { 'x-forwarded-for': '198.51.100.1' },
+  });
+  const limiter = {
+    limit: jest.fn().mockResolvedValue({
+      success: true,
+      limit: 5,
+      remaining: 4,
+      reset: 123,
+    }),
+  };
+
+  const result = await limitByIp(req, limiter);
+
+  expect(shouldBypassRateLimit()).toBe(false);
+  expect(limiter.limit).toHaveBeenCalledWith('198.51.100.1');
+  expect(result).toEqual({
+    success: true,
+    limit: 5,
+    remaining: 4,
+    reset: 123,
+  });
 });

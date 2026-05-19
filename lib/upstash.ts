@@ -1,7 +1,18 @@
 import { Redis } from '@upstash/redis';
-import { Duration, Ratelimit } from '@upstash/ratelimit';
+import { Ratelimit } from '@upstash/ratelimit';
+import type { Duration } from '@upstash/ratelimit';
+import {
+  createBypassedRateLimitResult,
+  shouldBypassRateLimit,
+  type RateLimiter,
+} from '@/lib/rate-limit';
 
-export const redis = Redis.fromEnv();
+let redis: Redis | null = null;
+
+function getRedis() {
+  redis ??= Redis.fromEnv();
+  return redis;
+}
 
 type SlidingWindowConfig = {
   prefix: string;
@@ -15,16 +26,28 @@ export function createSlidingWindowLimiter({
   limit,
   window,
   analytics = false,
-}: SlidingWindowConfig) {
-  return new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(limit, window),
-    prefix,
-    analytics,
-    // Keep this outside route handlers so hot instances can deny repeat hits
-    // without another Redis round-trip.
-    ephemeralCache: new Map<string, number>(),
-  });
+}: SlidingWindowConfig): RateLimiter {
+  let limiter: RateLimiter | null = null;
+
+  return {
+    limit: async identifier => {
+      if (shouldBypassRateLimit()) {
+        return createBypassedRateLimitResult();
+      }
+
+      limiter ??= new Ratelimit({
+        redis: getRedis(),
+        limiter: Ratelimit.slidingWindow(limit, window),
+        prefix,
+        analytics,
+        // Keep this outside route handlers so hot instances can deny repeat hits
+        // without another Redis round-trip.
+        ephemeralCache: new Map<string, number>(),
+      });
+
+      return limiter.limit(identifier);
+    },
+  };
 }
 
 export const rateLimiters = {
